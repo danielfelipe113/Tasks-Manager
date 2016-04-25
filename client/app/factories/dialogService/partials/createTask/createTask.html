@@ -1,0 +1,78 @@
+<md-dialog class="createTaskFormContainer" flex="60">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2 flex>Crear nueva tarea</h2>
+          <md-button ng-click="vm.closeDialog()" class="md-icon-button">
+            <md-icon>close</md-icon>
+          </md-button>
+        </div>
+      </md-toolbar>
+    <md-dialog-content layout-padding>
+        <form class="createTaskForm" name="createTaskForm" submit="vm.saveTask(createTaskForm.$valid)" novalidate layout="row" layout-wrap>
+            <md-input-container flex="50">
+                <label>Título de la tarea</label>
+                <input name="taskTitle" type="type" ng-model="vm.task.Title" required>
+                <div ng-messages="createTaskForm.taskTitle.$error">
+                    <div ng-message="required">El título de la tarea es requerido</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container flex="50">
+                <label>Descripción de la tarea</label>
+                <input name="taskDescription" type="type" ng-model="vm.task.Description" required>
+                <div ng-messages="createTaskForm.taskDescription.$error">
+                    <div ng-message="required">La descripción de la tarea es requerida</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container flex="50">
+                <label>Prioridad de la tarea</label>
+                <input name="taskPriority" type="type" ng-model="vm.task.Priority" required>
+                <div ng-messages="createTaskForm.taskPriority.$error">
+                    <div ng-message="required">La prioridad de la tarea es requerida</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container flex="50">
+                <label>Asignado por</label>
+                <input name="taskAsignBy" type="type" ng-model="vm.task.AsignBy" required>
+                <div ng-messages="createTaskForm.taskAsignBy.$error">
+                    <div ng-message="required">La persona que asigna es requerida</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container flex="50">
+                <label>Asignar a</label>
+                <input name="taskAsignTo" type="type" ng-model="vm.task.AsignTo" required>
+                <div ng-messages="createTaskForm.taskAsignTo.$error">
+                    <div ng-message="required">La persona a la que se asigna la tarea es requerida</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container flex="50">
+                <label>Realizar antes de:</label>
+                <input name="taskDoBeforeDate" type="type" ng-model="vm.task.DoBeforeDate">
+            </md-input-container>
+
+            <md-input-container flex="50">
+                <label>Horas estimadas</label>
+                <input name="taskEstimatedHours" type="type" ng-model="vm.task.EstimatedHours" required>
+                <div ng-messages="createTaskForm.taskEstimatedHours.$error">
+                    <div ng-message="required">Este campo es requerido</div>
+                </div>
+            </md-input-container>
+
+            <md-input-container flex="50">
+                <label>Horas invertidas</label>
+                <input name="taskTimeSpent" type="type" ng-model="vm.task.TimeSpent" required>
+                <div ng-messages="createTaskForm.taskTimeSpent.$error">
+                    <div ng-message="required">Este campo es requerido</div>
+                </div>
+            </md-input-container>
+        </form>
+        <md-dialog-actions>
+            <md-button type="submit">Guardar tarea</md-button>
+            <md-button ng-click="vm.closeDialog()">Cerrar</md-button>
+        </md-dialog-actions>
+    </md-dialog-content>
+</md-dialog>

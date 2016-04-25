@@ -1,0 +1,41 @@
+<md-sidenav class="md-sidenav-left sidenavLeft" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')" md-whiteframe="4"
+    flex ng-show="vm.isLoggedIn()">
+    <md-toolbar class="md-theme-indigo">
+        <h1 class="md-toolbar-tools">Sidenav Left</h1>
+    </md-toolbar>
+    <md-content layout-padding layout="column">
+        <md-button ui-sref="main" layout="row" layout-align="space-between center">
+            <span flex>Dashboard</span>
+            <md-icon class="tasksInProgress" flex="10">dashboard</md-icon>
+        </md-button>
+        <md-button ui-sref="tasksInProgress" layout="row" layout-align="space-between center">
+            <span flex>Tareas en progreso</span>
+            <md-icon class="tasksInProgress" flex="10">assessment</md-icon>
+        </md-button>
+        <md-button ui-sref="tasksToDoToday" layout="row" layout-align="space-between center">
+            <span flex>Tareas por hacer hoy</span>
+            <md-icon class="tasksToDoToday" flex="10">assignment_ind</md-icon>
+        </md-button>
+        <md-button ui-sref="tasksToDo" layout="row" layout-align="space-between center">
+            <span flex>Tareas por hacer</span>
+            <md-icon class="tasksToDo" flex="10">assignment</md-icon>
+        </md-button>
+        <md-button ui-sref="tasksDelayed" layout="row" layout-align="space-between center">
+            <span flex>Tareas tareas retrasadas</span>
+            <md-icon class="tasksDelayed" flex="10">assignment_late</md-icon>
+        </md-button>
+        <md-button ui-sref="tasksDone" layout="row" layout-align="space-between center">
+            <span flex>Tareas terminadas</span>
+            <md-icon class="tasksDone" flex="10">assignment_turned_in</md-icon>
+        </md-button>
+        <div class="temporalFix"></div>
+    </md-content>
+</md-sidenav>
+
+<md-button class="sidenavLeftButton md-fab md-accent" ng-click="vm.toggleLeftSidenav()" hide-gt-md>
+    <md-icon>navigate_next</md-icon>
+</md-button>
+
+<md-button class="addTaskButton md-fab md-accent" ng-click="vm.openDialog($event)">
+    <md-icon>add</md-icon>
+</md-button>

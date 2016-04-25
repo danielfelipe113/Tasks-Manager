@@ -1,0 +1,85 @@
+<navbar></navbar>
+<header></header>
+<div class="dashboardContainer md-padding">
+    <md-divider></md-divider>
+    <h2 class="md-display-1">Tareas asignadas:</h2>
+    <md-divider></md-divider>
+    <div class="tasks" layout="row" layout-wrap>
+        <a ui-sref="tasksInProgress" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30" >
+            <div class="card tasksInProgress" layout-padding layout="row" layout-align="center stretch">
+                <div class="textsContainer" layout="column">
+                    <span class="md-title" layout="row" layout-align="center center" flex="30">Tasks in progress</span>
+                    <div layout="row" layout-align="center center" flex>
+                        <p>50</p>
+                    </div>
+                </div>
+                <div class="content" layout="row" layout-align="end center" flex="20">
+                    <div class="iconContainer">
+                        <md-icon class="tasksInProgress icon-60">assessment</md-icon>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a ui-sref="tasksToDoToday" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30" >
+            <div class="card tasksToDoToday" layout-padding layout="row" layout-align="center stretch">
+                <div class="textsContainer" layout="column">
+                    <span class="md-title" layout="row" layout-align="center center" flex="30">Tasks to do today</span>
+                    <div layout="row" layout-align="center center" flex>
+                        <p>50</p>
+                    </div>
+                </div>
+                <div class="content" layout="row" layout-align="end center" flex="20">
+                    <div class="iconContainer">
+                        <md-icon class="tasksToDoToday icon-60">assignment</md-icon>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a ui-sref="tasksToDo" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30" >
+            <div class="card tasksToDo" layout-padding layout="row" layout-align="center stretch">
+                <div class="textsContainer" layout="column">
+                    <span class="md-title" layout="row" layout-align="center center" flex="30">Tasks to do</span>
+                    <div layout="row" layout-align="center center" flex>
+                        <p>50</p>
+                    </div>
+                </div>
+                <div class="content" layout="row" layout-align="end center" flex="20">
+                    <div class="iconContainer">
+                        <md-icon class="tasksToDo icon-60">assignment_ind</md-icon>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a ui-sref="tasksDelayed" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30" >
+            <div class="card tasksDelayed" layout-padding layout="row" layout-align="center stretch">
+                <div class="textsContainer" layout="column">
+                    <span class="md-title" layout="row" layout-align="center center" flex="30">Tasks delayed</span>
+                    <div layout="row" layout-align="center center" flex>
+                        <p>50</p>
+                    </div>
+                </div>
+                <div class="content" layout="row" layout-align="end center" flex="20">
+                    <div class="iconContainer">
+                        <md-icon class="tasksDelayed icon-60">assignment_late</md-icon>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <a ui-sref="tasksDone" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30" >
+            <div class="card tasksDone" layout-padding layout="row" layout-align="center stretch">
+                <div class="textsContainer" layout="column">
+                    <span class="md-title" layout="row" layout-align="center center" flex="30">Tasks done</span>
+                    <div layout="row" layout-align="center center" flex>
+                        <p>50</p>
+                    </div>
+                </div>
+                <div class="content" layout="row" layout-align="end center" flex="20">
+                    <div class="iconContainer">
+                        <md-icon class="tasksDone icon-60">assignment_turned_in</md-icon>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <md-divider></md-divider>
+</div>

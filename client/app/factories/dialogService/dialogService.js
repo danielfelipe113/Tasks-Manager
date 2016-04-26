@@ -22,7 +22,7 @@
                 controller: createTaskController,
                 controllerAs: 'vm',
                 locals: {
-                    items: '$scope.items'
+                    items: null
                 }
             });
         }

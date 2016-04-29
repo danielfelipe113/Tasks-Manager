@@ -74,6 +74,16 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
+// Gets a list of Tasks from the DB by its statusName
+export function getByStatus(req, res) {
+  return Tasks.find({
+    'Status.statusName' : req.params.status
+  }).exec()
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}
+
 // Creates a new Tasks in the DB
 export function create(req, res) {
   return Tasks.create(req.body)

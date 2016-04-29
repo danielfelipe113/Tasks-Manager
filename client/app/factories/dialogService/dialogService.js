@@ -5,15 +5,15 @@
         .module('tasksAdminApp')
         .service('dialogService', dialogService);
 
-    dialogService.$inject = ['$mdDialog'];
+    dialogService.$inject = ['$mdDialog', '$state'];
 
-    function dialogService($mdDialog) {
+    function dialogService($mdDialog, $state) {
         var dialogService = {
             showDialog: showDialog
         }
 
         return dialogService;
-        
+
         function showDialog($event, template, controller, task, successCallback, dismissCallback) {
             var parentEl = angular.element(document.body);
             $mdDialog.show({
@@ -25,12 +25,16 @@
                 clickOutsideToClose: true,
                 controller: controller,
                 controllerAs: 'vm',
-                onComplete: successCallback,
-                onRemoving: dismissCallback,
                 locals: {
                     task: task || null
                 }
-            });
+            })
+                .then(() => {
+                    successCallback
+                })
+                .catch(() => {
+                    dismissCallback
+                });
         }
     }
 })();

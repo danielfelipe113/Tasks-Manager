@@ -1,10 +1,7 @@
-<div class="navbar bg-indigo">
+<div class="navbar bg-indigo" flex>
   <div layout="row" layout-align="space-between center">
     <div layout="row">
-      <md-button class="color-white" href="/" class="md-raised">tasks-admin</md-button>
-      <div ng-repeat="item in nav.menu" ui-sref-active="active">
-          <md-button class="color-white" ui-sref="{{item.state}}">{{item.title}}</md-button>
-      </div>        
+      <md-button class="color-white" href="/" class="md-raised">Tareas</md-button>
     </div>
     <div>
       <md-button class="md-accent" ng-show="nav.isAdmin()" ui-sref-active="active"><a ui-sref="admin">Admin</a></md-button>
@@ -15,25 +12,31 @@
         <md-menu-content width="4">
           <md-menu-item ng-hide="nav.isLoggedIn()" ui-sref-active="active">
             <md-button ui-sref="signup">
-              <md-icon md-menu-align-target>face</md-icon>
+              <md-icon flex="10">assignment</md-icon>
               Sign up
             </md-button>
           </md-menu-item>
           <md-menu-item ng-hide="nav.isLoggedIn()" ui-sref-active="active">
             <md-button ui-sref="login">
-              <md-icon md-menu-align-target>face</md-icon>
+              <md-icon flex="10">person_pin</md-icon>
               Login
             </md-button>
           </md-menu-item>
           <md-menu-item ng-show="nav.isLoggedIn()">
-            <p>Hello {{ nav.getCurrentUser().name }}</p>
+            <p>Hola {{ nav.getCurrentUser().firstName }}</p>
           </md-menu-item>
-          <md-menu-divider></md-menu-divider>
+          <md-divider ng-show="nav.isLoggedIn()"></md-divider>
           <md-menu-item ng-show="nav.isLoggedIn()" ui-sref-active="active">
-            <md-button ui-sref="settings">Settings</md-button>
+            <md-button ui-sref="settings">
+              <md-icon flex="10">settings</md-icon>
+              <span>Opciones</span>
+            </md-button>
           </md-menu-item>
           <md-menu-item ng-show="nav.isLoggedIn()">
-            <md-button ui-sref="logout">Logout</md-button>
+            <md-button ui-sref="logout">
+              <md-icon flex="10">hotel</md-icon>
+              <span>Cerrar sesión</span>
+            </md-button>
           </md-menu-item>
         </md-menu-content>
       </md-menu>

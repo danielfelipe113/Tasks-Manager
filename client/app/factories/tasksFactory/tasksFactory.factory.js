@@ -6,8 +6,8 @@
             getTasks: () => {
                 return $http.get('/api/tasks');
             },
-            getTasksByStatus: () => {
-                return $http.get('/api/tasks');
+            getTasksByStatus: (status) => {
+                return $http.get('/api/tasks/byStatus/' + status);
             },
             getTaskById: (id) => {
                 return $http.get('/api/tasks/' + id);

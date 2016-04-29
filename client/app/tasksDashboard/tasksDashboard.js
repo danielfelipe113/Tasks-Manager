@@ -3,8 +3,8 @@
 angular.module('tasksAdminApp')
   .config(function($stateProvider) {
     $stateProvider
-      .state('main', {
+      .state('tasksDashboard', {
         url: '/',
-        template: '<main></main>'
+        template: '<tasks-dashboard></tasks-dashboard>'
       });
   });

@@ -1,0 +1,31 @@
+<navbar></navbar>
+<header></header>
+<div class="dashboardContainer md-padding">
+    <md-divider></md-divider>
+    <h2 class="md-display-1">Tareas {{vm.tasks[0].Status.statusDescription | lowercase}}:</h2>
+    <div class="tasks" layout="row" layout="column" layout-gt-sm="row" layout-wrap>
+        <div class="dashboardCardContainer md-whiteframe-1dp no-style" ng-repeat="task in vm.tasks"
+            flex-gt-sm="30">
+            <div class="card {{'tasks' + vm.status}}" layout-padding layout="column" layout-align="center center">
+                <div class="textsContainer" layout="column" layout-align="center center">
+                    <h2 flex="30">{{task.Title}}</h2>
+
+                    <div class="dataText" layout="row" flex>
+                        <p>{{task.Description}}</p>
+                    </div>
+                </div>
+                <div class="content" layout="row" layout-align="end center" flex="20">
+                    <md-button ui-sref="taskDetails({id: task._id})" class="md-raised md-accent">Ver más</md-button>
+                    <div class="actions" layout="column">
+                        <md-button class="delete md-icon-button">
+                            <md-icon>delete_forever</md-icon>
+                        </md-button>
+                        <md-button class="edit md-icon-button">
+                            <md-icon>mode_edit</md-icon>
+                        </md-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

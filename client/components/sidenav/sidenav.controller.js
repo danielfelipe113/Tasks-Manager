@@ -8,8 +8,9 @@ class SidenavController {
     }];
     //end-non-standard
 
-    constructor(Auth, $mdSidenav, dialogService) {
+    constructor(Auth, $mdSidenav, dialogService, $state) {
         this.isLoggedIn = Auth.isLoggedIn;
+        this.$state = $state;
         this.isAdmin = Auth.isAdmin;
         this.getCurrentUser = Auth.getCurrentUser;
         this.$mdSidenav = $mdSidenav;
@@ -17,9 +18,19 @@ class SidenavController {
     }
     
     createTask($event) {
+        let that = this;
         let template = './app/factories/dialogService/partials/createTask/createTask.html';
         let controller = 'createTaskController';
-        this.dialogService.showDialog($event, template, controller, null);
+        
+        function callback() {
+            that.$state.go('main', {}, {
+                reload: true,
+                inherit: false,
+                notify: true
+            })
+        }
+        
+        this.dialogService.showDialog($event, template, controller, null, callback);            
     }
     
     isSidenavLeftOpen() {

@@ -8,5 +8,12 @@ exports = module.exports = {
     "Employee": "Employee",
     "Administrator": "Administrator",
     "Supervisor": "Supervisor"
+  },
+  tasksStatus: {
+    'InProgress' : 'InProgress',
+    'ToDoToday' : 'ToDoToday',
+    'ToDo' : 'ToDo',
+    'Delayed' : 'Delayed',
+    'Done' : 'Done' 
   }
 };

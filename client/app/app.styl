@@ -44,6 +44,9 @@ $color-toDo = #009688;
 $color-delayed = #B71C1C;
 $color-done = #4CAF50;
 
+$color-edit = #FB8C00;
+$color-delete = #D50000;
+
 //general classes
 md-toast
   position fixed
@@ -138,12 +141,8 @@ md-toast
 @import 'factories/dialogService/partials/createTask/createTasks';
 @import 'factories/toast/partials/error/toast.error';
 @import 'factories/toast/partials/success/toast.sucess';
-@import 'main/main';
-@import 'tasksDelayed/tasksDelayed';
-@import 'tasksDone/tasksDone';
-@import 'tasksInProgress/tasksInProgress';
-@import 'tasksToDo/tasksToDo';
-@import 'tasksToDoToday/tasksToDoToday';
+@import 'tasksByStatus/tasksByStatus';
+@import 'tasksDashboard/tasksDashboard';
 @import '../components/footer/footer';
 @import '../components/header/header';
 @import '../components/navbar/navbar';

@@ -3,16 +3,19 @@
 (function () {
 
   class MainController {
-    constructor($http, tasksFactory) {
+    constructor($http, tasksFactory, models) {
       this.$http = $http;
       this.awesomeThings = null;
       this.tasksFactory = tasksFactory;
+      this.models = models;
       
       //init
       this.initialize();
     }
     initialize() {
       this.getTasks()  
+      this.task = new this.models.createEmptyTask();
+      console.log(this.task)
     }
     
     getTasks() {
@@ -23,6 +26,13 @@
     }
 
     addThing() {
+      this.$http.post('/api/tasks/', this.task)
+        .then(function(response) {
+          console.log(response)
+        })
+        .catch(function(err){
+          console.log(err)
+        })
       if (this.newThing) {
         this.$http.post('/api/things', { name: this.newThing });
         this.newThing = '';

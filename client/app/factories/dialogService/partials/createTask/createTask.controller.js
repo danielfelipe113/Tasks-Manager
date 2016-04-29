@@ -31,22 +31,14 @@ class createTaskController {
             }
         } else {
             this.task = new this.models.createEmptyTask();
+            console.log(this.task)
         }
     }
     
     taskModel() {
         this.taskModels = new this.models.createTaskModel();
-        console.log(this.taskModels)
     }
 
-    saveTask(isValid) {
-        this.submitted = true;
-        if (isValid) {
-            this.$mdDialog.hide()
-            console.log(this.task)
-        }
-        return false
-    }
 
     closeDialog() {
         this.$mdDialog.cancel()
@@ -57,6 +49,17 @@ class createTaskController {
             .then((response) => {
                 this.awesomeThings = response.data.results;
             })
+    }
+    
+    //submit
+    saveTask(isValid) {
+        this.submitted = true;
+        this.task.AssignDate = new Date();
+        if (isValid) {
+            this.$mdDialog.hide()
+            console.log(this.task)
+        }
+        return false
     }
 }
 

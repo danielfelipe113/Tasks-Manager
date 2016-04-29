@@ -9,22 +9,33 @@
         var service = {
             createEmptyTask: createEmptyTask,
             createTaskModel: createTaskModel
-        };
+        };            
 
         return service;
+        
+        function CreateEmptyUser() {
+            this.Id = 0;
+            this.FirstName = null;
+            this.LastName = null;
+            this.IsActive = null;
+            this.password = null;
+            this.email = null;
+            this.Roles = [];
+            this.UserSupervisors = [];
+        }
 
         function createEmptyTask() {
             this.Id = 0;
-            this.Title = null;
-            this.Description = null;
-            this.Comments = null;
-            this.Priority = null;
-            this.AssignBy = null;
-            this.AssignTo = null;
-            this.DoBeforeDate = null;
-            this.AssignDate = null;
-            this.EstimatedHours = null;
-            this.TimeSpent = null;
+            this.Title = 'null';
+            this.Description = 'null';
+            this.Comments = 'null';
+            this.Priority = 'null';
+            this.AssignBy = 'null';
+            this.AssignTo = 'null';
+            this.DoBeforeDate = 123;
+            this.AssignDate = 321;
+            this.EstimatedHours = 2;
+            this.TimeSpent = 1;
         }
 
         function createTaskModel() {
@@ -83,3 +94,19 @@
         }
     }
 })();
+
+
+// userSupervisors: Usuarios con rol supervisor o employee deben tener supervisor (admin y supervisor/admin respectivamente)
+
+// assignBy: Usuario con un rol de supervisor o administrador
+// AssignTo: Todos los usuarios que un supervisor Supervise o todos los usuarios para administrador
+
+// prioridad: {
+//                     textual: 'Low',
+//                     number: 1,
+//                     icon: {
+//                         name: 'bookmark_border',
+//                         class: 'priorityLow'
+//                     }
+//                 },
+

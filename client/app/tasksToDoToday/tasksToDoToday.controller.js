@@ -11,14 +11,14 @@ class TasksToDoTodayComponent {
       this.initialize();
     }
     initialize() {
-      this.getTasks()  
+      this.getTasks();  
     }
     
     getTasks() {
       this.tasksFactory.getTasks()
         .then((response) => {
           this.awesomeThings = response.data.results;
-        })
+        });
     }
 }
 

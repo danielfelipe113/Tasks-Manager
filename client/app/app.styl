@@ -44,22 +44,32 @@ $color-toDo = #009688;
 $color-delayed = #B71C1C;
 $color-done = #4CAF50;
 
+//general classes
+md-toast
+  position fixed
+  bottom 50px
+
 //tasks colors classes
 
-.tasksInProgress 
+.tasksInProgress, .tasksInProgress > md-icon
   color $color-inProgress
+  line-height 20px
 
-.tasksToDoToday 
+.tasksToDoToday, .tasksToDoToday > md-icon
   color $color-toDoToday
+  line-height 20px
 
-.tasksToDo   
+.tasksToDo, .tasksToDo > md-icon   
   color $color-toDo
+  line-height 20px
 
-.tasksDelayed 
+.tasksDelayed, .tasksDelayed > md-icon
   color $color-delayed
+  line-height 20px
  
-.tasksDone 
+.tasksDone, .tasksDone > md-icon
   color $color-done
+  line-height 20px
    
 //
 // Helper classes
@@ -126,6 +136,8 @@ $color-done = #4CAF50;
 /* inject:styl */
 @import 'admin/admin';
 @import 'factories/dialogService/partials/createTask/createTasks';
+@import 'factories/toast/partials/error/toast.error';
+@import 'factories/toast/partials/success/toast.sucess';
 @import 'main/main';
 @import 'tasksDelayed/tasksDelayed';
 @import 'tasksDone/tasksDone';

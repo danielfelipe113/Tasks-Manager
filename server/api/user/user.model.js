@@ -8,17 +8,43 @@ import {Schema} from 'mongoose';
 const authTypes = ['github', 'twitter', 'facebook', 'google'];
 
 var UserSchema = new Schema({
-  name: String,
-  email: {
+  firstName: {
     type: String,
-    lowercase: true
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
+  fullName: {
+    type: String,
+    required: true
   },
   role: {
     type: String,
-    default: 'user'
+    required: true,
+    default: 'Employee'
   },
-  password: String,
-  provider: String,
+  userSupervisors: [
+    {
+      SupervisorId: {
+        type: Number
+      }
+    }
+  ],
+  email: {
+    type: String,
+    required: true,
+    lowercase: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  provider: {
+    type: String,
+    default: 'local'
+  },
   salt: String,
   facebook: {},
   twitter: {},
@@ -33,9 +59,9 @@ var UserSchema = new Schema({
 // Public profile information
 UserSchema
   .virtual('profile')
-  .get(function() {
+  .get(function () {
     return {
-      'name': this.name,
+      'fullName': this.fullName,
       'role': this.role
     };
   });
@@ -43,7 +69,7 @@ UserSchema
 // Non-sensitive info we'll be putting in the token
 UserSchema
   .virtual('token')
-  .get(function() {
+  .get(function () {
     return {
       '_id': this._id,
       'role': this.role
@@ -57,7 +83,7 @@ UserSchema
 // Validate empty email
 UserSchema
   .path('email')
-  .validate(function(email) {
+  .validate(function (email) {
     if (authTypes.indexOf(this.provider) !== -1) {
       return true;
     }
@@ -67,7 +93,7 @@ UserSchema
 // Validate empty password
 UserSchema
   .path('password')
-  .validate(function(password) {
+  .validate(function (password) {
     if (authTypes.indexOf(this.provider) !== -1) {
       return true;
     }
@@ -77,10 +103,10 @@ UserSchema
 // Validate email is not taken
 UserSchema
   .path('email')
-  .validate(function(value, respond) {
+  .validate(function (value, respond) {
     var self = this;
     return this.constructor.findOne({ email: value }).exec()
-      .then(function(user) {
+      .then(function (user) {
         if (user) {
           if (self.id === user.id) {
             return respond(true);
@@ -89,12 +115,12 @@ UserSchema
         }
         return respond(true);
       })
-      .catch(function(err) {
+      .catch(function (err) {
         throw err;
       });
   }, 'The specified email address is already in use.');
 
-var validatePresenceOf = function(value) {
+var validatePresenceOf = function (value) {
   return value && value.length;
 };
 
@@ -102,7 +128,7 @@ var validatePresenceOf = function(value) {
  * Pre-save hook
  */
 UserSchema
-  .pre('save', function(next) {
+  .pre('save', function (next) {
     // Handle new/update passwords
     if (!this.isModified('password')) {
       return next();
@@ -212,7 +238,7 @@ UserSchema.methods = {
 
     if (!callback) {
       return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength)
-                   .toString('base64');
+        .toString('base64');
     }
 
     return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, (err, key) => {

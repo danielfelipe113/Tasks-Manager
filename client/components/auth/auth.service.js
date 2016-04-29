@@ -167,7 +167,7 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
       */
     isAdmin() {
       return Auth.hasRole
-        .apply(Auth, [].concat.apply(['admin'], arguments));
+        .apply(Auth, [].concat.apply(['Administrator'], arguments));
     },
 
     /**

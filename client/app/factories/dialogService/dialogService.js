@@ -8,65 +8,29 @@
     dialogService.$inject = ['$mdDialog'];
 
     function dialogService($mdDialog) {
-        this.showDialog = showDialog;
+        var dialogService = {
+            showDialog: showDialog
+        }
+
+        return dialogService;
         
-        function showDialog($event) {
+        function showDialog($event, template, controller, task, successCallback, dismissCallback) {
             var parentEl = angular.element(document.body);
             $mdDialog.show({
                 parent: parentEl,
                 targetEvent: $event,
-                templateUrl: './app/factories/dialogService/partials/createTask/createTask.html',
+                templateUrl: template,
                 fullscreen: true,
                 disableParentScroll: true,
                 clickOutsideToClose: true,
-                controller: createTaskController,
+                controller: controller,
                 controllerAs: 'vm',
+                onComplete: successCallback,
+                onRemoving: dismissCallback,
                 locals: {
-                    items: null
+                    task: task || null
                 }
             });
-        }
-        // function openDialog(model) {
-        //     var modalInstance = $modal.open({
-        //         templateUrl: model.templateUrl,
-        //         controller: model.controller,
-        //         controllerAs: 'vm',
-        //         size: model.size,
-        //         windowClass: model.windowClass,
-        //         resolve: {
-        //             model: function () {
-        //                 return model.returnVm;
-        //             }
-        //         },
-        //         backdrop: 'static'
-        //     });
-
-        //     modalInstance.result.then(
-        //         function (response) {
-        //             if (model.callback) {
-        //                 model.callback(response);
-        //             }
-        //             if (model.gridName) {
-        //                 kendoService.refreshGrid(model.gridName);
-        //             }
-        //         },
-        //         function () {
-        //             if (model.callbackDismiss) {
-        //                 model.callbackDismiss();
-        //             }
-        //         });
-        // }
-
-        function modalObject(templateUrl, controller, size, returnVm, gridName, callback, callbackDismiss, windowClass) {
-            this.templateUrl = templateUrl;
-            this.controller = controller;
-            this.size = size;
-            this.returnVm = returnVm;
-            this.gridName = gridName;
-            this.callback = callback;
-            this.callbackDismiss = callbackDismiss;
-            this.windowClass = windowClass;
-            return this;
         }
     }
 })();

@@ -12,12 +12,14 @@ class SidenavController {
         this.isLoggedIn = Auth.isLoggedIn;
         this.isAdmin = Auth.isAdmin;
         this.getCurrentUser = Auth.getCurrentUser;
-        this.$mdSidenav = $mdSidenav
-        this.dialogService = dialogService
+        this.$mdSidenav = $mdSidenav;
+        this.dialogService = dialogService;
     }
     
-    openDialog($event) {
-        this.dialogService.showDialog($event)
+    createTask($event) {
+        let template = './app/factories/dialogService/partials/createTask/createTask.html';
+        let controller = 'createTaskController';
+        this.dialogService.showDialog($event, template, controller, null);
     }
     
     isSidenavLeftOpen() {

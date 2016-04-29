@@ -2,64 +2,129 @@
 
 
 class createTaskController {
-    constructor($http, tasksFactory, items, $mdDialog, models) {
+    constructor($http, tasksFactory, task, $mdDialog, models, values, appConfig, Auth, usersFactory, toastFactory) {
+        //dependencies
         this.$http = $http;
         this.models = models;
-        this.taskModels = {};
-        this.awesomeThings = null;
+        this.values = values;
         this.$mdDialog = $mdDialog;
         this.tasksFactory = tasksFactory;
-        this.items = items;
+        this.appConfig = appConfig;
+        this.toastFactory = toastFactory;
+        this.Auth = Auth;
+        this.usersFactory = usersFactory;
+        //dependencies methods
+
+        //vars
+        this.currentUser = Auth.getCurrentUser().toJSON();
+        this.isEmployee = false;
+        this.isAdministrator = false;
+        this.taskModels = {};
+        this.priorities = null;
+        this.taskStatus = null;
+        this.users = {
+            Supervisors: [],
+            Administrators: [],
+            Employees: []
+        };
+        this.task = task;
+        this.newTask = null;
         this.submitted = false;
-        this.task = null;
-        this.isNew = false;
+
         //init
         this.initialize();
     }
+
     initialize() {
-        this.getTasks();
+        //methods
         this.populateTask();
-        this.taskModel();
+        this.getPriorities();
+        this.getStatus();
+        this.getUsers();
+        
+        //data logic
+        this.newTask.AssignBy = this.currentUser;
+        this.newTask.AssignDate = new Date();
+    }
+
+    setUserRol() {
+        this.isAdministrator = this.Auth.isAdmin();
+        
+        if (this.currentUser.role === this.appConfig.userRolesJson.Employee) {
+            this.isEmployee = true;
+            this.newTask.AssignTo = this.currentUser;
+        }
     }
 
     populateTask() {
-        if (this.items !== null) {
-            if (this.items.Id === 0) {
-                this.task = new this.models.createEmptyTask();
+        if (this.task !== null) {
+            if (this.task.Id === 0) {
+                this.newTask = new this.models.createEmptyTask();
             } else {
-                this.task = this.items;
+                this.newTask = this.task;
             }
         } else {
-            this.task = new this.models.createEmptyTask();
-            console.log(this.task)
+            this.newTask = new this.models.createEmptyTask();
         }
     }
-    
-    taskModel() {
-        this.taskModels = new this.models.createTaskModel();
+
+    getPriorities() {
+        this.priorities = this.values.getPriorities();
     }
 
+    getUsers() {
+        let that = this;
+        let tempUsers = null;
 
-    closeDialog() {
-        this.$mdDialog.cancel()
-    }
-
-    getTasks() {
-        this.tasksFactory.getTasks()
+        this.usersFactory.getUsers()
             .then((response) => {
-                this.awesomeThings = response.data.results;
+                tempUsers = response.data;
+                setUsers();
+                this.setUserRol();
             })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        function setUsers() {
+            tempUsers.forEach(function (element) {
+                if (element.role === that.appConfig.userRolesJson.Supervisor) {
+                    that.users.Supervisors.push(element);
+                } else if (element.role === that.appConfig.userRolesJson.Administrator) {
+                    that.users.Administrators.push(element);
+                } else if (element.role === that.appConfig.userRolesJson.Employee) {
+                    that.users.Employees.push(element);
+                }
+            }, this);
+        }
+
     }
-    
+
+    getStatus() {
+        this.taskStatus = this.values.getStatus();
+    }
+
     //submit
     saveTask(isValid) {
+        let that = this;
         this.submitted = true;
-        this.task.AssignDate = new Date();
+        
         if (isValid) {
-            this.$mdDialog.hide()
-            console.log(this.task)
+            this.tasksFactory.postTask(this.newTask)
+                .then(() => {
+                    that.toastFactory.successToast();
+                    that.$mdDialog.hide();
+                })
+                .catch(() => {
+                    that.toastFactory.errorToast();
+                    that.$mdDialog.cancel();
+                });
         }
-        return false
+        return false;
+    }
+
+    closeDialog() {
+        this.$mdDialog.cancel();
     }
 }
 

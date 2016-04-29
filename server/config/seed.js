@@ -4,56 +4,102 @@
  */
 
 'use strict';
-import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
-
-Thing.find({}).remove()
-  .then(() => {
-    Thing.create({
-      name: 'Development Tools',
-      info: 'Integration with popular tools such as Bower, Grunt, Babel, Karma, ' +
-             'Mocha, JSHint, Node Inspector, Livereload, Protractor, Jade, ' +
-             'Stylus, Sass, and Less.'
-    }, {
-      name: 'Server and Client integration',
-      info: 'Built with a powerful and fun stack: MongoDB, Express, ' +
-             'AngularJS, and Node.'
-    }, {
-      name: 'Smart Build System',
-      info: 'Build system ignores `spec` files, allowing you to keep ' +
-             'tests alongside code. Automatic injection of scripts and ' +
-             'styles into your index.html'
-    }, {
-      name: 'Modular Structure',
-      info: 'Best practice client and server structures allow for more ' +
-             'code reusability and maximum scalability'
-    }, {
-      name: 'Optimized Build',
-      info: 'Build process packs up your templates as a single JavaScript ' +
-             'payload, minifies your scripts/css/images, and rewrites asset ' +
-             'names for caching.'
-    }, {
-      name: 'Deployment Ready',
-      info: 'Easily deploy your app to Heroku or Openshift with the heroku ' +
-             'and openshift subgenerators'
-    });
-  });
 
 User.find({}).remove()
   .then(() => {
-    User.create({
-      provider: 'local',
-      name: 'Test User',
-      email: 'test@example.com',
-      password: 'test'
-    }, {
-      provider: 'local',
-      role: 'admin',
-      name: 'Admin',
-      email: 'admin@example.com',
-      password: 'admin'
-    })
-    .then(() => {
-      console.log('finished populating users');
-    });
+    User.create(
+      {
+        provider: 'local',
+        firstName: 'Administrator1',
+        lastName: 'lastNameAdmin1',
+        fullName: 'Administrator1 lastNameAdmin1',
+        email: 'administrator1@example.com',
+        password: 'Administrator1',
+        role: 'Administrator',
+        userSupervisors: []
+      },
+      {
+        provider: 'local',
+        firstName: 'Administrator2',
+        lastName: 'lastNameAdmin2',
+        fullName: 'Administrator2 lastNameAdmin2',
+        email: 'administrator2@example.com',
+        password: 'Administrator2',
+        role: 'Administrator',
+        userSupervisors: []
+      },
+      {
+        provider: 'local',
+        firstName: 'Administrator3',
+        lastName: 'lastNameAdmin3',
+        fullName: 'Administrator3 lastNameAdmin3',
+        email: 'administrator3@example.com',
+        password: 'Administrator3',
+        role: 'Administrator',
+        userSupervisors: []
+      },
+      {
+        provider: 'local',
+        firstName: 'Supervisor1',
+        lastName: 'LastNameSupervisor',
+        fullName: 'Supervisor1 LastNameSupervisor',
+        email: 'Supervisor1@example.com',
+        password: 'Supervisor1',
+        role: 'Supervisor',
+        userSupervisors: []
+      },
+      {
+        provider: 'local',
+        firstName: 'Supervisor2',
+        lastName: 'LastNameSupervisor',
+        fullName: 'Supervisor2 LastNameSupervisor',
+        email: 'Supervisor2@example.com',
+        password: 'Supervisor2',
+        role: 'Supervisor',
+        userSupervisors: []
+      },
+      {
+        provider: 'local',
+        firstName: 'Supervisor3',
+        lastName: 'LastNameSupervisor',
+        fullName: 'Supervisor3 LastNameSupervisor',
+        email: 'Supervisor2@example.com',
+        password: 'Supervisor3',
+        role: 'Supervisor',
+        userSupervisors: []
+      },
+      {
+        provider: 'local',
+        firstName: 'Employee1',
+        lastName: 'LastNameEmployee',
+        fullName: 'Employee1 LastNameEmployee',
+        email: 'Employee1@example.com',
+        password: 'Employee1',
+        role: 'Employee',
+        userSupervisors: []
+      },
+      {
+        provider: 'local',
+        firstName: 'Employee2',
+        lastName: 'LastNameEmployee',
+        fullName: 'Employee2 LastNameEmployee',
+        email: 'Employee1@example.com',
+        password: 'Employee',
+        role: 'Employee2',
+        userSupervisors: []
+      },
+      {
+        provider: 'local',
+        firstName: 'Employee3',
+        lastName: 'LastNameEmployee',
+        fullName: 'Employee3 LastNameEmployee',
+        email: 'Employee3@example.com',
+        password: 'Employee3',
+        role: 'Employee',
+        userSupervisors: []
+      })
+      .then(() => {
+        console.log('finished populating users');
+      });
   });

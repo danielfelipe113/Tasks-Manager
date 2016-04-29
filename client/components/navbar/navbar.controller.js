@@ -14,9 +14,7 @@ class NavbarController {
     this.isLoggedIn = Auth.isLoggedIn;
     this.isAdmin = Auth.isAdmin;
     this.getCurrentUser = Auth.getCurrentUser;
-    
-    
-    };
+    }
     
     openMenu($mdOpenMenu, ev) {
       let that = this;

@@ -3,44 +3,23 @@
 (function () {
 
   class MainController {
-    constructor($http, tasksFactory, models) {
-      this.$http = $http;
-      this.awesomeThings = null;
+    constructor(tasksFactory) {
+      this.tasks = null;
       this.tasksFactory = tasksFactory;
-      this.models = models;
-      
+
       //init
       this.initialize();
     }
     initialize() {
-      this.getTasks()  
-      this.task = new this.models.createEmptyTask();
-      console.log(this.task)
+      this.getTasks();
     }
-    
+
     getTasks() {
       this.tasksFactory.getTasks()
         .then((response) => {
-          this.awesomeThings = response.data.results;
-        })
-    }
-
-    addThing() {
-      this.$http.post('/api/tasks/', this.task)
-        .then(function(response) {
-          console.log(response)
-        })
-        .catch(function(err){
-          console.log(err)
-        })
-      if (this.newThing) {
-        this.$http.post('/api/things', { name: this.newThing });
-        this.newThing = '';
-      }
-    }
-
-    deleteThing(thing) {
-      this.$http.delete('/api/things/' + thing._id);
+          this.tasks = response.data;
+          console.log('Tasks: ', this.tasks);
+        });
     }
   }
 

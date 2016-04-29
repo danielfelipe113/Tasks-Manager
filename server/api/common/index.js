@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./taskPriorities.controller');
+var controller = require('./common.controller');
 
 var router = express.Router();
 

@@ -1,16 +1,16 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/taskPrioritiess              ->  index
- * POST    /api/taskPrioritiess              ->  create
- * GET     /api/taskPrioritiess/:id          ->  show
- * PUT     /api/taskPrioritiess/:id          ->  update
- * DELETE  /api/taskPrioritiess/:id          ->  destroy
+ * GET     /api/commons              ->  index
+ * POST    /api/commons              ->  create
+ * GET     /api/commons/:id          ->  show
+ * PUT     /api/commons/:id          ->  update
+ * DELETE  /api/commons/:id          ->  destroy
  */
 
 'use strict';
 
 import _ from 'lodash';
-import TaskPriorities from './taskPriorities.model';
+import Common from './common.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -59,43 +59,43 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of TaskPrioritiess
+// Gets a list of Commons
 export function index(req, res) {
-  return TaskPriorities.find().exec()
+  return Common.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Gets a single TaskPriorities from the DB
+// Gets a single Common from the DB
 export function show(req, res) {
-  return TaskPriorities.findById(req.params.id).exec()
+  return Common.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Creates a new TaskPriorities in the DB
+// Creates a new Common in the DB
 export function create(req, res) {
-  return TaskPriorities.create(req.body)
+  return Common.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
-// Updates an existing TaskPriorities in the DB
+// Updates an existing Common in the DB
 export function update(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  return TaskPriorities.findById(req.params.id).exec()
+  return Common.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Deletes a TaskPriorities from the DB
+// Deletes a Common from the DB
 export function destroy(req, res) {
-  return TaskPriorities.findById(req.params.id).exec()
+  return Common.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));

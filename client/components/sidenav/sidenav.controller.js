@@ -19,7 +19,7 @@ class SidenavController {
     
     createTask($event) {
         let that = this;
-        let template = './app/factories/dialogService/partials/createTask/createTask.html';
+        let template = './app/partials/createTask/createTask.html';
         let controller = 'createTaskController';
         
         function callback() {

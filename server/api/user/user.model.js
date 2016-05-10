@@ -6,6 +6,7 @@ mongoose.Promise = require('bluebird');
 import {Schema} from 'mongoose';
 
 const authTypes = ['github', 'twitter', 'facebook', 'google'];
+const roleTypes = ['Employee', 'Supervisor', 'Administrator']
 
 var UserSchema = new Schema({
   firstName: {
@@ -23,6 +24,7 @@ var UserSchema = new Schema({
   role: {
     type: String,
     required: true,
+    enum: roleTypes,
     default: 'Employee'
   },
   userSupervisors: [

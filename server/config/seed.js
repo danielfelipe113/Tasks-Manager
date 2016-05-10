@@ -86,7 +86,7 @@ User.find({}).remove()
         fullName: 'Employee2 LastNameEmployee',
         email: 'Employee1@example.com',
         password: 'Employee',
-        role: 'Employee2',
+        role: 'Employee',
         userSupervisors: []
       },
       {

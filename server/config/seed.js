@@ -6,6 +6,8 @@
 'use strict';
 import User from '../api/user/user.model';
 
+
+
 User.find({}).remove()
   .then(() => {
     User.create(
@@ -17,7 +19,26 @@ User.find({}).remove()
         email: 'administrator1@example.com',
         password: 'Administrator1',
         role: 'Administrator',
-        userSupervisors: []
+        userSupervisorOf: [
+          {
+            provider: 'local',
+            firstName: 'Administrator1',
+            lastName: 'lastNameAdmin1',
+            fullName: 'Administrator1 lastNameAdmin1',
+            email: 'administrator1@example.com',
+            password: 'Administrator1',
+            role: 'Administrator'
+          },
+          {
+            provider: 'local',
+            firstName: 'Administrator1',
+            lastName: 'lastNameAdmin1',
+            fullName: 'Administrator1 lastNameAdmin1',
+            email: 'administrator1@example.com',
+            password: 'Administrator1',
+            role: 'Administrator'
+          }
+        ]
       },
       {
         provider: 'local',
@@ -27,7 +48,26 @@ User.find({}).remove()
         email: 'administrator2@example.com',
         password: 'Administrator2',
         role: 'Administrator',
-        userSupervisors: []
+        userSupervisorOf: [
+          {
+            provider: 'local',
+            firstName: 'Administrator1',
+            lastName: 'lastNameAdmin1',
+            fullName: 'Administrator1 lastNameAdmin1',
+            email: 'administrator1@example.com',
+            password: 'Administrator1',
+            role: 'Administrator'
+          },
+          {
+            provider: 'local',
+            firstName: 'Administrator1',
+            lastName: 'lastNameAdmin1',
+            fullName: 'Administrator1 lastNameAdmin1',
+            email: 'administrator1@example.com',
+            password: 'Administrator1',
+            role: 'Administrator'
+          }
+        ]
       },
       {
         provider: 'local',
@@ -37,7 +77,26 @@ User.find({}).remove()
         email: 'administrator3@example.com',
         password: 'Administrator3',
         role: 'Administrator',
-        userSupervisors: []
+       userSupervisorOf: [
+          {
+            provider: 'local',
+            firstName: 'Administrator1',
+            lastName: 'lastNameAdmin1',
+            fullName: 'Administrator1 lastNameAdmin1',
+            email: 'administrator1@example.com',
+            password: 'Administrator1',
+            role: 'Administrator'
+          },
+          {
+            provider: 'local',
+            firstName: 'Administrator1',
+            lastName: 'lastNameAdmin1',
+            fullName: 'Administrator1 lastNameAdmin1',
+            email: 'administrator1@example.com',
+            password: 'Administrator1',
+            role: 'Administrator'
+          }
+        ]
       },
       {
         provider: 'local',
@@ -47,7 +106,26 @@ User.find({}).remove()
         email: 'Supervisor1@example.com',
         password: 'Supervisor1',
         role: 'Supervisor',
-        userSupervisors: []
+        userSupervisorOf: [
+          {
+            provider: 'local',
+            firstName: 'Administrator1',
+            lastName: 'lastNameAdmin1',
+            fullName: 'Administrator1 lastNameAdmin1',
+            email: 'administrator1@example.com',
+            password: 'Administrator1',
+            role: 'Administrator'
+          },
+          {
+            provider: 'local',
+            firstName: 'Administrator1',
+            lastName: 'lastNameAdmin1',
+            fullName: 'Administrator1 lastNameAdmin1',
+            email: 'administrator1@example.com',
+            password: 'Administrator1',
+            role: 'Administrator'
+          }
+        ]
       },
       {
         provider: 'local',
@@ -57,7 +135,26 @@ User.find({}).remove()
         email: 'Supervisor2@example.com',
         password: 'Supervisor2',
         role: 'Supervisor',
-        userSupervisors: []
+        userSupervisorOf: [
+          {
+            provider: 'local',
+            firstName: 'Administrator1',
+            lastName: 'lastNameAdmin1',
+            fullName: 'Administrator1 lastNameAdmin1',
+            email: 'administrator1@example.com',
+            password: 'Administrator1',
+            role: 'Administrator'
+          },
+          {
+            provider: 'local',
+            firstName: 'Administrator1',
+            lastName: 'lastNameAdmin1',
+            fullName: 'Administrator1 lastNameAdmin1',
+            email: 'administrator1@example.com',
+            password: 'Administrator1',
+            role: 'Administrator'
+          }
+        ]
       },
       {
         provider: 'local',
@@ -67,7 +164,26 @@ User.find({}).remove()
         email: 'Supervisor2@example.com',
         password: 'Supervisor3',
         role: 'Supervisor',
-        userSupervisors: []
+        userSupervisorOf: [
+          {
+            provider: 'local',
+            firstName: 'Administrator1',
+            lastName: 'lastNameAdmin1',
+            fullName: 'Administrator1 lastNameAdmin1',
+            email: 'administrator1@example.com',
+            password: 'Administrator1',
+            role: 'Administrator'
+          },
+          {
+            provider: 'local',
+            firstName: 'Administrator1',
+            lastName: 'lastNameAdmin1',
+            fullName: 'Administrator1 lastNameAdmin1',
+            email: 'administrator1@example.com',
+            password: 'Administrator1',
+            role: 'Administrator'
+          }
+        ]
       },
       {
         provider: 'local',
@@ -77,7 +193,7 @@ User.find({}).remove()
         email: 'Employee1@example.com',
         password: 'Employee1',
         role: 'Employee',
-        userSupervisors: []
+        userSupervisorOf: []
       },
       {
         provider: 'local',
@@ -87,7 +203,7 @@ User.find({}).remove()
         email: 'Employee1@example.com',
         password: 'Employee',
         role: 'Employee',
-        userSupervisors: []
+        userSupervisorOf: []
       },
       {
         provider: 'local',
@@ -97,7 +213,7 @@ User.find({}).remove()
         email: 'Employee3@example.com',
         password: 'Employee3',
         role: 'Employee',
-        userSupervisors: []
+        userSupervisorOf: []
       })
       .then(() => {
         console.log('finished populating users');

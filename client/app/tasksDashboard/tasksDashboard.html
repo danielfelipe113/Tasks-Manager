@@ -11,7 +11,7 @@
                     <h2 flex="30">Tareas en progreso</h2>
                     
                     <div class="dataText" layout="row" flex>
-                        <p>Actualmente tienes <span class="tasks">{{vm.tasks.InProgress.length}}</span> tareas en progreso</p>
+                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.InProgress.length}}</span> tareas en progreso</p>
                     </div>
                 </div>
                 <div class="content" layout="column" layout-align="center center" flex="20">
@@ -28,7 +28,7 @@
                     <h2 flex="30">Tareas por hacer hoy</h2>
                     
                     <div class="dataText" layout="row" flex>
-                        <p>Actualmente tienes <span class="tasks">{{vm.tasks.ToDoToday.length}}</span> tareas para hacer hoy</p>
+                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.ToDoToday.length}}</span> tareas para hacer hoy</p>
                     </div>
                 </div>
                 <div class="content" layout="column" layout-align="center center" flex="20">
@@ -45,7 +45,7 @@
                     <h2 flex="30">Tareas por hacer</h2>
                     
                     <div class="dataText" layout="row" flex>
-                        <p>Actualmente tienes <span class="tasks">{{vm.tasks.ToDo.length}}</span> tareas por hacer</p>
+                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.ToDo.length}}</span> tareas por hacer</p>
                     </div>
                 </div>
                 <div class="content" layout="column" layout-align="center center" flex="20">
@@ -62,7 +62,7 @@
                     <h2 flex="30">Tareas retrasadas</h2>
                     
                     <div class="dataText" layout="row" flex>
-                        <p>Actualmente tienes <span class="tasks">{{vm.tasks.Delayed.length}}</span> tareas retrasadas</p>
+                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.Delayed.length}}</span> tareas retrasadas</p>
                     </div>
                 </div>
                 <div class="content" layout="column" layout-align="center center" flex="20">
@@ -79,7 +79,7 @@
                     <h2 flex="30">Tareas terminadas</h2>
                     
                     <div class="dataText" layout="row" flex>
-                        <p>Actualmente tienes <span class="tasks">{{vm.tasks.Done.length}}</span> tareas terminadas</p>
+                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.Done.length}}</span> tareas terminadas</p>
                     </div>
                 </div>
                 <div class="content" layout="column" layout-align="center center" flex="20">

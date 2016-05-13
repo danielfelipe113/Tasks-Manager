@@ -11,38 +11,28 @@
       this.Auth = Auth;
 
       //variables
+      this.algo = 'algoo'
       this.users = {};
-      this.me = null
       this.ownTasks = null;
 
       //init
       this.initialize();
     }
     initialize() {
-      this.getUsers();
       this.getMyself();
-    }
-
-    getUsers() {
-      //traer TODOS usuarios -- debo solo traer los usuarios a los que superviso en caso de ser supervisor y TODOs en caso de ser admin
-      let tempUsers = null;
-
-      this.usersFactory.getUsers()
-        .then((response) => {
-          tempUsers = response.data;
-          console.log('tempUsers: ', tempUsers)
-          for (let i = 0; i < tempUsers.length; i++) {
-            let userName = tempUsers[i].firstName;
-            this.users[userName] = tempUsers[i];
-            this.getTasks(tempUsers[i], userName);
-          }
-          console.log('users: ', this.users)
-        })
     }
 
     getMyself() {
       this.users.me = this.Auth.getCurrentUser().toJSON();
       this.getTasks(this.users.me, 'me');
+      
+      let tempUsers = this.users.me.userSupervisorOf;
+      for (let i = 0; i < tempUsers.length; i++) {
+        let userName = tempUsers[i].firstName;
+        this.users[userName] = tempUsers[i];
+        this.getTasks(tempUsers[i], userName);
+      }
+      console.log(this.users)
     }
 
     getTasks(user, variablePosition) {
@@ -52,6 +42,7 @@
       this.tasksFactory.getTasksByUserId(userId)
         .then((response) => {
           let tempTasks = response.data;
+          console.log(tempTasks)
           this.organizeTasks(tempTasks, variablePosition)
         })
     }
@@ -89,7 +80,7 @@
     .component('tasksDashboard', {
       templateUrl: 'app/tasksDashboard/tasksDashboard.html',
       controller: tasksDashboardController,
-      controllerAs: 'main'
+      controllerAs: 'vm'
     });
 
 })();

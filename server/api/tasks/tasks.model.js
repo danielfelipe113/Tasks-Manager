@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 
 var userSchema = {
   _id: {
-    type: [mongoose.Schema.Types.Mixed],
+    type: mongoose.Schema.Types.Mixed,
     required: true
   },
   firstName: {

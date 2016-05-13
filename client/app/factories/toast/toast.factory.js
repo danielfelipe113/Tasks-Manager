@@ -6,6 +6,7 @@
 
     var toastFactory = {
       successToast: successToast,
+      errorToast: errorToast
     };
 
     return toastFactory;
@@ -23,8 +24,17 @@
       });
     }
 
-    function errorToast() {
-
+    function errorToast(message) {
+      $mdToast.show({
+        templateUrl: './app/factories/toast/partials/success/toast.error.html',
+        controller:  toastErrorController,
+        controllerAs: 'vm',
+        locals: {
+          message: message || null
+        },  
+        hideDelay: 1000,
+        position: 'bottom right'
+      });
     }
 
 

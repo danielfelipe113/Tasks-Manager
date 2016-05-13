@@ -4,9 +4,17 @@
         <h1 class="md-toolbar-tools">Administrador de tareas</h1>
     </md-toolbar>
     <md-content layout-padding layout="column">
-        <md-button ui-sref="tasksDashboard" layout="row" layout-align="space-between center">
+        <md-button ui-sref="tasksDashboard({id: ''})" layout="row" layout-align="space-between center">
             <span flex>Dashboard</span>
             <md-icon class="tasksInProgress" flex="10">dashboard</md-icon>
+        </md-button>
+        <md-button ui-sref="users" layout="row" layout-align="space-between center">
+            <span flex>Usuarios que superviso</span>
+            <md-icon class="tasksInProgress" flex="10">person</md-icon>
+        </md-button>
+        <md-button ui-sref="admin" layout="row" layout-align="space-between center" ng-show="vm.isAdmin()">
+            <span flex>Administrar usuarios</span>
+            <md-icon class="tasksInProgress" flex="10">person</md-icon>
         </md-button>
         <md-button ui-sref="#" layout="row" layout-align="space-between center">
             <span flex>Otros...</span>
@@ -20,6 +28,23 @@
     <md-icon>navigate_next</md-icon>
 </md-button>
 
-<md-button class="addTaskButton md-fab md-accent" ng-click="vm.createTask($event)" ng-show="vm.isLoggedIn()">
-    <md-icon>add</md-icon>
-</md-button>
+
+
+<div class="addNewButton" layout="row" layout-align="center center">
+    <md-fab-speed-dial class="md-scale" md-direction="up">
+        <md-fab-trigger>
+            <md-button aria-label="menu" class="md-fab md-warn">
+                <md-icon>add</md-icon>
+            </md-button>
+        </md-fab-trigger>
+        <md-fab-actions>
+            <md-button class="md-fab md-mini md-raised md-primary" ng-click="vm.createTask($event)" ng-show="vm.isLoggedIn()">
+                <md-icon>note_add</md-icon>
+            </md-button>
+
+            <md-button class="md-fab md-mini md-raised md-warn">
+                <md-icon>person</md-icon>
+            </md-button>
+        </md-fab-actions>
+    </md-fab-speed-dial>
+</div>

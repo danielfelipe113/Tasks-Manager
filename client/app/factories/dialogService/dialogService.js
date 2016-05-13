@@ -14,7 +14,7 @@
 
         return dialogService;
 
-        function showDialog($event, template, controller, task, successCallback, dismissCallback) {
+        function showDialog($event, template, controller, dataModel, successCallback, dismissCallback) {
             var parentEl = angular.element(document.body);
             $mdDialog.show({
                 parent: parentEl,
@@ -26,14 +26,16 @@
                 controller: controller,
                 controllerAs: 'vm',
                 locals: {
-                    task: task || null
+                    dataModel: dataModel || null
                 }
             })
                 .then(() => {
-                    successCallback
+                    successCallback()
                 })
                 .catch(() => {
-                    dismissCallback
+                    if(dismissCallback) {
+                        dismissCallback();
+                    }
                 });
         }
     }

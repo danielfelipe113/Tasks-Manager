@@ -1,0 +1,44 @@
+<md-dialog class="createTaskFormContainer" flex="60">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 flex>Detalles del usuario</h2>
+            <md-button ng-click="vm.closeDialog()" class="md-icon-button">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout-padding>
+        <div layout-padding layout="row">
+            <div flex="60" layout="column" layout-align="center start">
+                <div>
+                    <p class="md-title">Nombres: </p>
+                    <p class="md-subhead">{{ vm.user.fullName }}</p>
+                </div>
+                <div>
+                    <p class="md-title">Rol: </p>
+                    <p class="md-subhead">{{ vm.user.role }}</p>
+                </div>
+                <div>
+                    <p class="md-title">Correo electrónico: </p>
+                    <p class="md-subhead">{{ vm.user.email }}</p>
+                </div>
+                <div layout="row" layout-align="center center">
+                    <p class="md-title">¿Está activo?: </p>
+                    <p class="md-subhead">{{ vm.user.isActive }}</p>
+                </div>
+            </div>
+            <div flex="40">
+                <md-content>
+                    <p class="md-title">Supervisa a: </p>
+                    <div ng-repeat="user in vm.user.supervisorOf">
+                        <p class="md-subhead">{{ user.fullName }}</p>
+                        <span>{{ user.email }}</span>
+                    </div>
+                </md-content>
+            </div>
+        </div>
+        <md-dialog-actions>
+            <md-button ng-click="vm.closeDialog()">Cerrar</md-button>
+        </md-dialog-actions>
+    </md-dialog-content>
+</md-dialog>

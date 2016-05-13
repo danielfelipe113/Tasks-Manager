@@ -1,12 +1,38 @@
-<div class="container">
-  <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
-  <ul class="list-group user-list">
-    <li class="list-group-item" ng-repeat="user in admin.users">
-	    <div class="user-info">
-	        <strong>{{user.name}}</strong><br>
-	        <span class="text-muted">{{user.email}}</span>
-	    </div>
-        <a ng-click="admin.delete(user)" class="trash"><span class="fa fa-trash fa-2x"></span></a>
-    </li>
-  </ul>
+<navbar></navbar>
+<header></header>
+
+<div layout-padding>
+  <div layout="column" layout-align="center center">
+    <h2>Seleccione un grupo de usuarios: </h2>
+    <md-input-container>
+      <md-select name="userGroups" ng-model="vm.userRoleSelected" placeholder="Seleccionar grupo" ng-change="vm.getUsersByRole()"
+        aria-label="s">
+        <md-option ng-value="role.role" ng-repeat="role in vm.userRoles">
+          {{role.description}}
+        </md-option>
+      </md-select>
+    </md-input-container>
+  </div>
+
+  <md-content class="listContainer">
+    <md-list>
+      <md-subheader class="md-no-sticky">Usuarios:</md-subheader>
+      <md-list-item class="md-3-line" ng-repeat="user in vm.usersByRole" layout-padding>
+        <div class="md-list-item-text" layout="column" ng-click="vm.userDetails($event, user)">
+          <h3>{{ user.fullName }}</h3>
+          <h4>{{ user.email }}</h4>
+          <p><strong>Active:</strong> {{ user.isActive }}</p>
+        </div>
+        <div class="listActions md-secondary" layout="row" flex="20">
+          <md-button class="md-icon-button " ng-click="vm.editUser($event, user)" aria-label="button-label">
+            <md-icon>mode_edit</md-icon>
+          </md-button>
+          <md-button class="md-icon-button " ng-click="vm.delete(user)" aria-label="button-label">
+            <md-icon>delete</md-icon>
+          </md-button>
+        </div>
+      </md-list-item>
+      <md-divider></md-divider>
+    </md-list>
+  </md-content>
 </div>

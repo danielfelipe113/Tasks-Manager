@@ -7,23 +7,38 @@ class SignupController {
   submitted = false;
   //end-non-standard
 
-  constructor(Auth, $state) {
+  constructor(Auth, $state, models, appConfig) {
     this.Auth = Auth;
     this.$state = $state;
+    this.models = models;
+    this.roles = appConfig.userRolesJson;
+    this.user = null;
+    
+    this.initialize();
   }
+
+  initialize() {
+    this.CreateEmptyUser();
+  }
+  
+  CreateEmptyUser() {
+    this.user = new this.models.CreateEmptyUser();
+    console.log(this.user)
+  }
+
+
 
   register(form) {
     this.submitted = true;
+    this.user.fullName = this.user.firstName + ' ' + this.user.lastName;
+    this.user.isActive = true;
+    
 
     if (form.$valid) {
-      this.Auth.createUser({
-        name: this.user.name,
-        email: this.user.email,
-        password: this.user.password
-      })
+      this.Auth.createUser(this.user)
       .then(() => {
         // Account created, redirect to home
-        this.$state.go('main');
+        this.$state.go('tasksDashboard');
       })
       .catch(err => {
         err = err.data;

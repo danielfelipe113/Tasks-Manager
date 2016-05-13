@@ -15,8 +15,14 @@
         function values() {
             var values = {
                 MESSAGES: {
-                    TASK: {
-                        ERROR: 'Hubo un error, por favor contacte al administrador',
+                    SUCCESS: 'Proceso completado',
+                    ERROR: 'Hubo un error, por favor contacte al administrador',
+                    USERS: {
+                        CREATESUCCESS: 'El usuario fue creado satisfactoriamente',
+                        SAVESUCCESS: 'El usuario fue guardado satisfactoriamente',
+                        DELETESUCCESS: 'El usuario fue eliminado satisfactoriamente'
+                    },
+                    TASKS: {
                         CREATESUCCESS: 'La tarea se creó satisfactoriamente',
                         SAVESUCCESS: 'La tarea fue guardada satisfactoriamente',
                         DELETESUCCESS: 'La tarea fue eliminada satisfactoriamente'                    
@@ -68,7 +74,7 @@
                     statusDescription: 'Por hacer',
                     statusIcon: {
                         iconName: 'warning',
-                        iconClass: 'priorityHigh'
+                        iconClass: 'tasksToDo'
                     }
                 },
                 {

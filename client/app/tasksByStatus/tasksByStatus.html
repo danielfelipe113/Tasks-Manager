@@ -7,6 +7,9 @@
         <div class="dashboardCardContainer md-whiteframe-1dp no-style" ng-repeat="task in vm.tasks"
             flex-gt-sm="30">
             <div class="card {{'tasks' + vm.status}}" layout-padding layout="column" layout-align="center center">
+                <span class="{{task.Priority.priorityIcon.iconClass}} priorityStatus">
+                    <md-icon>{{task.Priority.priorityIcon.iconName}}</md-icon>
+                </span>
                 <div class="textsContainer" layout="column" layout-align="center center">
                     <h2 flex="30">{{task.Title}}</h2>
 

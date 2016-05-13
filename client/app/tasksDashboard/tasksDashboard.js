@@ -4,7 +4,7 @@ angular.module('tasksAdminApp')
   .config(function($stateProvider) {
     $stateProvider
       .state('tasksDashboard', {
-        url: '/',
+        url: '/dashboard/:id',
         template: '<tasks-dashboard></tasks-dashboard>'
       });
   });

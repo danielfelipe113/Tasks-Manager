@@ -4,7 +4,7 @@ angular.module('tasksAdminApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('tasksByStatus', {
-        url: '/tasksByStatus/:status',
+        url: '/tasksByStatus/:myId/:status',
         template: '<tasks-by-status></tasks-by-status>'
       });
   });

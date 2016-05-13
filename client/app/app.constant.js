@@ -9,7 +9,6 @@
 		"Administrator"
 	],
 	"userRolesJson": {
-		"guest": "guest",
 		"Employee": "Employee",
 		"Administrator": "Administrator",
 		"Supervisor": "Supervisor"

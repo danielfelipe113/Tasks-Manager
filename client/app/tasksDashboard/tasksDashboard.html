@@ -5,41 +5,8 @@
     <h2 class="md-display-1">Tareas asignadas:</h2>
     
     <div class="tasks" layout="column" layout-gt-sm="row" layout-wrap>
-        <a ui-sref="tasksByStatus({status: 'InProgress'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
-            <div class="card tasksInProgress" layout-padding layout="column" layout-align="center center" >
-                <div class="textsContainer" layout="column" layout-align="center center">
-                    <h2 flex="30">Tareas en progreso</h2>
-                    
-                    <div class="dataText" layout="row" flex>
-                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.InProgress.length}}</span> tareas en progreso</p>
-                    </div>
-                </div>
-                <div class="content" layout="column" layout-align="center center" flex="20">
-                    <div class="iconContainer">
-                        <md-icon class="tasksInProgress icon-60">assessment</md-icon>
-                    </div>
-                </div>
-            </div>
-        </a>
         
-        <a ui-sref="tasksByStatus({status: 'ToDoToday'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
-            <div class="card tasksToDoToday" layout-padding layout="column" layout-align="center center" >
-                <div class="textsContainer" layout="column" layout-align="center center">
-                    <h2 flex="30">Tareas por hacer hoy</h2>
-                    
-                    <div class="dataText" layout="row" flex>
-                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.ToDoToday.length}}</span> tareas para hacer hoy</p>
-                    </div>
-                </div>
-                <div class="content" layout="column" layout-align="center center" flex="20">
-                    <div class="iconContainer">
-                        <md-icon class="tasksToDoToday icon-60">assignment_ind</md-icon>
-                    </div>
-                </div>
-            </div>
-        </a>
-        
-        <a ui-sref="tasksByStatus({status: 'ToDo'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
+        <a ui-sref="tasksByStatus({myId: '{{vm.users.me._id}}', status: 'ToDo'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
             <div class="card tasksToDo" layout-padding layout="column" layout-align="center center" >
                 <div class="textsContainer" layout="column" layout-align="center center">
                     <h2 flex="30">Tareas por hacer</h2>
@@ -56,7 +23,41 @@
             </div>
         </a>
         
-        <a ui-sref="tasksByStatus({status: 'Delayed'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
+        <a ui-sref="tasksByStatus({myId: '{{vm.users.me._id}}', status: 'ToDoToday'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
+            <div class="card tasksToDoToday" layout-padding layout="column" layout-align="center center" >
+                <div class="textsContainer" layout="column" layout-align="center center">
+                    <h2 flex="30">Tareas por hacer hoy</h2>
+                    
+                    <div class="dataText" layout="row" flex>
+                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.ToDoToday.length}}</span> tareas para hacer hoy</p>
+                    </div>
+                </div>
+                <div class="content" layout="column" layout-align="center center" flex="20">
+                    <div class="iconContainer">
+                        <md-icon class="tasksToDoToday icon-60">assignment_ind</md-icon>
+                    </div>
+                </div>
+            </div>
+        </a>
+        
+        <a ui-sref="tasksByStatus({myId: '{{vm.users.me._id}}', status: 'InProgress'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
+            <div class="card tasksInProgress" layout-padding layout="column" layout-align="center center" >
+                <div class="textsContainer" layout="column" layout-align="center center">
+                    <h2 flex="30">Tareas en progreso</h2>
+                    
+                    <div class="dataText" layout="row" flex>
+                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.InProgress.length}}</span> tareas en progreso</p>
+                    </div>
+                </div>
+                <div class="content" layout="column" layout-align="center center" flex="20">
+                    <div class="iconContainer">
+                        <md-icon class="tasksInProgress icon-60">assessment</md-icon>
+                    </div>
+                </div>
+            </div>
+        </a>
+        
+        <a ui-sref="tasksByStatus({myId: '{{vm.users.me._id}}', status: 'Delayed'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
             <div class="card tasksDelayed" layout-padding layout="column" layout-align="center center" >
                 <div class="textsContainer" layout="column" layout-align="center center">
                     <h2 flex="30">Tareas retrasadas</h2>
@@ -73,7 +74,7 @@
             </div>
         </a>
         
-        <a ui-sref="tasksByStatus({status: 'Done'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
+        <a ui-sref="tasksByStatus({myId: '{{vm.users.me._id}}', status: 'Done'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
             <div class="card tasksDone" layout-padding layout="column" layout-align="center center" >
                 <div class="textsContainer" layout="column" layout-align="center center">
                     <h2 flex="30">Tareas terminadas</h2>

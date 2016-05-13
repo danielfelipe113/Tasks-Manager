@@ -1,0 +1,84 @@
+<md-dialog class="createTaskFormContainer" flex="60">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 flex>Editar usuario</h2>
+            <md-button ng-click="vm.closeDialog()" class="md-icon-button">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout-padding>
+        <form class="saveForm" name="saveForm" novalidate layout="column" layout-align="center center" layout-align-gt-sm="start">
+            <div layout="row" layout-align="center center">
+                <h2 class="color-indigo">Llene los siguientes campos:</h2>
+            </div>
+            <div layout="column" layout-gt-sm="row" layout-align="space-around start" layout-wrap>
+                <div flex="40" layout="column" layout-padding>
+                    <md-input-container>
+                        <label>Nombres</label>
+                        <input type="text" name="firstName" ng-model="vm.user.firstName" required/>
+                        <div ng-messages="signUpForm.firstName.$error">
+                            <div ng-message="required">
+                                Escribe tus nombres
+                            </div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Apellidos</label>
+                        <input type="text" name="lastName" ng-model="vm.user.lastName" required/>
+                        <div ng-messages="signUpForm.lastName.$error">
+                            <div ng-message="required">
+                                Escribe tus nombres
+                            </div>
+                        </div>
+                    </md-input-container>
+
+                    <md-input-container class="md-accent" ng-hide="vm.user.role === vm.roles.Employee">
+                        <label>Supervisar a:</label>
+                        <md-select ng-model="vm.user.supervisorOf" multiple="">
+                            <md-optgroup label="Usuarios">
+                                <md-option ng-value="user" ng-repeat="user in vm.users">
+                                    {{ user.fullName }}
+                                </md-option>
+                            </md-optgroup>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Role:</label>
+                        <md-select name="role" ng-model="vm.user.role" ng-change="vm.getUsers()" required>
+                            <md-option ng-value="role" ng-repeat="role in vm.roles" ng-selected="role === vm.user.role" flex>
+                                {{role}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container>
+                        <label>Correo electrónico</label>
+                        <input type="email" name="email" ng-model="vm.user.email" required mongoose-error/>
+                        <div ng-messages="signUpForm.email.$error">
+                            <div ng-message="required">
+                                Escribe tu correo electrónico
+                            </div>
+                            <div ng-message="mongooseError">
+                                {{vm.errors.email}}
+                            </div>
+                        </div>
+                    </md-input-container>
+
+                    <div layout="row" layout-align="center center">
+                        <md-checkbox ng-model="vm.user.isActive" aria-label="Checkbox is active">
+                            Is active
+                        </md-checkbox>
+                    </div>
+                </div>
+            </div>
+        </form>
+       
+        <md-dialog-actions>
+            <md-button type="submit" class="md-raised md-primary" ng-click="vm.saveForm(saveForm.$valid)">Guardar cambios</md-button>
+            <md-button ng-click="vm.closeDialog()">Cerrar</md-button>
+        </md-dialog-actions>
+    </md-dialog-content>
+</md-dialog>

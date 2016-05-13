@@ -1,17 +1,19 @@
 'use strict';
-
+/**
+ * Pasar las funciones a la factory
+ */
 (function () {
 
   class tasksDashboardController {
-    constructor(tasksFactory, appConfig, Auth, usersFactory) {
+    constructor(tasksFactory, appConfig, Auth, usersFactory, $stateParams) {
       //dependences
+      this.userId = $stateParams.id;
       this.appConfig = appConfig;
       this.tasksFactory = tasksFactory;
       this.usersFactory = usersFactory;
       this.Auth = Auth;
 
       //variables
-      this.algo = 'algoo'
       this.users = {};
       this.ownTasks = null;
 
@@ -19,60 +21,28 @@
       this.initialize();
     }
     initialize() {
-      this.getMyself();
+      console.log('params: ', this.userId)
+      this.getTasks(this.userId);
+      
     }
 
-    getMyself() {
-      this.users.me = this.Auth.getCurrentUser().toJSON();
-      this.getTasks(this.users.me, 'me');
-      
-      let tempUsers = this.users.me.userSupervisorOf;
-      for (let i = 0; i < tempUsers.length; i++) {
-        let userName = tempUsers[i].firstName;
-        this.users[userName] = tempUsers[i];
-        this.getTasks(tempUsers[i], userName);
-      }
-      console.log(this.users)
-    }
-
-    getTasks(user, variablePosition) {
-      let tempTasks = null;
-      let userId = user._id
-      
-      this.tasksFactory.getTasksByUserId(userId)
-        .then((response) => {
-          let tempTasks = response.data;
-          console.log(tempTasks)
-          this.organizeTasks(tempTasks, variablePosition)
-        })
-    }
-
-    //primer parametro, la coleccion de tareas
-    //segundo parametro, a que usuario se las debo asignar
-
-    organizeTasks(tempTasks, userName) {
-      this.users[userName].tasks = {
-        InProgress: [],
-        ToDoToday: [],
-        ToDo: [],
-        Delayed: [],
-        Done: []
-      };
-      
-      tempTasks.forEach(function (element) {
-        if (element.Status.statusName === this.appConfig.tasksStatus.InProgress) {
-          this.users[userName].tasks.InProgress.push(element);
-        } else if (element.Status.statusName === this.appConfig.tasksStatus.ToDoToday) {
-          this.users[userName].tasks.ToDoToday.push(element);
-        } else if (element.Status.statusName === this.appConfig.tasksStatus.ToDo) {
-          this.users[userName].tasks.ToDo.push(element);
-        } else if (element.Status.statusName === this.appConfig.tasksStatus.Delayed) {
-          this.users[userName].tasks.Delayed.push(element);
-        } else if (element.Status.statusName === this.appConfig.tasksStatus.Done) {
-          this.users[userName].tasks.Done.push(element);
+    getTasks(id) {
+     this.tasksFactory.getTasksConstructor(id)
+      .then(response => {
+        if(id) {
+          this.users = response;
+          if(this.users.hasOwnProperty('me')) {
+            delete this.users['me']
+          };  
+        } else {
+          this.users.me = response['me']
         }
-      }, this);
+        console.log('users: ', this.users)
+      });
+        
     }
+
+
 
   } //end
 

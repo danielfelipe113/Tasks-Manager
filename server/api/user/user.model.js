@@ -27,9 +27,9 @@ var UserSchema = new Schema({
     enum: roleTypes,
     default: 'Employee'
   },
-  userSupervisorOf: [
-    {}
-  ],
+  supervisorOf: {
+    type: []
+  },
   email: {
     type: String,
     required: true,
@@ -42,6 +42,10 @@ var UserSchema = new Schema({
   provider: {
     type: String,
     default: 'local'
+  },
+  isActive: {
+    type: Boolean,
+    default: true
   },
   salt: String,
   facebook: {},

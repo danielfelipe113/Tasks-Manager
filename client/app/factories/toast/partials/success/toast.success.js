@@ -13,7 +13,7 @@ class toastSuccessController {
         if(this.message) {
             this.successMessage = this.message;
         } else {
-            this.successMessage = this.values.MESSAGES.TASK.CREATESUCCESS;
+            this.successMessage = this.values.MESSAGES.SUCCESS;
         }
     }
 

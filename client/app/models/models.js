@@ -10,14 +10,16 @@
         return service;
 
         function CreateEmptyUser() {
-            this.Id = 0;
-            this.FirstName = null;
-            this.LastName = null;
-            this.IsActive = null;
-            this.password = null;
+            this.firstName = null;
+            this.lastName = null;
+            this.fullName = null;
+            this.role = null;
+            this.supervisorOf = null;
             this.email = null;
-            this.rol = null;
-            this.UserSupervisors = [];
+            this.password = null;
+            this.confirmPassword = null;
+            this.isActive = null;
+            this.tasks = [];
         }
 
         function createEmptyTask() {

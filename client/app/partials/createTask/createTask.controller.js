@@ -1,8 +1,11 @@
 'use strict';
-
+/**
+ * tengo que revisar los endpoints porque no me están encontrando las tareas del usuario por el Id
+ * 
+ */
 
 class createTaskController {
-    constructor($http, tasksFactory, task, $mdDialog, models, values, appConfig, Auth, usersFactory, toastFactory) {
+    constructor($http, tasksFactory, dataModel, $mdDialog, models, values, appConfig, Auth, usersFactory, toastFactory) {
         //dependencies
         this.$http = $http;
         this.models = models;
@@ -27,7 +30,7 @@ class createTaskController {
             Administrators: [],
             Employees: []
         };
-        this.task = task;
+        this.task = dataModel;
         this.newTask = null;
         this.submitted = false;
 
@@ -48,11 +51,11 @@ class createTaskController {
     }
 
     setUserRol() {
-        this.isAdministrator = this.Auth.isAdmin();
-        
         if (this.currentUser.role === this.appConfig.userRolesJson.Employee) {
             this.isEmployee = true;
             this.newTask.AssignTo = this.currentUser;
+        } else if (this.currentUser.role === this.appConfig.userRolesJson.Administrator) { 
+            this.isAdministrator = true;
         }
     }
 
@@ -106,17 +109,18 @@ class createTaskController {
 
     //submit
     saveTask(isValid) {
+        let messages = this.values.values();
         let that = this;
         this.submitted = true;
         
         if (isValid) {
             this.tasksFactory.postTask(this.newTask)
-                .then(() => {
-                    that.toastFactory.successToast();
+                .then((res) => {
+                    that.toastFactory.successToast(messages.MESSAGES.TASKS.CREATESUCCESS);
                     that.$mdDialog.hide();
                 })
-                .catch(() => {
-                    that.toastFactory.errorToast();
+                .catch((err) => {
+                    that.toastFactory.errorToast(messages.MESSAGES.ERROR);
                     that.$mdDialog.cancel();
                 });
         }

@@ -14,9 +14,7 @@ angular.module('tasksAdminApp')
         referrer: 'main',
         template: '',
         controller: function($state, Auth) {
-          var referrer = $state.params.referrer ||
-                          $state.current.referrer ||
-                          'main';
+          var referrer = 'login';
           Auth.logout();
           $state.go(referrer);
         }

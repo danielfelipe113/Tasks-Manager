@@ -23,10 +23,9 @@ class SidenavController {
         let controller = 'createTaskController';
         
         function callback() {
-            that.$state.go('main', {}, {
-                reload: true,
-                inherit: false,
-                notify: true
+            console.log(that.$state)
+            that.$state.go('tasksDashboard', {}, {
+                reload: true
             })
         }
         

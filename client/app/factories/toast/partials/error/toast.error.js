@@ -1,6 +1,6 @@
 'use strict';
 
-class toastSuccessController {
+class toastErrorController {
     constructor(values, message) {
         this.values = values.values();
         this.message = message;
@@ -13,12 +13,12 @@ class toastSuccessController {
         if(this.message) {
             this.errorMessage = this.message;
         } else {
-            this.errorMessage = this.values.MESSAGES.TASK.ERROR;
+            this.errorMessage = this.values.MESSAGES.ERROR;
         }
     }
 
 }
 
 angular.module('tasksAdminApp')
-    .controller('toastSuccessController', toastSuccessController);
+    .controller('toastErrorController', toastErrorController);
 

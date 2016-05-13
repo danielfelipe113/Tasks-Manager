@@ -10,7 +10,9 @@ router.get('/', controller.index);
 router.delete('/:id', controller.destroy);
 router.get('/me', auth.isAuthenticated(), controller.me);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
+router.patch('/:id', auth.isAuthenticated(), controller.updateUser);
 router.get('/:id', auth.isAuthenticated(), controller.show);
+router.get('/getUsersByRole/:role', auth.isAuthenticated(), controller.getUsersByRole);
 router.post('/', controller.create);
 
 module.exports = router;

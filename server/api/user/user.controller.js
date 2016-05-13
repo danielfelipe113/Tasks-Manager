@@ -4,6 +4,7 @@ import User from './user.model';
 import passport from 'passport';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
+import _ from 'lodash';
 
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
@@ -32,12 +33,25 @@ export function index(req, res) {
 }
 
 /**
+ * Get list of users
+ * restriction: 'admin'
+ */
+export function getUsersByRole(req, res) {
+  return User.find({
+    "role" : req.params.role
+  }, '-salt -password').exec()
+    .then(users => {
+      res.status(200).json(users);
+    })
+    .catch(handleError(res));
+}
+
+/**
  * Creates a new user
  */
 export function create(req, res, next) {
   var newUser = new User(req.body);
   newUser.provider = 'local';
-  newUser.role = 'user';
   newUser.save()
     .then(function(user) {
       var token = jwt.sign({ _id: user._id }, config.secrets.session, {
@@ -96,6 +110,25 @@ export function changePassword(req, res, next) {
       } else {
         return res.status(403).end();
       }
+    });
+}
+
+/**
+ * Change a users password
+ */
+export function updateUser(req, res, next) {
+  var userId = req.params.id;
+  
+  return User.findById(userId).exec()
+    .then(user => {
+        user = _.merge(user, req.body);
+        console.log(user)
+        return user.save()
+          .then(() => {
+            res.status(204).end();
+          })
+          .catch(validationError(res));
+      
     });
 }
 

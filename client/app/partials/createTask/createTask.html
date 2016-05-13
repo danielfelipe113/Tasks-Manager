@@ -58,7 +58,7 @@
                     <md-input-container>
                         <label>Asignar a</label>
                         <md-select name="taskAssignTo" ng-model="vm.newTask.AssignTo" required ng-disabled="vm.isEmployee">
-                            <md-optgroup label="Administradores" ng-if="isAdministrator">
+                            <md-optgroup label="Administradores" ng-if="vm.isAdministrator">
                                 <md-option ng-value="administrator" ng-repeat="administrator in vm.users.Administrators" ng-selected="true">{{administrator.fullName}}</md-option>
                             </md-optgroup>
                             <md-optgroup label="Supervisores">
@@ -118,11 +118,8 @@
                 </div>
             </div>
         </form>
-        <code>
-           {{ vm.newTask | json }}
-        </code>
         <md-dialog-actions>
-            <md-button type="submit" ng-click="vm.saveTask(createTaskForm.$valid)">Guardar tarea</md-button>
+            <md-button type="submit" class="md-raised md-primary" ng-click="vm.saveTask(createTaskForm.$valid)">Guardar tarea</md-button>
             <md-button ng-click="vm.closeDialog()">Cerrar</md-button>
         </md-dialog-actions>
     </md-dialog-content>

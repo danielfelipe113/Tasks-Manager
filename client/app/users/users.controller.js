@@ -14,7 +14,7 @@
     }
     
     getUsers() {
-      this.tasksFactory.getTasksConstructor()
+      this.tasksFactory.getTasksConstructor(0, true)
         .then(res =>{          
           this.users = res;
           if(this.users.hasOwnProperty('me')) {

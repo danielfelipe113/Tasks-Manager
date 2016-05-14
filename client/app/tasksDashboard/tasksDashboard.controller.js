@@ -14,32 +14,24 @@
       this.Auth = Auth;
 
       //variables
-      this.users = {};
-      this.ownTasks = null;
-
+      this.user = {};
+      
+      this.id = this.user._id
+     
       //init
       this.initialize();
     }
     initialize() {
-      console.log('params: ', this.userId)
       this.getTasks(this.userId);
-      
     }
 
     getTasks(id) {
-     this.tasksFactory.getTasksConstructor(id)
-      .then(response => {
-        if(id) {
-          this.users = response;
-          if(this.users.hasOwnProperty('me')) {
-            delete this.users['me']
-          };  
-        } else {
-          this.users.me = response['me']
-        }
-        console.log('users: ', this.users)
-      });
-        
+      this.tasksFactory.getTasksConstructor(id, false)
+        .then(response => {
+          this.user = response.user
+          console.log(this.user)
+        });
+
     }
 
 

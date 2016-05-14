@@ -6,13 +6,13 @@
     
     <div class="tasks" layout="column" layout-gt-sm="row" layout-wrap>
         
-        <a ui-sref="tasksByStatus({myId: '{{vm.users.me._id}}', status: 'ToDo'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
+        <a ui-sref="tasksByStatus({id: vm.user._id, status: 'ToDo'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
             <div class="card tasksToDo" layout-padding layout="column" layout-align="center center" >
                 <div class="textsContainer" layout="column" layout-align="center center">
                     <h2 flex="30">Tareas por hacer</h2>
                     
                     <div class="dataText" layout="row" flex>
-                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.ToDo.length}}</span> tareas por hacer</p>
+                        <p> <span class="tasks">{{vm.user.tasks.ToDo.length || 0}}</span> tareas por hacer</p>
                     </div>
                 </div>
                 <div class="content" layout="column" layout-align="center center" flex="20">
@@ -23,13 +23,13 @@
             </div>
         </a>
         
-        <a ui-sref="tasksByStatus({myId: '{{vm.users.me._id}}', status: 'ToDoToday'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
+        <a ui-sref="tasksByStatus({id: vm.user._id, status: 'ToDoToday'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
             <div class="card tasksToDoToday" layout-padding layout="column" layout-align="center center" >
                 <div class="textsContainer" layout="column" layout-align="center center">
                     <h2 flex="30">Tareas por hacer hoy</h2>
                     
                     <div class="dataText" layout="row" flex>
-                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.ToDoToday.length}}</span> tareas para hacer hoy</p>
+                        <p> <span class="tasks">{{vm.user.tasks.ToDoToday.length || 0}}</span> tareas para hacer hoy</p>
                     </div>
                 </div>
                 <div class="content" layout="column" layout-align="center center" flex="20">
@@ -40,13 +40,13 @@
             </div>
         </a>
         
-        <a ui-sref="tasksByStatus({myId: '{{vm.users.me._id}}', status: 'InProgress'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
+        <a ui-sref="tasksByStatus({id: vm.user._id, status: 'InProgress'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
             <div class="card tasksInProgress" layout-padding layout="column" layout-align="center center" >
                 <div class="textsContainer" layout="column" layout-align="center center">
                     <h2 flex="30">Tareas en progreso</h2>
                     
                     <div class="dataText" layout="row" flex>
-                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.InProgress.length}}</span> tareas en progreso</p>
+                        <p> <span class="tasks">{{vm.user.tasks.InProgress.length || 0}}</span> tareas en progreso</p>
                     </div>
                 </div>
                 <div class="content" layout="column" layout-align="center center" flex="20">
@@ -57,13 +57,13 @@
             </div>
         </a>
         
-        <a ui-sref="tasksByStatus({myId: '{{vm.users.me._id}}', status: 'Delayed'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
+        <a ui-sref="tasksByStatus({id: vm.user._id, status: 'Delayed'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
             <div class="card tasksDelayed" layout-padding layout="column" layout-align="center center" >
                 <div class="textsContainer" layout="column" layout-align="center center">
                     <h2 flex="30">Tareas retrasadas</h2>
                     
                     <div class="dataText" layout="row" flex>
-                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.Delayed.length}}</span> tareas retrasadas</p>
+                        <p> <span class="tasks">{{vm.user.tasks.Delayed.length || 0}}</span> tareas retrasadas</p>
                     </div>
                 </div>
                 <div class="content" layout="column" layout-align="center center" flex="20">
@@ -74,13 +74,13 @@
             </div>
         </a>
         
-        <a ui-sref="tasksByStatus({myId: '{{vm.users.me._id}}', status: 'Done'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
+        <a ui-sref="tasksByStatus({id: vm.user._id, status: 'Done'})" class="dashboardCardContainer md-whiteframe-1dp no-style" flex-gt-sm="30">
             <div class="card tasksDone" layout-padding layout="column" layout-align="center center" >
                 <div class="textsContainer" layout="column" layout-align="center center">
                     <h2 flex="30">Tareas terminadas</h2>
                     
                     <div class="dataText" layout="row" flex>
-                        <p>Actualmente tienes <span class="tasks">{{vm.users.me.tasks.Done.length}}</span> tareas terminadas</p>
+                        <p> <span class="tasks">{{vm.user.tasks.Done.length || 0}}</span> tareas terminadas</p>
                     </div>
                 </div>
                 <div class="content" layout="column" layout-align="center center" flex="20">

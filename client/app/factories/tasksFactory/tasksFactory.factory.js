@@ -54,34 +54,32 @@
 
 
 
-        function getTasksConstructor(id) {
+        function getTasksConstructor(id, getSupervised) {
             var deferred = $q.defer();
             var promise = deferred.promise;
             var users = {};
             var tempTasks = null;
-            
-            if(id) { //al pasar un Id traigo los datos de los que supervisa el usuario del que pasé el id
-                usersFactory.getUserById(id)
-                    .then(function(response) {
-                        var tempUser = response.data;
-                        console.log(response)
-                        users[tempUser.fullName] = tempUser;
-                        getUsersSupervised(tempUser.fullName);
-                    });
-            } else { //Cuando no paso un ID a esta función solo sirve para traer los datos de los que yo superviso
-                users.me = Auth.getCurrentUser().toJSON();
-                console.log(users.me)
-                getUsersSupervised('me'); 
-            }            
 
-            function getUsersSupervised(variablePosition) {
-                
+            if (id) { //Busco las tareas del usuario que yo superviso y que ya seleccioné 
+                usersFactory.getUserById(id)
+                    .then(function (response) {
+                        users.user = response.data;
+                        getTasks(users.user._id, 'user')
+                    });
+            } else if (getSupervised) { //Busco todos los usuarios que yo superviso y sus tareas
+                users.user = Auth.getCurrentUser().toJSON();
+                getUsersSupervised('user');
+            } else { //busco mis propias tareas
+                users.user = Auth.getCurrentUser().toJSON();
+                getTasks(users.user._id, 'user')
+            }
+
+            function getUsersSupervised(variablePosition) { //establezco a quien superviso y hago llamados de sus tareas
                 var supervisorOf = users[variablePosition].supervisorOf;
                 if (supervisorOf != null) {
                     for (var i = 0; i < supervisorOf.length; i++) {
-                        var userName = supervisorOf[i].firstName;
+                        var userName = supervisorOf[i].firstName + supervisorOf[i].lastName + supervisorOf[i].role;
                         users[userName] = supervisorOf[i];
-                        
                         getTasks(supervisorOf[i]._id, userName);
                     }
                 }
@@ -90,8 +88,8 @@
             function getTasks(userId, variablePosition) {
                 getTasksByUserId(userId)
                     .then(function (response) {
-                        var tempTasks = response.data;
-                        organizeTasks(tempTasks, variablePosition)
+                        users[variablePosition].tasks = response.data;
+                        organizeTasks(users[variablePosition].tasks, variablePosition)
                     });
             }
 
@@ -105,7 +103,6 @@
                 };
                 users[userName].totalTasks = 0;
                 users[userName].haveTasks = false;
-
                 tempTasks.forEach(function (element) {
                     if (element.Status.statusName === appConfig.tasksStatus.InProgress) {
                         users[userName].tasks.InProgress.push(element);
@@ -119,22 +116,16 @@
                         users[userName].tasks.Done.push(element);
                     }
                 });
-
                 for (var taskStatus in users[userName].tasks) {
                     if (users[userName].tasks[taskStatus].length) {
                         users[userName].haveTasks = true;
                         users[userName].totalTasks += users[userName].tasks[taskStatus].length;
                     }
                 }
-                console.log(users)
                 deferred.resolve(users);
             }
-
             return promise;
         }
-
-
-
     };
 
     angular

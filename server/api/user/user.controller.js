@@ -73,7 +73,8 @@ export function show(req, res, next) {
       if (!user) {
         return res.status(404).end();
       }
-      res.json(user.profile);
+      
+      res.json(user);
     })
     .catch(err => next(err));
 }

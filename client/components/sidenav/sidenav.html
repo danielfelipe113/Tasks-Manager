@@ -30,7 +30,7 @@
 
 
 
-<div class="addNewButton" layout="row" layout-align="center center">
+<div class="addNewButton" layout="row" layout-align="center center" ng-show="vm.isLoggedIn()">
     <md-fab-speed-dial class="md-scale" md-direction="up">
         <md-fab-trigger>
             <md-button aria-label="menu" class="md-fab md-warn">
@@ -38,11 +38,11 @@
             </md-button>
         </md-fab-trigger>
         <md-fab-actions>
-            <md-button class="md-fab md-mini md-raised md-primary" ng-click="vm.createTask($event)" ng-show="vm.isLoggedIn()">
+            <md-button id="newTask" class="md-fab md-mini md-raised md-primary" ng-click="vm.createTask($event)" >
                 <md-icon>note_add</md-icon>
             </md-button>
 
-            <md-button class="md-fab md-mini md-raised md-warn">
+            <md-button id="newUser" class="md-fab md-mini md-raised md-warn" ng-click="vm.createUser($event)">
                 <md-icon>person</md-icon>
             </md-button>
         </md-fab-actions>

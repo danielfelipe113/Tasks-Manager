@@ -1,34 +1,36 @@
 'use strict';
-(function(){
+(function () {
 
-class tasksByStatusController {
-  constructor($http, tasksFactory, $stateParams, appConfig) {
+  class tasksByStatusController {
+    constructor($http, tasksFactory, $stateParams, appConfig) {
       this.status = $stateParams.status;
-      this.myId = $stateParams.myId;
+      this.id = $stateParams.id;
       this.tasksFactory = tasksFactory;
-      this.tasks = null;
+      this.user = null;
+
       //init
       this.initialize();
     }
-    
+
     initialize() {
-      this.getTasks();  
+      this.getTasks(this.id);
     }
-    
-    getTasks() {
-      this.tasksFactory.getTasksByStatus(this.myId, this.status)
-        .then((response) => {
-          this.tasks = response.data;
-          console.log(this.tasks)
+
+    getTasks(id) {
+      this.tasksFactory.getTasksConstructor(id, false)
+        .then(response => {
+          this.user = response.user
+          console.log(this.user)
+          console.log(this.user.tasks[this.status][0].Status.statusDescription)
         });
     }
-}
+  }
 
-angular.module('tasksAdminApp')
-  .component('tasksByStatus', {
-    templateUrl: 'app/tasksByStatus/tasksByStatus.html',
-    controller: tasksByStatusController,
-    controllerAs: 'vm'
-  });
+  angular.module('tasksAdminApp')
+    .component('tasksByStatus', {
+      templateUrl: 'app/tasksByStatus/tasksByStatus.html',
+      controller: tasksByStatusController,
+      controllerAs: 'vm'
+    });
 
 })();

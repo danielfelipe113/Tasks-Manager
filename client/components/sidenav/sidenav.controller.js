@@ -1,13 +1,6 @@
 'use strict';
 
 class SidenavController {
-    //start-non-standard
-    menu = [{
-        'title': 'Home',
-        'state': 'main'
-    }];
-    //end-non-standard
-
     constructor(Auth, $mdSidenav, dialogService, $state) {
         this.isLoggedIn = Auth.isLoggedIn;
         this.$state = $state;
@@ -15,6 +8,14 @@ class SidenavController {
         this.getCurrentUser = Auth.getCurrentUser;
         this.$mdSidenav = $mdSidenav;
         this.dialogService = dialogService;
+    }
+    
+    createUser($event) {
+        let that = this;
+        let template = './app/partials/createUser/createUser.html';
+        let controller = 'createUserController';
+        
+        this.dialogService.showDialog($event, template, controller);            
     }
     
     createTask($event) {

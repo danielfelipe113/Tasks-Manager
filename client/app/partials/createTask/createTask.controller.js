@@ -5,8 +5,9 @@
  */
 
 class createTaskController {
-    constructor($http, tasksFactory, dataModel, $mdDialog, models, values, appConfig, Auth, usersFactory, toastFactory) {
+    constructor($http, tasksFactory, dataModel, $mdDialog, models, values, appConfig, Auth, usersFactory, toastFactory, $q) {
         //dependencies
+        this.$q = $q;
         this.$http = $http;
         this.models = models;
         this.values = values;
@@ -19,7 +20,7 @@ class createTaskController {
         //dependencies methods
 
         //vars
-        this.currentUser = Auth.getCurrentUser().toJSON();
+        this.currentUser = Auth.getCurrentUser().toJSON();        
         this.isEmployee = false;
         this.isAdministrator = false;
         this.taskModels = {};
@@ -43,7 +44,15 @@ class createTaskController {
         this.populateTask();
         this.getPriorities();
         this.getStatus();
-        this.getUsers();
+        this.setUserRol()
+            .then(res => {
+                console.log(res)
+                if(res != 'Employee') {
+                     this.getUsers();             
+                }
+            });
+        
+       
         
         //data logic
         this.newTask.AssignBy = this.currentUser;
@@ -51,12 +60,18 @@ class createTaskController {
     }
 
     setUserRol() {
+        let deferred = this.$q.defer();
+        
         if (this.currentUser.role === this.appConfig.userRolesJson.Employee) {
             this.isEmployee = true;
-            this.newTask.AssignTo = this.currentUser;
+            deferred.resolve('Employee')
         } else if (this.currentUser.role === this.appConfig.userRolesJson.Administrator) { 
             this.isAdministrator = true;
+            deferred.resolve('Administrator')
+        } else {
+            deferred.resolve('Supervisor')
         }
+        return deferred.promise
     }
 
     populateTask() {
@@ -83,7 +98,6 @@ class createTaskController {
             .then((response) => {
                 tempUsers = response.data;
                 setUsers();
-                this.setUserRol();
             })
             .catch((err) => {
                 console.log(err);
@@ -109,6 +123,7 @@ class createTaskController {
 
     //submit
     saveTask(isValid) {
+        console.log(this.newTask)
         let messages = this.values.values();
         let that = this;
         this.submitted = true;

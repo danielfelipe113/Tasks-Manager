@@ -65,6 +65,9 @@
                     .then(function (response) {
                         users.user = response.data;
                         getTasks(users.user._id, 'user')
+                    })
+                    .catch(function (err) {
+                        console.log(err)
                     });
             } else if (getSupervised) { //Busco todos los usuarios que yo superviso y sus tareas
                 var tempUser = Auth.getCurrentUser().toJSON();
@@ -73,6 +76,9 @@
                     .then(function (response) {
                         users.user = response.data;
                         getUsersSupervised('user');
+                    })
+                    .catch(function (err) {
+                        console.log(err)
                     });
             } else { //busco mis propias tareas
                 var tempUser = Auth.getCurrentUser().toJSON();
@@ -80,6 +86,9 @@
                     .then(function (response) {
                         users.user = response.data;
                         getTasks(users.user._id, 'user')
+                    })
+                    .catch(function (err) {
+                        console.log(err)
                     });
             }
 
@@ -97,8 +106,12 @@
             function getTasks(userId, variablePosition) {
                 getTasksByUserId(userId)
                     .then(function (response) {
-                        users[variablePosition].tasks = response.data;
-                        organizeTasks(users[variablePosition].tasks, variablePosition)
+                        console.log('tasks: ', response)
+                        var tempTasks = response.data;
+                        organizeTasks(tempTasks, variablePosition)
+                    })
+                    .catch(function (err) {
+                        console.log(err)
                     });
             }
 
@@ -110,19 +123,22 @@
                     Delayed: [],
                     Done: []
                 };
+                console.log('temptasks:', tempTasks)
                 users[userName].totalTasks = 0;
                 users[userName].haveTasks = false;
                 tempTasks.forEach(function (element) {
-                    if (element.Status.statusName === appConfig.tasksStatus.InProgress) {
-                        users[userName].tasks.InProgress.push(element);
-                    } else if (element.Status.statusName === appConfig.tasksStatus.ToDoToday) {
-                        users[userName].tasks.ToDoToday.push(element);
-                    } else if (element.Status.statusName === appConfig.tasksStatus.ToDo) {
-                        users[userName].tasks.ToDo.push(element);
-                    } else if (element.Status.statusName === appConfig.tasksStatus.Delayed) {
-                        users[userName].tasks.Delayed.push(element);
-                    } else if (element.Status.statusName === appConfig.tasksStatus.Done) {
-                        users[userName].tasks.Done.push(element);
+                    for (var i = 0; i < element.Status.length; i++) {
+                        if (element.Status[i].statusName === appConfig.tasksStatus.InProgress) {
+                            users[userName].tasks.InProgress.push(element);
+                        } else if (element.Status[i].statusName === appConfig.tasksStatus.ToDoToday) {
+                            users[userName].tasks.ToDoToday.push(element);
+                        } else if (element.Status[i].statusName === appConfig.tasksStatus.ToDo) {
+                            users[userName].tasks.ToDo.push(element);
+                        } else if (element.Status[i].statusName === appConfig.tasksStatus.Delayed) {
+                            users[userName].tasks.Delayed.push(element);
+                        } else if (element.Status[i].statusName === appConfig.tasksStatus.Done) {
+                            users[userName].tasks.Done.push(element);
+                        }
                     }
                 });
                 for (var taskStatus in users[userName].tasks) {
@@ -131,6 +147,7 @@
                         users[userName].totalTasks += users[userName].tasks[taskStatus].length;
                     }
                 }
+                console.log('users: ', users)
                 deferred.resolve(users);
             }
             return promise;

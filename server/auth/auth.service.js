@@ -50,8 +50,7 @@ export function hasRole(roleRequired) {
   return compose()
     .use(isAuthenticated())
     .use(function meetsRequirements(req, res, next) {      
-      if (config.userRoles.indexOf(req.user.role) >=
-          config.userRoles.indexOf(roleRequired)) {
+      if (config.userRoles.indexOf(req.user.role) >= config.userRoles.indexOf(roleRequired)) {  
         next();
       } else {
         res.status(403).send('Forbidden');

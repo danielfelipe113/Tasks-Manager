@@ -57,15 +57,16 @@
 
                     <md-input-container>
                         <label>Asignar a</label>
-                        <md-select name="taskAssignTo" ng-model="vm.newTask.AssignTo" required ng-disabled="vm.isEmployee">
+                        <md-select name="taskAssignTo" ng-model="vm.newTask.AssignTo" required ng-disabled="vm.isEmployee" multiple="!vm.isEmployee">
+                            <md-option ng-value="vm.currentUser" ng-selected="true" ng-show="vm.isEmployee"> {{ vm.newTask.AssignTo.fullName }}</md-option>
                             <md-optgroup label="Administradores" ng-if="vm.isAdministrator">
-                                <md-option ng-value="administrator" ng-repeat="administrator in vm.users.Administrators" ng-selected="true">{{administrator.fullName}}</md-option>
+                                <md-option ng-value="administrator" ng-repeat="administrator in vm.users.Administrators">{{administrator.fullName}}</md-option>
                             </md-optgroup>
                             <md-optgroup label="Supervisores">
-                                <md-option ng-value="supervisor" ng-repeat="supervisor in vm.users.Supervisors" ng-selected="true">{{supervisor.fullName}}</md-option>
+                                <md-option ng-value="supervisor" ng-repeat="supervisor in vm.users.Supervisors">{{supervisor.fullName}}</md-option>
                             </md-optgroup>
                             <md-optgroup label="Empleados">
-                                <md-option ng-value="employee" ng-repeat="employee in vm.users.Employees" ng-selected="true">{{employee.fullName}}</md-option>
+                                <md-option ng-value="employee" ng-repeat="employee in vm.users.Employees" >{{employee.fullName}}</md-option>
                             </md-optgroup>
                         </md-select>
                         <div ng-messages="createTaskForm.taskAssignTo.$error" ng-show="createTaskForm.taskAssignTo.$invalid && vm.submitted">
@@ -118,6 +119,7 @@
                 </div>
             </div>
         </form>
+        <code> {{vm.newTask | json}}  </code>
         <md-dialog-actions>
             <md-button type="submit" class="md-raised md-primary" ng-click="vm.saveTask(createTaskForm.$valid)">Guardar tarea</md-button>
             <md-button ng-click="vm.closeDialog()">Cerrar</md-button>

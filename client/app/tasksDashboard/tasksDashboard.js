@@ -5,6 +5,7 @@ angular.module('tasksAdminApp')
     $stateProvider
       .state('tasksDashboard', {
         url: '/dashboard/:id',
-        template: '<tasks-dashboard></tasks-dashboard>'
+        template: '<tasks-dashboard></tasks-dashboard>',
+        authenticate: true
       });
   });

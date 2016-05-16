@@ -8,6 +8,9 @@
     <md-content class="listContainer">
         <md-list>
             <md-subheader class="md-no-sticky">Usuarios:</md-subheader>
+            <md-list-item layout="row" layout-align="center center" ng-show="!vm.users">
+                <p  class="md-title">Actualmente no supervisas ningún usuario</p>              
+            </md-list-item>
             <md-list-item class="md-3-line" ng-repeat="user in vm.users" layout-padding ui-sref="tasksDashboard({id: user._id })">
                 <div class="md-list-item-text" layout="column" ng-click="vm.userDetails($event, user)">
                     <h3>{{ user.fullName }}</h3>

@@ -19,13 +19,11 @@ class SettingsController {
   }
 
   getUser() {
-    console.log('getting')
     let tempUser = this.Auth.getCurrentUser().toJSON();
     
     this.usersFactory.getUserById(tempUser._id)
       .then(response => {
-        this.user = response.data;
-        console.log(response)
+        this.user = response.data;        
       })
   }
   
@@ -53,11 +51,11 @@ class SettingsController {
     if (form.$valid) {
       this.Auth.changePassword(this.user.oldPassword, this.user.newPassword)
         .then(() => {
-          this.message = 'Password successfully changed.';
+          this.message = 'Contraseña cambiada satsifactoriamente';
         })
         .catch(() => {
           form.password.$setValidity('mongoose', false);
-          this.errors.other = 'Incorrect password';
+          this.errors.other = 'Contraseña incorrecta';
           this.message = '';
         });
     }

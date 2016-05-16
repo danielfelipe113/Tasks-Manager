@@ -5,6 +5,7 @@ angular.module('tasksAdminApp')
     $stateProvider
       .state('tasksByStatus', {
         url: '/tasksByStatus/:id/:status',
-        template: '<tasks-by-status></tasks-by-status>'
+        template: '<tasks-by-status></tasks-by-status>',
+        authenticate: true
       });
   });

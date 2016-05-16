@@ -29,7 +29,6 @@
       this.tasksFactory.getTasksConstructor(id, false)
         .then(response => {
           this.user = response.user
-          console.log(this.user)
         });
 
     }

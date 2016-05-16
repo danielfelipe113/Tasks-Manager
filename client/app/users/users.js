@@ -5,6 +5,7 @@ angular.module('tasksAdminApp')
     $stateProvider
       .state('users', {
         url: '/users',
-        template: '<users></users>'
+        template: '<users></users>',
+        authenticate: true
       });
   });

@@ -11,7 +11,7 @@ angular.module('tasksAdminApp')
       })
       .state('logout', {
         url: '/logout?referrer',
-        referrer: 'main',
+        referrer: 'login',
         template: '',
         controller: function($state, Auth) {
           var referrer = 'login';
@@ -36,7 +36,7 @@ angular.module('tasksAdminApp')
   .run(function($rootScope) {
     $rootScope.$on('$stateChangeStart', function(event, next, nextParams, current) {
       if (next.name === 'logout' && current && current.name && !current.authenticate) {
-        next.referrer = current.name;
+        next.referrer = 'login';
       }
     });
   });

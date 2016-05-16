@@ -8,6 +8,6 @@ angular.module('tasksAdminApp.admin')
         templateUrl: 'app/admin/admin.html',
         controller: 'AdminController',
         controllerAs: 'vm',
-        authenticate: 'admin'
+        authenticate: 'Administrator'
       });
   });

@@ -2,7 +2,7 @@
 
 exports = module.exports = {
   // List of user roles
-  userRoles: ['guest', 'Employee', 'Supervisor', 'Administrator'],
+  userRoles: ['Employee', 'Supervisor', 'Administrator'],
   userRolesJson: {
     "Employee": "Employee",
     "Administrator": "Administrator",

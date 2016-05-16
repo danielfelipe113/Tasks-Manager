@@ -14,14 +14,13 @@
 
     initialize() {
       this.getTasks(this.id);
+      
     }
 
     getTasks(id) {
       this.tasksFactory.getTasksConstructor(id, false)
         .then(response => {
-          this.user = response.user
-          console.log(this.user)
-          console.log(this.user.tasks[this.status][0].Status.statusDescription)
+          this.user = response.user;
         });
     }
   }

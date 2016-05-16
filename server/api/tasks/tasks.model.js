@@ -29,7 +29,7 @@ var userSchema = {
         type: Number
       }
     }
-  ],  
+  ],
   email: {
     type: String,
     lowercase: true,
@@ -42,28 +42,30 @@ var TasksSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  Status: {
-    statusCode: {
-      type: Number,
-      required: true
-    },
-    statusName: {
-      type: String,
-      required: true
-    },
-    statusDescription: {
-      type: String,
-      required: true
-    },
-    statusIcon: {
-      iconName: {
-        type: String
+  Status: [
+    {
+      statusCode: {
+        type: Number,
+        required: true
       },
-      iconClass: {
-        type: String
+      statusName: {
+        type: String,
+        required: true
+      },
+      statusDescription: {
+        type: String,
+        required: true
+      },
+      statusIcon: {
+        iconName: {
+          type: String
+        },
+        iconClass: {
+          type: String
+        }
       }
     }
-  },
+  ],
   Description: {
     type: String,
     required: true

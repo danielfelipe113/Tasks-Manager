@@ -1,15 +1,12 @@
 <navbar></navbar>
 <header></header>
-<div class="settingsContainer" layout-padding flex>
-  <div class="changePasswordFormContainer" layout="column" layout-align="center center">
-
+<div class="settingsContainer" layout-margin flex>
     <md-tabs md-dynamic-height md-border-bottom md-center-tabs>
 
       <md-tab label="Identificación">   
-        <form class="signUpForm" name="signUpForm" ng-submit="vm.register(signUpForm)" layout="column" layout-align="center center"
-        novalidate flex>
+        <form class="signUpForm formMargin" name="signUpForm" ng-submit="vm.saveUser(signUpForm)" layout="column" layout-align="center center" novalidate flex style="margin: 1.5em 0.5em;">
 
-        <md-input-container>
+        <md-input-container class="width-60">
           <label>Nombres</label>
           <input type="text" name="firstName" ng-model="vm.user.firstName" required/>
           <div ng-messages="signUpForm.firstName.$error">
@@ -19,7 +16,7 @@
           </div>
         </md-input-container>
         
-        <md-input-container>
+        <md-input-container class="width-60">
           <label>Apellidos</label>
           <input type="text" name="lastName" ng-model="vm.user.lastName" required/>
           <div ng-messages="signUpForm.lastName.$error">
@@ -29,21 +26,7 @@
           </div>
         </md-input-container>
 
-        <md-input-container class="md-accent">
-          <label>supervisorOf /-! Quitar!</label>
-          <input type="text" name="supervisorOf" ng-model="vm.user.supervisorOf"/>
-        </md-input-container>
-        
-        <md-input-container>
-          <label>Role:</label>
-          <md-select name="role" ng-model="vm.user.role" required>
-              <md-option ng-value="role" ng-repeat="role in vm.roles" ng-selected="true" flex>
-                  {{role}}
-              </md-option>
-          </md-select>
-        </md-input-container>
-
-        <md-input-container>
+        <md-input-container class="width-60">
           <label>Correo electrónico</label>
           <input type="email" name="email" ng-model="vm.user.email" required mongoose-error/>
           <div ng-messages="signUpForm.email.$error">
@@ -59,52 +42,20 @@
           </div>
         </md-input-container>
 
-        <md-input-container>
-          <label>Contraseña</label>
-          <input type="password" name="password" ng-model="vm.user.password" ng-minlength="3" required mongoose-error/>
-          <div ng-messages="signUpForm.password.$error">
-            <div ng-message="required">
-              Escribe tu contraseña
-            </div>
-            <div ng-message="mongoose-error">
-              {{vm.errors.password}}
-            </div>
-            <!--<p ng-show="signUpForm.email.$error.mongoose">
-                {{ vm.errors.email }}
-              </p>-->
-          </div>
-        </md-input-container>
-
-        <md-input-container>
-          <label>Confirmar contraseña</label>
-          <input type="password" name="confirmPassword" ng-model="vm.user.confirmPassword" match="vm.user.password" ng-minlength="3"
-            required/>
-          <div ng-messages="signUpForm.password.$error">
-            <div ng-message="required">
-              Confirma tu contraseña
-            </div>
-            <div ng-message="match">
-              Las contraseñas deben coincidir
-            </div>
-          </div>
-        </md-input-container>
+      
 
         <div layout="row" layout-align="center center">
           <md-button class="md-raised md-primary" type="submit">
-            Registrarse
+            Guardar
           </md-button>
-          <a class="md-button" ui-sref="login">
-            Iniciar sesión
-          </a>
+          
         </div>
-          <code style="max-width: 200px;"> {{vm.user || json}} </code>
       </form>
       </md-tab>
       
       <md-tab label="Cambiar contraseña">   
-        <form class="changePasswordForm" name="changePasswordForm" ng-submit="vm.changePassword(changePasswordForm)" layout="column"
-          novalidate>
-          <md-input-container>
+        <form class="changePasswordForm" name="changePasswordForm" ng-submit="vm.changePassword(changePasswordForm)" layout="column" layout-align="center center" novalidate style="margin: 1.5em 0.5em;">
+          <md-input-container class="width-60">
             <label>Contraseña actual</label>
 
             <input type="password" name="password" class="form-control" ng-model="vm.user.oldPassword" mongoose-error/>
@@ -113,7 +64,7 @@
             </p>
           </md-input-container>
 
-          <md-input-container>
+          <md-input-container class="width-60">
             <label>Nueva contraseña</label>
             <input type="password" name="newPassword" class="form-control" ng-model="vm.user.newPassword" ng-minlength="3" required/>
             <div ng-messages="changePasswordForm.newPassword.$error">
@@ -126,7 +77,7 @@
             </p>
           </md-input-container>
 
-          <md-input-container>
+          <md-input-container class="width-60">
             <label>Confirmar nueva contraseña</label>
 
             <input type="password" name="confirmPassword" class="form-control" ng-model="vm.user.confirmPassword" match="vm.user.newPassword"
@@ -143,5 +94,4 @@
       </md-tab>
       
     </md-tabs>
-  </div>
 </div>

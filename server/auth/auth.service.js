@@ -32,7 +32,7 @@ export function isAuthenticated() {
           if (!user) {
             return res.status(401).end();
           }
-          req.user = user;
+          req.user = user;          
           next();
         })
         .catch(err => next(err));
@@ -42,14 +42,14 @@ export function isAuthenticated() {
 /**
  * Checks if the user role meets the minimum requirements of the route
  */
-export function hasRole(roleRequired) {
+export function hasRole(roleRequired) {  
   if (!roleRequired) {
     throw new Error('Required role needs to be set');
   }
 
   return compose()
     .use(isAuthenticated())
-    .use(function meetsRequirements(req, res, next) {
+    .use(function meetsRequirements(req, res, next) {      
       if (config.userRoles.indexOf(req.user.role) >=
           config.userRoles.indexOf(roleRequired)) {
         next();

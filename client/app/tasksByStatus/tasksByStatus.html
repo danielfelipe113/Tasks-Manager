@@ -21,12 +21,12 @@
                     </div>
                 </div>
                 <div class="content" layout="row" layout-align="end center" flex="20">
-                    <md-button ui-sref="taskDetails({id: task._id})" class="md-raised md-accent">Ver más</md-button>
+                    <md-button ng-click="vm.taskDetails($event, task)" class="md-raised md-accent">Ver más</md-button>
                     <div class="actions" layout="column">
-                        <md-button class="delete md-icon-button">
+                        <md-button class="delete md-icon-button" ng-click="vm.removeTasks($event, task)">
                             <md-icon>delete_forever</md-icon>
                         </md-button>
-                        <md-button class="edit md-icon-button">
+                        <md-button class="edit md-icon-button"  ng-click="vm.editTask($event, task)">
                             <md-icon>mode_edit</md-icon>
                         </md-button>
                     </div>

@@ -20,7 +20,8 @@ class createTaskController {
         //dependencies methods
 
         //vars
-        this.currentUser = Auth.getCurrentUser().toJSON();        
+        this.currentUser = Auth.getCurrentUser().toJSON();
+        this.isNewTask = true;
         this.isEmployee = false;
         this.isAdministrator = false;
         this.taskModels = {};
@@ -40,6 +41,8 @@ class createTaskController {
     }
 
     initialize() {
+        //data logic
+
         //methods
         this.populateTask();
         this.getPriorities();
@@ -47,25 +50,20 @@ class createTaskController {
         this.setUserRol()
             .then(res => {
                 console.log(res)
-                if(res != 'Employee') {
-                     this.getUsers();             
+                if (res != 'Employee') {
+                    this.getUsers();
                 }
             });
-        
-       
-        
-        //data logic
         this.newTask.AssignBy = this.currentUser;
-        this.newTask.AssignDate = new Date();
     }
 
     setUserRol() {
         let deferred = this.$q.defer();
-        
+
         if (this.currentUser.role === this.appConfig.userRolesJson.Employee) {
             this.isEmployee = true;
             deferred.resolve('Employee')
-        } else if (this.currentUser.role === this.appConfig.userRolesJson.Administrator) { 
+        } else if (this.currentUser.role === this.appConfig.userRolesJson.Administrator) {
             this.isAdministrator = true;
             deferred.resolve('Administrator')
         } else {
@@ -80,6 +78,7 @@ class createTaskController {
                 this.newTask = new this.models.createEmptyTask();
             } else {
                 this.newTask = this.task;
+                this.isNewTask = false;
             }
         } else {
             this.newTask = new this.models.createEmptyTask();
@@ -123,21 +122,36 @@ class createTaskController {
 
     //submit
     saveTask(isValid) {
-        console.log(this.newTask)
+        this.submitted = true;
         let messages = this.values.values();
         let that = this;
-        this.submitted = true;
-        
-        if (isValid) {
-            this.tasksFactory.postTask(this.newTask)
-                .then((res) => {
-                    that.toastFactory.successToast(messages.MESSAGES.TASKS.CREATESUCCESS);
-                    that.$mdDialog.hide();
-                })
-                .catch((err) => {
-                    that.toastFactory.errorToast(messages.MESSAGES.ERROR);
-                    that.$mdDialog.cancel();
-                });
+        console.log(this.newTask)
+        if (isValid) { //create task
+            if (this.isNewTask) {
+                console.log('soy nuevo')
+                this.tasksFactory.postTask(this.newTask)
+                    .then((res) => {
+                        that.toastFactory.successToast(messages.MESSAGES.TASKS.CREATESUCCESS);
+                        that.$mdDialog.hide();
+                    })
+                    .catch((err) => {
+                        that.toastFactory.errorToast(messages.MESSAGES.ERROR);
+                        that.$mdDialog.cancel();
+                    });
+            } else { //save task
+                console.log('soy viejo')
+                this.tasksFactory.putTask(this.newTask._id, this.newTask)
+                    .then(res => {
+                        console.log(res)
+                        that.toastFactory.successToast(messages.MESSAGES.TASKS.CREATESUCCESS);
+                        that.$mdDialog.hide();
+                    })
+                    .catch(err => {
+                        console.log(err)
+                        that.toastFactory.errorToast(messages.MESSAGES.ERROR);
+                        that.$mdDialog.cancel();
+                    })
+            }
         }
         return false;
     }

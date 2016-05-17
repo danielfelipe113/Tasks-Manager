@@ -1,0 +1,20 @@
+<md-dialog class="createTaskFormContainer" flex="30">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 flex>Confirmar</h2>
+            <md-button ng-click="vm.closeDialog()" class="md-icon-button">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout-padding>
+        <div layout="row" layout-align="center center">
+            <p>{{ vm.message }}</p>
+        </div>
+        
+        <div layout="row" layout-align="center center">
+            <md-button ng-click="vm.confirm()" class="md-raised md-primary" aria-label="confirm action"> Eliminar </md-button>
+            <md-button ng-click="vm.closeDialog()" class="md-raised" aria-label="confirm action"> Cancelar </md-button>
+        </div>
+    </md-dialog-content>
+</md-dialog>

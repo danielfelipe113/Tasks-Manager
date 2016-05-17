@@ -88,6 +88,7 @@ var TasksSchema = new mongoose.Schema({
   ],
   DoBeforeDate: {
     type: Date,
+    default: Date.now,
     required: true
   },
   AssignDate: {

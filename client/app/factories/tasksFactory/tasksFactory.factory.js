@@ -38,6 +38,7 @@
         }
 
         function putTask(id, task) {
+            console.log(id, task)
             return $http.put('/api/tasks/' + id, task);
         }
 
@@ -65,9 +66,6 @@
                     .then(function (response) {
                         users.user = response.data;
                         getTasks(users.user._id, 'user')
-                    })
-                    .catch(function (err) {
-                        console.log(err)
                     });
             } else if (getSupervised) { //Busco todos los usuarios que yo superviso y sus tareas
                 var tempUser = Auth.getCurrentUser().toJSON();
@@ -76,9 +74,6 @@
                     .then(function (response) {
                         users.user = response.data;
                         getUsersSupervised('user');
-                    })
-                    .catch(function (err) {
-                        console.log(err)
                     });
             } else { //busco mis propias tareas
                 var tempUser = Auth.getCurrentUser().toJSON();
@@ -86,9 +81,6 @@
                     .then(function (response) {
                         users.user = response.data;
                         getTasks(users.user._id, 'user')
-                    })
-                    .catch(function (err) {
-                        console.log(err)
                     });
             }
 
@@ -106,7 +98,6 @@
             function getTasks(userId, variablePosition) {
                 getTasksByUserId(userId)
                     .then(function (response) {
-                        console.log('tasks: ', response)
                         var tempTasks = response.data;
                         organizeTasks(tempTasks, variablePosition)
                     })
@@ -123,7 +114,6 @@
                     Delayed: [],
                     Done: []
                 };
-                console.log('temptasks:', tempTasks)
                 users[userName].totalTasks = 0;
                 users[userName].haveTasks = false;
                 tempTasks.forEach(function (element) {
@@ -146,8 +136,7 @@
                         users[userName].haveTasks = true;
                         users[userName].totalTasks += users[userName].tasks[taskStatus].length;
                     }
-                }
-                console.log('users: ', users)
+                }                
                 deferred.resolve(users);
             }
             return promise;

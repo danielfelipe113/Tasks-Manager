@@ -22,13 +22,6 @@
       this.initialize();
     }
     initialize() {
-      this.tasksFactory.getTasksByUserId("57364c8570b247b0057b8ec8")
-        .then(res => {
-          console.log(res)
-        })
-      
-      
-      
       this.getTasks(this.userId);
     }
 
@@ -36,7 +29,9 @@
       this.tasksFactory.getTasksConstructor(id, false)
         .then(response => {
           this.user = response.user
-          console.log(response)
+        })
+        .catch(err => {
+          console.log(err)
         });
 
     }

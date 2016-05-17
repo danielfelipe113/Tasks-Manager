@@ -27,6 +27,14 @@
                         SAVESUCCESS: 'La tarea fue guardada satisfactoriamente',
                         DELETESUCCESS: 'La tarea fue eliminada satisfactoriamente'                    
                     }
+                },
+                CONFIRM: {
+                    TYPE: {
+                        USER: 'USER',
+                        TASK: 'TASK'
+                    },
+                    REMOVEUSER: '¿Está seguro que desea eliminar permanentemente el usuario?',
+                    REMOVETASK: '¿Está seguro que desea eliminar permanentemente la tarea?'
                 }
             };
             

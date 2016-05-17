@@ -22,7 +22,7 @@
                 templateUrl: template,
                 fullscreen: true,
                 disableParentScroll: true,
-                clickOutsideToClose: true,
+                clickOutsideToClose: false,
                 controller: controller,
                 controllerAs: 'vm',
                 locals: {

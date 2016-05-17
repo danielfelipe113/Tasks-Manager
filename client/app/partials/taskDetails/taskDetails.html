@@ -1,0 +1,80 @@
+<md-dialog class="createTaskdivContainer" flex="60">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2 flex>Detalles de la tarea</h2>
+            <md-button ng-click="vm.closeDialog()" class="md-icon-button">
+                <md-icon>close</md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <md-dialog-content layout-padding>
+        <div layout="column" layout-align="center center" layout-align-gt-sm="start">
+            <div layout="row" layout-align="center center">
+                <h2 class="color-indigo">Detalles de la tarea</h2>
+            </div>
+            <div layout="column" layout-gt-sm="row" layout-align="space-around start" layout-wrap>
+                <div flex="40" layout="column" layout-padding>
+                    <div>
+                        <h2 class="md-title">Título de la tarea</h2>
+                        <p> {{ vm.task.Title }} </p>
+                    </div>
+
+                    <div>
+                        <h2 class="md-title">Descripción de la tarea</h2>
+                        <p> {{ vm.task.Description }} </p>
+                    </div>
+
+                    <div>
+                        <h2 class="md-title">Prioridad de la tarea</h2>
+                        <p> {{ vm.task.Priority.priorityName }} </p>
+                    </div>
+
+                    <div>
+                        <h2 class="md-title">Asignada por</h2>
+                        <p> {{ vm.task.AssignBy.fullName }} </p>
+                    </div>
+                    
+                    <div>
+                        <h2 class="md-title">Fecha de asignación</h2>
+                        <p> {{ vm.AssignDate }} </p>
+                    </div>
+
+                    <div>
+                        <h2 class="md-title">Asignada a</h2>
+                        <div ng-repeat="user in vm.task.AssignTo"> {{ user.fullName }} </div>
+                    </div>
+                </div>
+                <div flex="40" layout="column" layout-padding>
+                    <div>
+                        <h2 class="md-title">Estatus de la tarea</h2>
+                        <p ng-repeat="status in vm.task.Status"> {{ status.statusName }} </p>
+                    </div>
+
+                    <div layout="column">
+                        <h2 class="md-title">Realizar antes de:</h2>
+                        <p> {{ vm.DoBeforeDate }} </p>
+                    </div>
+
+                    <div>
+                        <h2 class="md-title ">Horas estimadas</h2>
+                        <p> {{ vm.task.EstimatedHours }} </p>
+                    </div>
+
+                    <div>
+                        <h2 class="md-title">Horas invertidas</h2>
+                        <p> {{ vm.task.TimeSpent }} </p>
+                    </div>
+
+                    <div>
+                        <h2 class="md-title ">Comentarios</h2>
+                        <p> {{ vm.task.Comments }} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <md-dialog-actions>
+            <md-button type="submit" class="md-raised md-primary" ng-click="vm.saveTask(createTaskdiv.$valid)">Guardar tarea</md-button>
+            <md-button ng-click="vm.closeDialog()">Cerrar</md-button>
+        </md-dialog-actions>
+    </md-dialog-content>
+</md-dialog>

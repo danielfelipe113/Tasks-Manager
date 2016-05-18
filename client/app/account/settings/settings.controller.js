@@ -15,35 +15,40 @@ class SettingsController {
 
   initialize() {
     this.getUser();
-
   }
 
   getUser() {
-    let tempUser = this.Auth.getCurrentUser().toJSON();
-    
-    this.usersFactory.getUserById(tempUser._id)
-      .then(response => {
-        this.user = response.data;        
-      })
-  }
-  
-  saveUser(isValid) {
-        this.user.fullName = this.user.firstName + ' ' + this.user.lastName;
+    let that = this;
+    let tempUser = null;
+
+    this.usersFactory.getMe()
+      .then((response) => {
+        tempUser = response;
         
-        let that = this;
-        if (isValid) {
-            this.usersFactory.updateUser(this.user._id, this.user)
-                .then((res) => {
-                  that.getUser();
-                  that.toastFactory.successToast(that.values.MESSAGES.USERS.SAVESUCCESS);
-                })
-                .catch((err) => {
-                    that.toastFactory.errorToast(that.values.MESSAGES.ERROR);
-                });
-        }
-        return false;
+        that.usersFactory.getUserById(tempUser._id)
+          .then(response => {
+            that.user = response.data;
+          })
+      });
+  }
+
+  saveUser(isValid) {
+    this.user.fullName = this.user.firstName + ' ' + this.user.lastName;
+
+    let that = this;
+    if (isValid) {
+      this.usersFactory.updateUser(this.user._id, this.user)
+        .then((res) => {
+          that.getUser();
+          that.toastFactory.successToast(that.values.MESSAGES.USERS.SAVESUCCESS);
+        })
+        .catch((err) => {
+          that.toastFactory.errorToast(that.values.MESSAGES.ERROR);
+        });
     }
-  
+    return false;
+  }
+
 
   changePassword(form) {
     this.submitted = true;

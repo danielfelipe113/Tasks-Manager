@@ -86,20 +86,28 @@
                         getTasks(users.user._id, 'user')
                     });
             } else if (getSupervised) { //Busco todos los usuarios que yo superviso y sus tareas
-                var tempUser = Auth.getCurrentUser().toJSON();
+                var tempUser = null;
+                usersFactory.getMe()
+                    .then(function (response) {
+                        tempUser = response;
+                        usersFactory.getUserById(tempUser._id)
+                            .then(function (response) {
+                                users.user = response.data;
+                                getUsersSupervised('user');
+                            });
+                    });
 
-                usersFactory.getUserById(tempUser._id)
-                    .then(function (response) {
-                        users.user = response.data;
-                        getUsersSupervised('user');
-                    });
             } else { //busco mis propias tareas
-                var tempUser = Auth.getCurrentUser().toJSON();
-                usersFactory.getUserById(tempUser._id)
+                var tempUser = null;
+                usersFactory.getMe()
                     .then(function (response) {
-                        users.user = response.data;
-                        getTasks(users.user._id, 'user')
-                    });
+                        tempUser = response
+                        usersFactory.getUserById(tempUser._id)
+                            .then(function (response) {
+                                users.user = response.data;
+                                getTasks(users.user._id, 'user')
+                            });
+                    })
             }
 
             function getUsersSupervised(variablePosition) { //establezco a quien superviso y hago llamados de sus tareas

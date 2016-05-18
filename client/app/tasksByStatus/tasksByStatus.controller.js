@@ -2,8 +2,9 @@
 (function () {
 
   class tasksByStatusController {
-    constructor($http, tasksFactory, $stateParams, appConfig, dialogService, values, Auth, $state) {
+    constructor($http, tasksFactory, $stateParams, appConfig, dialogService, values, $state, usersFactory) {
       this.$state = $state
+      this.usersFactory = usersFactory;
       this.dialogService = dialogService;
       this.status = $stateParams.status;
       this.id = $stateParams.id;
@@ -11,14 +12,21 @@
       this.user = null;
       this.values = values;
       this.Status = this.values.getStatus();
-
-      this.currentUser = Auth.getCurrentUser().toJSON();
+      this.currentUser = null;
+      
       //init
       this.initialize();
     }
 
     initialize() {
+      this.getMe();
       this.getTasks(this.id);
+    }
+    getMe() {
+        this.usersFactory.getMe()
+            .then((response) => {
+                this.currentUser = response;
+            });
     }
 
     createTasks($event) {

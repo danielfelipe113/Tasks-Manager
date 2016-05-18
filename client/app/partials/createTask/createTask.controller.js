@@ -21,7 +21,7 @@ class createTaskController {
         //dependencies methods
 
         //vars
-        this.currentUser = Auth.getCurrentUser().toJSON();
+        this.currentUser = null;
         this.isNewTask = true;
         this.isEmployee = false;
         this.isAdministrator = false;
@@ -43,18 +43,23 @@ class createTaskController {
 
     initialize() {
         //data logic
-
-        //methods
-        this.populateTask();
-        this.getPriorities();
-        this.getStatus();
-        this.setUserRol()
-            .then(res => {
-                if (res != 'Employee') {
-                    this.getUsers();
-                }
+        usersFactory.getMe().then(
+            function (res) {
+                this.currentUser = res
+                this.getMe();
+                this.populateTask();
+                this.getPriorities();
+                this.getStatus();
+                this.setUserRol()
+                    .then(res => {
+                        if (res != 'Employee') {
+                            this.getUsers();
+                        }
+                    });
+                this.newTask.AssignBy = this.currentUser;
             });
-        this.newTask.AssignBy = this.currentUser;
+        //methods
+
     }
 
     setUserRol() {
@@ -73,7 +78,7 @@ class createTaskController {
     }
 
     populateTask() {
-        if (this.task !== null) {            
+        if (this.task !== null) {
             this.newTask = this.task;
             this.newTask.DoBeforeDate = new Date(this.task.DoBeforeDate);
             this.isNewTask = false;

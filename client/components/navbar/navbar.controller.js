@@ -13,7 +13,14 @@ class NavbarController {
   constructor(Auth) {
     this.isLoggedIn = Auth.isLoggedIn;
     this.isAdmin = Auth.isAdmin;
-    this.getCurrentUser = Auth.getCurrentUser;
+    this.getCurrentUser = null;
+    }
+    
+    getMe() {
+        this.usersFactory.getMe()
+            .then((response) => {
+                this.getCurrentUser = response;
+            });
     }
     
     openMenu($mdOpenMenu, ev) {

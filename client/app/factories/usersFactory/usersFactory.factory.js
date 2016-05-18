@@ -1,7 +1,7 @@
 
 'use strict';
 (function () {
-    function usersFactory($http, Auth) {
+    function usersFactory($http, Auth, dialogService) {
         return {
             getUsers: () => {
                 return $http.get('/api/users');
@@ -18,6 +18,11 @@
             },
             deleteUser: (id) => {
                 return $http.delete('api/users/' + id);
+            },
+            createUsers($event) {
+                let template = './app/partials/createUser/createUser.html';
+                let controller = 'createUserController';
+                dialogService.showDialog($event, template, controller);
             }
         };
     }

@@ -1,11 +1,12 @@
 
 'use strict';
 (function () {
-    function tasksFactory($http, $q, Auth, appConfig, usersFactory) {
+    function tasksFactory($http, $q, Auth, appConfig, usersFactory, dialogService, $state) {
 
         var tasksFactory = {
             getTasks: getTasks,
             getTasksByUserId: getTasksByUserId,
+            createTasks: createTasks,
             getTasksByStatus: getTasksByStatus,
             getTaskById: getTaskById,
             postTask: postTask,
@@ -40,13 +41,28 @@
 
         function putTask(id, task) {
             var tempTask = angular.toJson(task);
-            console.log(tempTask)
             return $http.put('/api/tasks/' + id, tempTask);
         }
 
         function deleteTask(id) {
             return $http.delete('/api/tasks/' + id);
         }
+
+        function createTasks($event) {
+            var that = this;
+            var template = './app/partials/createTask/createTask.html';
+            var controller = 'createTaskController';
+
+            function callback(state) {
+                var goToState = state || 'tasksDashboard';
+                $state.go(goToState, {}, {
+                    reload: true
+                })
+            }
+
+            dialogService.showDialog($event, template, controller, null, callback);
+        }
+
 
         //por ahora solo toma las tareas de 1 solo usuario y si se manda un array de Ids hace un for y hace varios gets, debo corregir eso en el server
         /**
@@ -119,26 +135,26 @@
                 users[userName].totalTasks = 0;
                 users[userName].haveTasks = false;
                 tempTasks.forEach(function (element) {
-                    
-                        if (element.Status.statusName === appConfig.tasksStatus.InProgress) {
-                            users[userName].tasks.InProgress.push(element);
-                        } else if (element.Status.statusName === appConfig.tasksStatus.ToDoToday) {
-                            users[userName].tasks.ToDoToday.push(element);
-                        } else if (element.Status.statusName === appConfig.tasksStatus.ToDo) {
-                            users[userName].tasks.ToDo.push(element);
-                        } else if (element.Status.statusName === appConfig.tasksStatus.Delayed) {
-                            users[userName].tasks.Delayed.push(element);
-                        } else if (element.Status.statusName === appConfig.tasksStatus.Done) {
-                            users[userName].tasks.Done.push(element);
-                        }
-                    
+
+                    if (element.Status.statusName === appConfig.tasksStatus.InProgress) {
+                        users[userName].tasks.InProgress.push(element);
+                    } else if (element.Status.statusName === appConfig.tasksStatus.ToDoToday) {
+                        users[userName].tasks.ToDoToday.push(element);
+                    } else if (element.Status.statusName === appConfig.tasksStatus.ToDo) {
+                        users[userName].tasks.ToDo.push(element);
+                    } else if (element.Status.statusName === appConfig.tasksStatus.Delayed) {
+                        users[userName].tasks.Delayed.push(element);
+                    } else if (element.Status.statusName === appConfig.tasksStatus.Done) {
+                        users[userName].tasks.Done.push(element);
+                    }
+
                 });
                 for (var taskStatus in users[userName].tasks) {
                     if (users[userName].tasks[taskStatus].length) {
                         users[userName].haveTasks = true;
                         users[userName].totalTasks += users[userName].tasks[taskStatus].length;
                     }
-                }                
+                }
                 deferred.resolve(users);
             }
             return promise;

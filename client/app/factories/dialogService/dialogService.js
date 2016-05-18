@@ -29,12 +29,12 @@
                     dataModel: dataModel || null
                 }
             })
-                .then(() => {
-                    successCallback()
+                .then(function (res) {
+                    successCallback(res)
                 })
-                .catch(() => {
-                    if(dismissCallback) {
-                        dismissCallback();
+                .catch(function (err) {
+                    if (dismissCallback) {
+                        dismissCallback(err);
                     }
                 });
         }

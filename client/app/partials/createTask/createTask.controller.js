@@ -5,9 +5,10 @@
  */
 
 class createTaskController {
-    constructor($http, tasksFactory, dataModel, $mdDialog, models, values, appConfig, Auth, usersFactory, toastFactory, $q) {
+    constructor($http, tasksFactory, dataModel, $mdDialog, models, values, appConfig, Auth, usersFactory, toastFactory, $q, $state) {
         //dependencies
         this.$q = $q;
+        this.$state = $state;
         this.$http = $http;
         this.models = models;
         this.values = values;
@@ -72,8 +73,7 @@ class createTaskController {
     }
 
     populateTask() {
-        if (this.task !== null) {
-            console.log('soy viejo2')
+        if (this.task !== null) {            
             this.newTask = this.task;
             this.newTask.DoBeforeDate = new Date(this.task.DoBeforeDate);
             this.isNewTask = false;
@@ -123,26 +123,22 @@ class createTaskController {
         this.submitted = true;
         let messages = this.values.values();
         let that = this;
-        console.log(this.newTask)
         if (isValid) { //create task
             if (this.isNewTask) {
-                console.log('soy nuevo')
                 this.tasksFactory.postTask(this.newTask)
                     .then((res) => {
                         that.toastFactory.successToast(messages.MESSAGES.TASKS.CREATESUCCESS);
-                        that.$mdDialog.hide();
+                        that.$mdDialog.hide(that.$state.current.name);
                     })
                     .catch((err) => {
                         that.toastFactory.errorToast(messages.MESSAGES.ERROR);
                         that.$mdDialog.cancel();
                     });
             } else { //save task
-                console.log('soy viejo')
                 this.tasksFactory.putTask(this.newTask._id, this.newTask)
                     .then(res => {
-                        console.log(res)
                         that.toastFactory.successToast(messages.MESSAGES.TASKS.CREATESUCCESS);
-                        that.$mdDialog.hide();
+                        that.$mdDialog.hide(that.$state.current.name);
                     })
                     .catch(err => {
                         console.log(err)

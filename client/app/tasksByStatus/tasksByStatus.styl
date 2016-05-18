@@ -1,13 +1,10 @@
 .dashboardContainer
+    .filterContiner
+        margin 1em 0
     .tasks
         .card
             position relative
             .content
-                .iconContainer.byStatus
-                    position absolute
-                    left 0
-                    bottom 0
-                 
                 .actions
                     position absolute
                     right 0
@@ -18,6 +15,12 @@
                     .delete
                         md-icon
                             color $color-delete
+                    .toInProgress
+                        md-icon
+                            color $color-inProgress
+                    .toDone
+                        md-icon
+                            color $color-done
 
 .priorityStatus
     position absolute

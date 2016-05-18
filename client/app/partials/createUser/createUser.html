@@ -13,7 +13,7 @@
 
         <md-input-container>
           <label>Nombres</label>
-          <input type="text" name="firstName" ng-model="vm.user.firstName" required/>
+          <input type="text" name="firstName" ng-model="vm.user.firstName" required md-autofocus/>
           <div ng-messages="signUpForm.firstName.$error">
             <div ng-message="required">
               Escribe tus nombres

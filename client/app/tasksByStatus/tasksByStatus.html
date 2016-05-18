@@ -6,9 +6,29 @@
     <div layout="row" layout-align="center center" ng-hide="vm.user.tasks[vm.status].length">
         <h1>No tienes tareas disponibles</h1>
     </div>
-    <div class="tasks" layout="row" layout="column" layout-gt-sm="row" layout-wrap>
-        <div class="dashboardCardContainer md-whiteframe-1dp no-style" ng-repeat="task in vm.user.tasks[vm.status]"
+    <div class="filterContiner" layout="row" layout-align="center center" layout-margin>
+        <md-autocomplete          
+            md-item-text="task.Title"
+            md-no-cache="true"
+            md-min-length="0"
+            md-search-text="vm.searchText"          
+            md-items="task in vm.user.tasks[vm.status]"
+            placeholder="Buscar tareas"
+            flex="40"
+            md-select-on-match="true">
+            <md-item-template>
+            <span md-highlight-text="vm.searchText" >{{task.Title}}</span>
+            </md-item-template>
+            <md-not-found>
+                No se encontraron tareas
+            <md-button class="md-raised md-primary" ng-click="vm.createTasks($event)">¡Crea una nueva!</md-button>
+            </md-not-found>
+        </md-autocomplete>
+    </div>
+    <div class="tasks" layout="row" layout-gt-sm="row" layout-wrap>
+        <div class="dashboardCardContainer md-whiteframe-1dp no-style" ng-repeat="task in vm.user.tasks[vm.status] | orderBy: 'Priority.priorityNumber': true | filter: vm.searchText | limitTo: 20"
             flex-gt-sm="30">
+            
             <div class="card {{'tasks' + vm.status}}" layout-padding layout="column" layout-align="center center">
                 <span class="{{task.Priority.priorityIcon.iconClass}} priorityStatus">
                     <md-icon>{{task.Priority.priorityIcon.iconName}}</md-icon>
@@ -17,18 +37,48 @@
                     <h2 flex="30">{{task.Title}}</h2>
 
                     <div class="dataText" layout="row" flex>
-                        <p>{{task.Description}}</p>
+                        <p>{{task.Description | limitTo: 150}}</p>
                     </div>
                 </div>
                 <div class="content" layout="row" layout-align="end center" flex="20">
                     <md-button ng-click="vm.taskDetails($event, task)" class="md-raised md-accent">Ver más</md-button>
-                    <div class="actions" layout="column">
-                        <md-button class="delete md-icon-button" ng-click="vm.removeTasks($event, task)" ng-show="vm.currentUser.role === 'Administrator'">
-                            <md-icon>delete_forever</md-icon>
-                        </md-button>
-                        <md-button class="edit md-icon-button"  ng-click="vm.editTask($event, task)">
-                            <md-icon>mode_edit</md-icon>
-                        </md-button>
+                    <div class="actions" ng-hide="task.Status.statusName === 'Done'">
+                        <md-fab-speed-dial md-direction="down" class="md-scale">
+                            <md-fab-trigger>
+                                <md-button aria-label="Add..." class="md-icon-button">
+                                    <md-tooltip md-direction="top">
+                                        Más opciones
+                                    </md-tooltip>
+                                    <md-icon>more_vert</md-icon>
+                                </md-button>
+                            </md-fab-trigger>
+                            <md-fab-actions>
+                                <md-button class="toInProgress md-icon-button" ng-click="vm.toTarget('InProgress', task)" ng-hide="task.Status.statusName === 'InProgress'">
+                                    <md-tooltip md-direction="left">
+                                        En progreso
+                                    </md-tooltip>
+                                    <md-icon>assessment</md-icon>
+                                </md-button>
+                                <md-button class="toDone md-icon-button" ng-click="vm.toTarget('Done', task)" ng-show="task.Status.statusName === 'InProgress'">
+                                    <md-tooltip md-direction="left">
+                                        Terminar
+                                    </md-tooltip>
+                                    <md-icon>assignment_turned_in</md-icon>
+                                </md-button>
+                                <md-button class="edit md-icon-button" ng-click="vm.editTask($event, task)">
+                                    <md-tooltip md-direction="left">
+                                        Editar
+                                    </md-tooltip>
+                                    <md-icon>mode_edit</md-icon>
+                                </md-button>
+                                <md-button class="delete md-icon-button" ng-click="vm.removeTasks($event, task)" ng-show="vm.currentUser.role === 'Administrator'">
+                                    <md-tooltip md-direction="left">
+                                        Eliminar
+                                    </md-tooltip>
+                                    <md-icon>delete_forever</md-icon>
+                                </md-button>
+                            </md-fab-actions>
+                        </md-fab-speed-dial>
                     </div>
                 </div>
             </div>

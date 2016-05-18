@@ -1,35 +1,21 @@
 'use strict';
 
 class SidenavController {
-    constructor(Auth, $mdSidenav, dialogService, $state) {
+    constructor(Auth, $mdSidenav, tasksFactory, usersFactory) {
         this.isLoggedIn = Auth.isLoggedIn;
-        this.$state = $state;
         this.isAdmin = Auth.isAdmin;
         this.getCurrentUser = Auth.getCurrentUser;
         this.$mdSidenav = $mdSidenav;
-        this.dialogService = dialogService;
+        this.usersFactory = usersFactory;
+        this.tasksFactory = tasksFactory;
     }
     
     createUser($event) {
-        let that = this;
-        let template = './app/partials/createUser/createUser.html';
-        let controller = 'createUserController';
-        
-        this.dialogService.showDialog($event, template, controller);            
+        this.usersFactory.createUsers($event);            
     }
     
     createTask($event) {
-        let that = this;
-        let template = './app/partials/createTask/createTask.html';
-        let controller = 'createTaskController';
-        
-        function callback() {
-            that.$state.go('tasksDashboard', {}, {
-                reload: true
-            })
-        }
-        
-        this.dialogService.showDialog($event, template, controller, null, callback);            
+        this.tasksFactory.createTasks($event);
     }
     
     isSidenavLeftOpen() {

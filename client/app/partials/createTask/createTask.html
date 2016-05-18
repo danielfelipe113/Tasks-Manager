@@ -16,7 +16,7 @@
                 <div flex="40" layout="column" layout-padding>
                     <md-input-container>
                         <label>Título de la tarea</label>
-                        <input name="taskTitle" type="text" ng-model="vm.newTask.Title" required md-maxlength="30">
+                        <input name="taskTitle" type="text" ng-model="vm.newTask.Title" required md-maxlength="30" md-autofocus>
                         <div ng-messages="createTaskForm.taskTitle.$error">
                             <div ng-message="required">El título de la tarea es requerido</div>
                             <div ng-message="md-maxlength">El título debe ser de 30 caracteres como máximo</div>
@@ -35,7 +35,7 @@
                     <md-input-container>
                         <label>Prioridad de la tarea</label>
                         <md-select name="taskPriority" ng-model="vm.newTask.Priority" required ng-model-options="{trackBy: '$value.priorityName'}" ng-multiple="false">
-                            <md-option ng-value="priority" ng-repeat="priority in vm.priorities" ng-selected="priority.priorityName === 'Media'">
+                            <md-option ng-value="priority" ng-repeat="priority in vm.priorities">
                                 <span class="{{priority.priorityIcon.iconClass}}">
                                     <md-icon>{{priority.priorityIcon.iconName}}</md-icon>
                                 </span>
@@ -79,8 +79,8 @@
                 <div flex="40" layout="column" layout-padding>
                     <md-input-container>
                         <label>Estatus de la tarea</label>
-                        <md-select name="taskStatus" ng-model="vm.newTask.Status" required ng-model-options="{trackBy: '$value.statusDescription'}" ng-multiple="false">
-                            <md-option ng-value="status" ng-repeat="status in vm.taskStatus" ng-selected="status.statusDescription === 'Por hacer'" flex>
+                        <md-select name="taskStatus" ng-model="vm.newTask.Status" required ng-model-options="{trackBy: '$value.statusName'}" ng-multiple="false">
+                            <md-option ng-value="status" ng-repeat="status in vm.taskStatus" flex>
                                 <span class="{{status.statusIcon.iconClass}}">
                                     <md-icon>{{status.statusIcon.iconName}}</md-icon>
                                 </span>

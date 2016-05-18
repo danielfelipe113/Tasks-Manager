@@ -113,7 +113,7 @@
                     }
                 },
                 {
-                    statusCode: 0,
+                    statusCode: 4,
                     statusName: 'Done',
                     statusDescription: 'Terminadas',
                     statusIcon: {

@@ -2,8 +2,8 @@
 <header></header>
 <div class="dashboardContainer md-padding">
     <md-divider></md-divider>
-    <h2 class="md-display-1" ng-show="vm.user.tasks[vm.status].length">Tareas {{vm.user.tasks[vm.status][0].Status.statusDescription | lowercase}}:</h2>
-    <div layout="row" layout-align="center center" ng-hide="vm.user.tasks[vm.status].length">
+    <h2 class="md-display-1" ng-show="vm.tasks.length">Tareas {{vm.tasks.Status.statusDescription | lowercase}}:</h2>
+    <div layout="row" layout-align="center center" ng-hide="vm.tasks.length">
         <h1>No tienes tareas disponibles</h1>
     </div>
     <div class="filterContiner" layout="row" layout-align="center center" layout-margin>
@@ -12,7 +12,7 @@
             md-no-cache="true"
             md-min-length="0"
             md-search-text="vm.searchText"          
-            md-items="task in vm.user.tasks[vm.status]"
+            md-items="task in vm.tasks"
             placeholder="Buscar tareas"
             flex="40"
             md-select-on-match="true">
@@ -26,7 +26,7 @@
         </md-autocomplete>
     </div>
     <div class="tasks" layout="row" layout-gt-sm="row" layout-wrap>
-        <div class="dashboardCardContainer md-whiteframe-1dp no-style" ng-repeat="task in vm.user.tasks[vm.status] | orderBy: 'Priority.priorityNumber': true | filter: vm.searchText | limitTo: 20"
+        <div class="dashboardCardContainer md-whiteframe-1dp no-style" ng-repeat="task in vm.tasks | orderBy: 'Priority.priorityNumber': true | filter: vm.searchText | limitTo: 20"
             flex-gt-sm="30">
             
             <div class="card {{'tasks' + vm.status}}" layout-padding layout="column" layout-align="center center">

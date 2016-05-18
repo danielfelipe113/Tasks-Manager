@@ -7,12 +7,13 @@
       this.usersFactory = usersFactory;
       this.dialogService = dialogService;
       this.status = $stateParams.status;
-      this.id = $stateParams.id;
+      this.otherUserId = $stateParams.id;
       this.tasksFactory = tasksFactory;
       this.user = null;
       this.values = values;
       this.Status = this.values.getStatus();
       this.currentUser = null;
+      this.tasks = null;
       
       //init
       this.initialize();
@@ -20,12 +21,28 @@
 
     initialize() {
       this.getMe();
-      this.getTasks(this.id);
+     
     }
+    
+    getTasks() {
+      var tempId = null;
+      if(this.otherUserIdid) {
+        tempId = this.otherUserId
+      } else {
+        tempId = this.currentUser._id
+      }
+      
+      this.tasksFactory.getTasksByStatus(tempId, this.status)
+        .then(res => {
+          this.tasks = res.data;
+        });
+    }
+    
     getMe() {
         this.usersFactory.getMe()
             .then((response) => {
                 this.currentUser = response;
+                this.getTasks();
             });
     }
 
@@ -47,13 +64,6 @@
         .catch(() => {
         })
       this.getTasks(this.id);
-    }
-
-    getTasks(id) {
-      this.tasksFactory.getTasksConstructor(id, false)
-        .then(response => {
-          this.user = response.user;
-        });
     }
 
     taskDetails($event, task) {

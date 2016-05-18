@@ -42,21 +42,22 @@ class createTaskController {
     }
 
     initialize() {
+        let that = this;
         //data logic
-        usersFactory.getMe().then(
+        this.usersFactory.getMe().then(
             function (res) {
-                this.currentUser = res
-                this.getMe();
-                this.populateTask();
-                this.getPriorities();
-                this.getStatus();
-                this.setUserRol()
+                let parentScope = that;
+                that.currentUser = res
+                that.populateTask();
+                that.getPriorities();
+                that.getStatus();
+                that.setUserRol()
                     .then(res => {
                         if (res != 'Employee') {
-                            this.getUsers();
+                            parentScope.getUsers();
                         }
                     });
-                this.newTask.AssignBy = this.currentUser;
+                that.newTask.AssignBy = that.currentUser;
             });
         //methods
 

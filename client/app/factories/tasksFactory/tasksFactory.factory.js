@@ -26,10 +26,6 @@
             return $http.get('/api/tasks/byUserId/' + userId);
         }
 
-        function getTasksByStatus(userId, status) {
-            return $http.get('/api/tasks/byStatus/' + userId + '/' + status);
-        }
-
         function getTaskById(id) {
             return $http.get('/api/tasks/' + id);
         }
@@ -71,7 +67,9 @@
          * retorna el objeto con las tareas totalmente ordenadas
          */
 
-
+        function getTasksByStatus(userId, status) {
+            return $http.get('/api/tasks/byStatus/' + userId + '/' + status);
+        }
 
         function getTasksConstructor(id, getSupervised) {
             var deferred = $q.defer();
@@ -132,7 +130,7 @@
                     });
             }
 
-            function organizeTasks(tempTasks, userName) {
+            function organizeTasks(tempTasks, userName, usersToFind) { //hago map de las tareas
                 users[userName].tasks = {
                     InProgress: [],
                     ToDoToday: [],

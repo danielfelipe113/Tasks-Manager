@@ -34,12 +34,14 @@
         }
 
         function postTask(task) {
-            return $http.post('/api/tasks', task);
+            var tempTask = angular.toJson(task);
+            return $http.post('/api/tasks', tempTask);
         }
 
         function putTask(id, task) {
-            console.log(id, task)
-            return $http.put('/api/tasks/' + id, task);
+            var tempTask = angular.toJson(task);
+            console.log(tempTask)
+            return $http.put('/api/tasks/' + id, tempTask);
         }
 
         function deleteTask(id) {
@@ -117,19 +119,19 @@
                 users[userName].totalTasks = 0;
                 users[userName].haveTasks = false;
                 tempTasks.forEach(function (element) {
-                    for (var i = 0; i < element.Status.length; i++) {
-                        if (element.Status[i].statusName === appConfig.tasksStatus.InProgress) {
+                    
+                        if (element.Status.statusName === appConfig.tasksStatus.InProgress) {
                             users[userName].tasks.InProgress.push(element);
-                        } else if (element.Status[i].statusName === appConfig.tasksStatus.ToDoToday) {
+                        } else if (element.Status.statusName === appConfig.tasksStatus.ToDoToday) {
                             users[userName].tasks.ToDoToday.push(element);
-                        } else if (element.Status[i].statusName === appConfig.tasksStatus.ToDo) {
+                        } else if (element.Status.statusName === appConfig.tasksStatus.ToDo) {
                             users[userName].tasks.ToDo.push(element);
-                        } else if (element.Status[i].statusName === appConfig.tasksStatus.Delayed) {
+                        } else if (element.Status.statusName === appConfig.tasksStatus.Delayed) {
                             users[userName].tasks.Delayed.push(element);
-                        } else if (element.Status[i].statusName === appConfig.tasksStatus.Done) {
+                        } else if (element.Status.statusName === appConfig.tasksStatus.Done) {
                             users[userName].tasks.Done.push(element);
                         }
-                    }
+                    
                 });
                 for (var taskStatus in users[userName].tasks) {
                     if (users[userName].tasks[taskStatus].length) {

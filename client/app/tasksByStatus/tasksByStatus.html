@@ -13,7 +13,7 @@
                 <span class="{{task.Priority.priorityIcon.iconClass}} priorityStatus">
                     <md-icon>{{task.Priority.priorityIcon.iconName}}</md-icon>
                 </span>
-                <div class="textsContainer" layout="column" layout-align="center center">
+                <div class="textsContainer" layout="column" layout-align="center center" layout-margin>
                     <h2 flex="30">{{task.Title}}</h2>
 
                     <div class="dataText" layout="row" flex>
@@ -23,7 +23,7 @@
                 <div class="content" layout="row" layout-align="end center" flex="20">
                     <md-button ng-click="vm.taskDetails($event, task)" class="md-raised md-accent">Ver más</md-button>
                     <div class="actions" layout="column">
-                        <md-button class="delete md-icon-button" ng-click="vm.removeTasks($event, task)">
+                        <md-button class="delete md-icon-button" ng-click="vm.removeTasks($event, task)" ng-show="vm.currentUser.role === 'Administrator'">
                             <md-icon>delete_forever</md-icon>
                         </md-button>
                         <md-button class="edit md-icon-button"  ng-click="vm.editTask($event, task)">

@@ -16,24 +16,26 @@
                 <div flex="40" layout="column" layout-padding>
                     <md-input-container>
                         <label>Título de la tarea</label>
-                        <input name="taskTitle" type="text" ng-model="vm.newTask.Title" required>
-                        <div ng-messages="createTaskForm.taskTitle.$error" ng-show="createTaskForm.taskTitle.$invalid && vm.submitted">
+                        <input name="taskTitle" type="text" ng-model="vm.newTask.Title" required md-maxlength="30">
+                        <div ng-messages="createTaskForm.taskTitle.$error">
                             <div ng-message="required">El título de la tarea es requerido</div>
+                            <div ng-message="md-maxlength">El título debe ser de 30 caracteres como máximo</div>
                         </div>
                     </md-input-container>
 
                     <md-input-container class="textareaCustom">
                         <label>Descripción de la tarea</label>
-                        <textarea name="taskDescription" ng-model="vm.newTask.Description" required></textarea>
+                        <textarea name="taskDescription" ng-model="vm.newTask.Description" md-maxlength="350" required></textarea>
                         <div ng-messages="createTaskForm.taskDescription.$error" ng-show="createTaskForm.taskDescription.$invalid && vm.submitted">
                             <div ng-message="required">La descripción de la tarea es requerida</div>
+                            <div ng-message="md-maxlength">El título debe ser de 350 caracteres como máximo</div>
                         </div>
                     </md-input-container>
 
                     <md-input-container>
                         <label>Prioridad de la tarea</label>
-                        <md-select name="taskPriority" ng-model="vm.newTask.Priority" required>
-                            <md-option ng-value="priority" ng-repeat="priority in vm.priorities" ng-selected="true">
+                        <md-select name="taskPriority" ng-model="vm.newTask.Priority" required ng-model-options="{trackBy: '$value.priorityName'}" ng-multiple="false">
+                            <md-option ng-value="priority" ng-repeat="priority in vm.priorities" ng-selected="priority.priorityName === 'Media'">
                                 <span class="{{priority.priorityIcon.iconClass}}">
                                     <md-icon>{{priority.priorityIcon.iconName}}</md-icon>
                                 </span>
@@ -57,10 +59,10 @@
 
                     <md-input-container>
                         <label>Asignar a</label>
-                        <md-select name="taskAssignTo" ng-model="vm.newTask.AssignTo" required ng-disabled="vm.isEmployee" multiple="!vm.isEmployee">
+                        <md-select name="taskAssignTo" ng-model="vm.newTask.AssignTo" required ng-disabled="vm.isEmployee" multiple ng-model-options="{trackBy: '$value._id'}">
                             <md-option ng-value="vm.currentUser" ng-selected="true" ng-show="vm.isEmployee"> {{ vm.newTask.AssignTo.fullName }}</md-option>
                             <md-optgroup label="Administradores" ng-if="vm.isAdministrator">
-                                <md-option ng-value="administrator" ng-repeat="administrator in vm.users.Administrators">{{administrator.fullName}}</md-option>
+                                <md-option ng-value="administrator" ng-repeat="administrator in vm.users.Administrators track by administrator">{{administrator.fullName}}</md-option>
                             </md-optgroup>
                             <md-optgroup label="Supervisores">
                                 <md-option ng-value="supervisor" ng-repeat="supervisor in vm.users.Supervisors">{{supervisor.fullName}}</md-option>
@@ -77,8 +79,8 @@
                 <div flex="40" layout="column" layout-padding>
                     <md-input-container>
                         <label>Estatus de la tarea</label>
-                        <md-select name="taskStatus" ng-model="vm.newTask.Status" required>
-                            <md-option ng-value="status" ng-repeat="status in vm.taskStatus" ng-selected="true" flex>
+                        <md-select name="taskStatus" ng-model="vm.newTask.Status" required ng-model-options="{trackBy: '$value.statusDescription'}" ng-multiple="false">
+                            <md-option ng-value="status" ng-repeat="status in vm.taskStatus" ng-selected="status.statusDescription === 'Por hacer'" flex>
                                 <span class="{{status.statusIcon.iconClass}}">
                                     <md-icon>{{status.statusIcon.iconName}}</md-icon>
                                 </span>
@@ -111,9 +113,9 @@
 
                     <md-input-container class="textareaCustom">
                         <label>Comentarios</label>
-                        <textarea name="taskComments" type="text" ng-model="vm.newTask.Comments" required></textarea>
-                        <div ng-messages="createTaskForm.taskComments.$error" ng-show="createTaskForm.taskComments.$invalid && vm.submitted">
-                            <div ng-message="required">Este campo es requerido</div>
+                        <textarea name="taskComments" type="text" ng-model="vm.newTask.Comments" md-maxlength="150"></textarea>
+                        <div ng-messages="createTaskForm.taskComments.$error">
+                        <div ng-message="md-maxlength">El título debe ser de 150 caracteres como máximo</div>
                         </div>
                     </md-input-container>
                 </div>

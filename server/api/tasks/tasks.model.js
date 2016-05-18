@@ -42,8 +42,7 @@ var TasksSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  Status: [
-    {
+  Status: {
       statusCode: {
         type: Number,
         required: true
@@ -64,15 +63,13 @@ var TasksSchema = new mongoose.Schema({
           type: String
         }
       }
-    }
-  ],
+    },
   Description: {
     type: String,
     required: true
   },
   Comments: {
-    type: String,
-    required: true
+    type: String
   },
   Priority: {
     priorityName: { type: String, required: true },
@@ -83,9 +80,7 @@ var TasksSchema = new mongoose.Schema({
     }
   },
   AssignBy: userSchema,
-  AssignTo: [
-    userSchema
-  ],
+  AssignTo: [],
   DoBeforeDate: {
     type: Date,
     default: Date.now,

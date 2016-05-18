@@ -13,7 +13,8 @@
                 return $http.get('api/users/getUsersByRole/' + role);
             },
             updateUser: (id, user) => {
-                return $http.patch('api/users/' + id, user);
+                var tempUser = angular.toJson(user);
+                return $http.patch('api/users/' + id, tempUser);
             },
             deleteUser: (id) => {
                 return $http.delete('api/users/' + id);

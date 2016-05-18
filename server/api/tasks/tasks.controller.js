@@ -22,10 +22,12 @@ function respondWithResult(res, statusCode) {
 }
 
 function saveUpdates(updates) {
+  console.log('entré a save')
   return function (entity) {
     var updated = _.merge(entity, updates);
     return updated.save()
       .then(updated => {
+        
         return updated;
       });
   };
@@ -107,6 +109,7 @@ export function create(req, res) {
 
 // Updates an existing Tasks in the DB
 export function update(req, res) {
+  console.log(req.body)
   if (req.body._id) {
     delete req.body._id;
   }

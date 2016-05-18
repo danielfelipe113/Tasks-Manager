@@ -2,13 +2,14 @@
 (function () {
 
   class tasksByStatusController {
-    constructor($http, tasksFactory, $stateParams, appConfig, dialogService, values) {
+    constructor($http, tasksFactory, $stateParams, appConfig, dialogService, values, Auth) {
       this.dialogService = dialogService;
       this.status = $stateParams.status;
       this.id = $stateParams.id;
       this.tasksFactory = tasksFactory;
       this.user = null;
       this.values = values.values();
+      this.currentUser = Auth.getCurrentUser().toJSON();
 
       //init
       this.initialize();
@@ -27,16 +28,11 @@
     }
     
     taskDetails($event, task) {
-      console.log('Details')
       let that = this;
       let template = './app/partials/taskDetails/taskDetails.html';
       let controller = 'taskDetailsController';
 
-      function callback() {
-        this.getTasks(that.id);
-      }
-
-      this.dialogService.showDialog($event, template, controller, task, callback);
+      this.dialogService.showDialog($event, template, controller, task);
     }
 
     editTask($event, task) {
@@ -46,7 +42,7 @@
       let controller = 'createTaskController';
 
       function callback() {
-        this.getTasks(that.id);
+        that.getTasks(that.id);
       }
 
       this.dialogService.showDialog($event, template, controller, taskToEdit, callback);

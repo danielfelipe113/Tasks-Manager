@@ -49,7 +49,6 @@ class createTaskController {
         this.getStatus();
         this.setUserRol()
             .then(res => {
-                console.log(res)
                 if (res != 'Employee') {
                     this.getUsers();
                 }
@@ -74,12 +73,11 @@ class createTaskController {
 
     populateTask() {
         if (this.task !== null) {
-            if (this.task.Id === 0) {
-                this.newTask = new this.models.createEmptyTask();
-            } else {
-                this.newTask = this.task;
-                this.isNewTask = false;
-            }
+            console.log('soy viejo2')
+            this.newTask = this.task;
+            this.newTask.DoBeforeDate = new Date(this.task.DoBeforeDate);
+            this.isNewTask = false;
+
         } else {
             this.newTask = new this.models.createEmptyTask();
         }

@@ -20,13 +20,13 @@
           message: message || null
         },  
         hideDelay: 1000,
-        position: 'bottom right'
+        position: 'top right'
       });
     }
 
     function errorToast(message) {
       $mdToast.show({
-        templateUrl: './app/factories/toast/partials/success/toast.error.html',
+        templateUrl: './app/factories/toast/partials/error/toast.error.html',
         controller:  toastErrorController,
         controllerAs: 'vm',
         locals: {

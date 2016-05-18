@@ -32,8 +32,8 @@
             this.AssignTo = null;
             this.DoBeforeDate = new Date();
             this.AssignDate = new Date();
-            this.EstimatedHours = null;
-            this.TimeSpent = null;
+            this.EstimatedHours = 0;
+            this.TimeSpent = 0;
         }
     }
     angular

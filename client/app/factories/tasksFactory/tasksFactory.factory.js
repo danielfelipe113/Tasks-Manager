@@ -1,7 +1,36 @@
 
 'use strict';
 (function () {
-    function tasksFactory($http, $q, Auth, appConfig, usersFactory, dialogService, $state) {
+    function tasksFactory($http, $q, appConfig, usersFactory, dialogService, $state, $interval, values) {
+
+        if(sessionStorage.getItem('reviewedForDelayed') !== 'true') {
+            reviewedForDelayed();
+        }
+
+        function reviewedForDelayed() {
+            var sessionStorage = window.sessionStorage;
+            sessionStorage.setItem('reviewedForDelayed', 'true')
+            var status = values.getStatus();
+
+            getTasks()
+                .then(function (response) {
+                    var tasks = response.data;
+                    var tempTasks = [];
+                    var actualTime = new Date();
+                    var taskTime = null;
+                    for (var i = 0; i < tasks.length; i++) {
+                        taskTime = new Date(tasks[i].DoBeforeDate);   
+                        if (tasks[i].Status.statusName === 'ToDo' || tasks[i].Status.statusName === 'ToDoToday') { //need to be fixed
+                            if (actualTime > taskTime) {
+                                tasks[i].Status = status[3]; // == delayed, need to be fixed - quitar numero
+                                tempTasks.push(tasks[i]);
+                            }
+                        }
+                    }
+                    putTask(tempTasks);
+                });
+        }
+
 
         var tasksFactory = {
             getTasks: getTasks,
@@ -31,18 +60,22 @@
         }
 
         function postTask(task) {
-            var tempTask = angular.toJson(task);
+            var tempTask = task;
+            if(typeof task === 'object') {
+                tempTask = [];
+                tempTask[0] = task;
+            }
             return $http.post('/api/tasks', tempTask);
         }
 
-        function putTask(id, task) {
-            var tempTask = angular.toJson(task);
-            return $http.put('/api/tasks/' + id, tempTask);
+        function putTask(task) {
+            return $http.put('/api/tasks/', task);
         }
 
         function deleteTask(id) {
             return $http.delete('/api/tasks/' + id);
         }
+        
 
         function createTasks($event) {
             var that = this;

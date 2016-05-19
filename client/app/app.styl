@@ -47,6 +47,21 @@ $color-done = #4CAF50;
 $color-edit = #FB8C00;
 $color-delete = #D50000;
 
+//
+// Fixes
+//
+
+//Angular Material fixes...
+
+//this fixed overflow when toast appear
+md-toast-animating { 
+  overflow:hidden!important 
+}
+
+body.md-toast-animating { 
+  overflow: auto !important;
+}
+
 //general classes
 md-toast
   position fixed

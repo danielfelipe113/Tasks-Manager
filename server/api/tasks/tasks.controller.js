@@ -22,12 +22,11 @@ function respondWithResult(res, statusCode) {
 }
 
 function saveUpdates(updates) {
-  console.log('entré a save')
   return function (entity) {
     var updated = _.merge(entity, updates);
     return updated.save()
       .then(updated => {
-        
+
         return updated;
       });
   };
@@ -109,15 +108,41 @@ export function create(req, res) {
 
 // Updates an existing Tasks in the DB
 export function update(req, res) {
-  console.log(req.body)
-  if (req.body._id) {
-    delete req.body._id;
+
+
+  if (!req.body.length) {
+    var idSingle = req.body._id;
+    
+    
+    return Tasks.findById(idSingle).exec()
+      .then(handleEntityNotFound(res))
+      .then(saveUpdates(req.body))
+      .then(respondWithResult(res))
+      .catch(handleError(res));
+  } else {
+    var tasks = req.body;
+    for (var i in tasks) {
+      var id = tasks[i]._id;
+      var task = tasks[i];
+      
+      
+      Tasks.findById(id).exec()
+        .then(handleEntityNotFound(res))
+        .then(saveUpdates(task))
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+    }
   }
-  return Tasks.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+
+
+
+
+
+  // return Tasks.findById(req.params.id).exec()
+  //   .then(handleEntityNotFound(res))
+  //   .then(saveUpdates(req.body))
+  //   .then(respondWithResult(res))
+  //   .catch(handleError(res));
 }
 
 // Deletes a Tasks from the DB

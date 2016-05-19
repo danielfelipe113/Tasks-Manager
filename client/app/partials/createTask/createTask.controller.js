@@ -141,7 +141,7 @@ class createTaskController {
                         that.$mdDialog.cancel();
                     });
             } else { //save task
-                this.tasksFactory.putTask(this.newTask._id, this.newTask)
+                this.tasksFactory.putTask(this.newTask)
                     .then(res => {
                         that.toastFactory.successToast(messages.MESSAGES.TASKS.CREATESUCCESS);
                         that.$mdDialog.hide(that.$state.current.name);

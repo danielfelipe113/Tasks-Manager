@@ -58,7 +58,7 @@
         tempTask.Status = this.Status[4];
       }
 
-      this.tasksFactory.putTask(tempTask._id, tempTask)
+      this.tasksFactory.putTask(tempTask)
         .then(() => {
         })
         .catch(() => {

@@ -3,7 +3,7 @@
 
 
   function toastFactory($http, $mdToast) {
-
+    var parentEl = angular.element(document.body);
     var toastFactory = {
       successToast: successToast,
       errorToast: errorToast
@@ -13,6 +13,7 @@
 
     function successToast(message) {
       $mdToast.show({
+        parent: parentEl,
         templateUrl: './app/factories/toast/partials/success/toast.success.html',
         controller:  toastSuccessController,
         controllerAs: 'vm',
@@ -26,6 +27,7 @@
 
     function errorToast(message) {
       $mdToast.show({
+        parent: parentEl,
         templateUrl: './app/factories/toast/partials/error/toast.error.html',
         controller:  toastErrorController,
         controllerAs: 'vm',

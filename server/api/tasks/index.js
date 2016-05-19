@@ -11,7 +11,7 @@ router.get('/:id', auth.isAuthenticated(), controller.show);
 router.get('/byUserId/:userId', auth.isAuthenticated(), controller.showByUserId);
 router.get('/byStatus/:userId/:status', auth.isAuthenticated(), controller.getByStatus);
 router.post('/', auth.isAuthenticated(), controller.create);
-router.put('/:id', auth.isAuthenticated(), controller.update);
+router.put('/', auth.isAuthenticated(), controller.update);
 router.patch('/:id', auth.isAuthenticated(), controller.update);
 router.delete('/:id', auth.hasRole('Administrator'), controller.destroy);
 

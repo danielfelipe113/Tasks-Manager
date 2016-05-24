@@ -169,6 +169,11 @@ function AuthService($location, $http, $cookies, $q, appConfig, Util, User) {
       return Auth.hasRole
         .apply(Auth, [].concat.apply(['Administrator'], arguments));
     },
+    
+    isEmployee() {
+      return Auth.hasRole
+        .apply(Auth, [].concat.apply(['Employee'], arguments));
+    },
 
     /**
      * Get auth token

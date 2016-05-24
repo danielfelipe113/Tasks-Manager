@@ -13,13 +13,13 @@ class NavbarController {
   constructor(Auth) {
     this.isLoggedIn = Auth.isLoggedIn;
     this.isAdmin = Auth.isAdmin;
-    this.getCurrentUser = null;
+    this.currentUser = null;
     }
     
     getMe() {
         this.usersFactory.getMe()
             .then((response) => {
-                this.getCurrentUser = response;
+                this.currentUser = response;
             });
     }
     

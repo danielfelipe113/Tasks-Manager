@@ -2,7 +2,7 @@
 'use strict';
 (function () {
     function usersFactory($http, Auth, dialogService, $q) {
-        
+
         var me = null;
         var usersFactory = {
             getUsers: getUsers,
@@ -13,7 +13,7 @@
             createUsers: createUsers,
             getMe: getMe
         };
-        
+
         return usersFactory;
 
         function getUsers() {
@@ -39,15 +39,13 @@
         }
         function getMe() {
             var deferred = $q.defer();
-            if (me) {
-                deferred.resolve(me);
-            } else {
-                $http.get('/api/users/me')
-                    .then(function(response) {
-                        me = response.data;                        
-                        deferred.resolve(me);
-                    });
-            }
+
+            $http.get('/api/users/me')
+                .then(function (response) {                    
+                    me = response.data;
+                    deferred.resolve(me);
+                });
+
             return deferred.promise;
         }
     }

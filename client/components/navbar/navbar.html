@@ -22,7 +22,7 @@
             </md-button>
           </md-menu-item>
           <md-menu-item ng-show="nav.isLoggedIn()">
-            <p>Hola {{ nav.getCurrentUser().firstName }}</p>
+            <p>Hola {{ nav.currentUser.fullName }}</p>
           </md-menu-item>
           <md-divider ng-show="nav.isLoggedIn()"></md-divider>
           <md-menu-item ng-show="nav.isLoggedIn()" ui-sref-active="active">

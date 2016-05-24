@@ -8,34 +8,50 @@
     constructor(tasksFactory, appConfig, Auth, usersFactory, $stateParams) {
       //dependences
       this.userId = $stateParams.id;
-      this.appConfig = appConfig;
       this.tasksFactory = tasksFactory;
       this.usersFactory = usersFactory;
-      this.Auth = Auth;
 
       //variables
-      this.user = {};
-      
-      this.id = this.user._id
-     
+      this.tasks = {};
+
       //init
       this.initialize();
     }
     initialize() {
-      this.getTasks(this.userId);
+      if (this.userId) {
+        this.getUserById();
+      } else {
+        this.getMe()
+      }
+    }
+
+    getUserById() {
+      this.usersFactory.getUserById(this.userId)
+        .then(response => {
+          this.currentUser = response.data;
+          this.getTasks(this.currentUser._id);
+        })
+    }
+
+    getMe() {
+      this.usersFactory.getMe()
+        .then((response) => {
+          this.currentUser = response;
+          this.getTasks(this.currentUser._id);
+        });
     }
 
     getTasks(id) {
-      this.tasksFactory.getTasksConstructor(id, false)
+      this.tasksFactory.getTasks(id, true)
         .then(response => {
-          this.user = response.user
+          this.tasks = response.data;
         })
         .catch(err => {
           console.log(err)
         });
 
     }
-    
+
 
 
   } //end

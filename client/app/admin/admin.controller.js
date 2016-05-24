@@ -8,8 +8,8 @@
       this.dialogService = dialogService;
       this.usersFactory = usersFactory;
       this.usersByRole = null;
+      this.currentUser = null;
       this.userRoleSelected = null;
-      this.hover = false;
       this.values = values.values();
       this.userRoles = [
         {
@@ -25,7 +25,12 @@
           description: 'Empleados'
         }
       ];
-
+      
+      this.initialize();
+    }
+    
+    initialize() {
+      this.getMe();
     }
 
     userDetails($event, user) {
@@ -47,7 +52,14 @@
 
       this.dialogService.showDialog($event, template, controller, user, callback);
     }
-
+    
+    getMe() {
+      this.usersFactory.getMe()
+        .then((response) => {
+          this.currentUser = response;
+        });
+    }
+    
     getUsersByRole() {
       this.usersFactory.getUsersByRole(this.userRoleSelected)
         .then((response) => {

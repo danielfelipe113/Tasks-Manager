@@ -2,28 +2,29 @@
 (function () {
 
   class UsersComponent {
-    constructor(Auth, tasksFactory) {
-      this.Auth = Auth;
+    constructor(Auth, tasksFactory, usersFactory) {
       this.tasksFactory = tasksFactory;
+      this.usersFactory = usersFactory;
       this.users = null;
+
       this.initialize();
     }
 
     initialize() {
-      this.getUsers();
-    }
-    
-    getUsers() {
-      this.tasksFactory.getTasksConstructor(0, true)
-        .then(res =>{          
-          this.users = res;
-          if(this.users.hasOwnProperty('me')) {
-            delete this.users['me']
-          };
-        });
+      this.getSupervisedTasks()
     }
 
-    
+    getSupervisedTasks() {
+      let that = this;
+      this.tasksFactory.getSupervisedTasks()
+        .then(function (res) {
+          that.users = res;
+        });
+        
+    }
+
+
+
   }
 
   angular.module('tasksAdminApp')

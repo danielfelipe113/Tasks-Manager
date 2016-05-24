@@ -36,11 +36,16 @@
 
                     <md-input-container class="md-accent" ng-hide="vm.user.role === vm.roles.Employee">
                         <label>Supervisar a:</label>
-                        <md-select ng-model="vm.user.supervisorOf" multiple="">
-                            <md-optgroup label="Usuarios">
-                                <md-option ng-value="user" ng-repeat="user in vm.users">
-                                    {{ user.fullName }}
-                                </md-option>
+                        <md-select name="taskAssignTo" ng-model="vm.user.supervisorOf" required ng-disabled="vm.isEmployee" multiple ng-model-options="{trackBy: '$value._id'}">
+                            <md-option ng-value="vm.currentUser" ng-selected="true" ng-show="vm.isEmployee"> {{ vm.newTask.AssignTo.fullName }}</md-option>
+                            <md-optgroup label="Administradores" ng-if="vm.isAdministrator">
+                                <md-option ng-value="administrator" ng-repeat="administrator in vm.users.Administrators">{{administrator.fullName}}</md-option>
+                            </md-optgroup>
+                            <md-optgroup label="Supervisores">
+                                <md-option ng-value="supervisor" ng-repeat="supervisor in vm.users.Supervisors">{{supervisor.fullName}}</md-option>
+                            </md-optgroup>
+                            <md-optgroup label="Empleados">
+                                <md-option ng-value="employee" ng-repeat="employee in vm.users.Employees" >{{employee.fullName}}</md-option>
                             </md-optgroup>
                         </md-select>
                     </md-input-container>

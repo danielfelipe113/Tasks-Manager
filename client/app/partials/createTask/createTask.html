@@ -62,7 +62,7 @@
                         <md-select name="taskAssignTo" ng-model="vm.newTask.AssignTo" required ng-disabled="vm.isEmployee" multiple ng-model-options="{trackBy: '$value._id'}">
                             <md-option ng-value="vm.currentUser" ng-selected="true" ng-show="vm.isEmployee"> {{ vm.newTask.AssignTo.fullName }}</md-option>
                             <md-optgroup label="Administradores" ng-if="vm.isAdministrator">
-                                <md-option ng-value="administrator" ng-repeat="administrator in vm.users.Administrators track by administrator">{{administrator.fullName}}</md-option>
+                                <md-option ng-value="administrator" ng-repeat="administrator in vm.users.Administrators">{{administrator.fullName}}</md-option>
                             </md-optgroup>
                             <md-optgroup label="Supervisores">
                                 <md-option ng-value="supervisor" ng-repeat="supervisor in vm.users.Supervisors">{{supervisor.fullName}}</md-option>

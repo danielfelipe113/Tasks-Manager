@@ -7,10 +7,14 @@ class editUserController {
         this.values = values.values();
         this.usersFactory = usersFactory;
         this.$mdDialog = $mdDialog;
-        
+        this.appConfig = appConfig;
+
         //vars
-        this.users = null;
-    
+        this.users = {
+            Supervisors: [],
+            Administrators: [],
+            Employees: []
+        };
         this.roles = appConfig.userRolesJson;
         this.user = dataModel;
         //init
@@ -19,25 +23,41 @@ class editUserController {
 
     initialize() {
         //methods
-        this.getUsers();    
-        
+        this.getUsers();
+
     }
-    
+
     getUsers() {
-        this.users = null;
-        if(this.user.role !== this.roles.Employee) {
-            this.usersFactory.getUsers()
-                .then((res) => {
-                this.users = res.data;
-                });
-        };
+        let that = this;
+        let tempUsers = null;
+
+        this.usersFactory.getUsers()
+            .then((response) => {
+                tempUsers = response.data;
+                setUsers();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        function setUsers() {
+            tempUsers.forEach(function (element) {
+                if (element.role === that.appConfig.userRolesJson.Supervisor) {
+                    that.users.Supervisors.push(element);
+                } else if (element.role === that.appConfig.userRolesJson.Administrator) {
+                    that.users.Administrators.push(element);
+                } else if (element.role === that.appConfig.userRolesJson.Employee) {
+                    that.users.Employees.push(element);
+                }
+            }, this);
+        }
     }
-    
+
     //submit
     saveForm(isValid) {
         this.user.fullName = this.user.firstName + ' ' + this.user.lastName;
         let that = this;
-        
+
         if (isValid) {
             this.usersFactory.updateUser(this.user._id, this.user)
                 .then((res) => {

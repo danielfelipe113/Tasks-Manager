@@ -10,11 +10,11 @@
         </md-button>
         <md-button ui-sref="users" layout="row" layout-align="space-between center" ng-hide="vm.currentUser === 'Employee'">
             <span flex>Usuarios que superviso</span>
-            <md-icon class="tasksInProgress" flex="10">person</md-icon>
+            <md-icon class="tasksInProgress" flex="10">supervisor_account</md-icon>
         </md-button>
         <md-button ui-sref="admin" layout="row" layout-align="space-between center" ng-show="vm.isAdmin()">
             <span flex>Administrar usuarios</span>
-            <md-icon class="tasksInProgress" flex="10">person</md-icon>
+            <md-icon class="tasksInProgress" flex="10">verified_user</md-icon>
         </md-button>
         <div class="temporalFix"></div>
     </md-content>

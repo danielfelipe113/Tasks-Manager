@@ -7,9 +7,11 @@ class createUserController {
   submitted = false;
   //end-non-standard
 
-  constructor(Auth, $state, models, appConfig, $mdDialog) {
+  constructor(Auth, $state, models, appConfig, $mdDialog, toastFactory, values) {
     this.Auth = Auth;
     this.$mdDialog = $mdDialog;
+    this.values = values.values(); 
+    this.toastFactory = toastFactory;
     this.$state = $state;
     this.models = models;
     this.roles = appConfig.userRolesJson;
@@ -39,7 +41,6 @@ class createUserController {
     if (form.$valid) {
       this.Auth.createUser(this.user)
         .then((res) => {
-          console.log(res)
           that.toastFactory.successToast(that.values.MESSAGES.USERS.SAVESUCCESS);
           that.$mdDialog.hide();
         })

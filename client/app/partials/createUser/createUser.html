@@ -9,82 +9,88 @@
   </md-toolbar>
   <md-dialog-content class="signUpContent">
     <div class="formContainer" layout="column" layout-align="center center">
-      <form class="signUpForm" name="signUpForm" ng-submit="vm.register(signUpForm)" novalidate>
+      <form class="signUpForm" name="signUpForm" ng-submit="vm.register(signUpForm)" novalidate layout="column" layout-align="center center"
+        layout-align-gt-sm="start">
 
-        <md-input-container>
-          <label>Nombres</label>
-          <input type="text" name="firstName" ng-model="vm.user.firstName" required md-autofocus/>
-          <div ng-messages="signUpForm.firstName.$error">
-            <div ng-message="required">
-              Escribe tus nombres
+        <div flex="40">
+          <md-input-container>
+            <label>Nombres</label>
+            <input type="text" name="firstName" ng-model="vm.user.firstName" required md-autofocus/>
+            <div ng-messages="signUpForm.firstName.$error">
+              <div ng-message="required">
+                Escribe tus nombres
+              </div>
             </div>
-          </div>
-        </md-input-container>
+          </md-input-container>
 
-        <md-input-container>
-          <label>Apellidos</label>
-          <input type="text" name="lastName" ng-model="vm.user.lastName" required/>
-          <div ng-messages="signUpForm.lastName.$error">
-            <div ng-message="required">
-              Escribe tus nombres
+          <md-input-container>
+            <label>Apellidos</label>
+            <input type="text" name="lastName" ng-model="vm.user.lastName" required/>
+            <div ng-messages="signUpForm.lastName.$error">
+              <div ng-message="required">
+                Escribe tus nombres
+              </div>
             </div>
-          </div>
-        </md-input-container>
+          </md-input-container>
 
-        <md-input-container>
-          <label>Role:</label>
-          <md-select name="role" ng-model="vm.user.role" required>
-            <md-option ng-value="role" ng-repeat="role in vm.roles" ng-selected="true" flex>
-              {{role}}
-            </md-option>
-          </md-select>
-        </md-input-container>
+          <md-input-container>
+            <label>Role:</label>
+            <md-select name="role" ng-model="vm.user.role" required>
+              <md-option ng-value="role" ng-repeat="role in vm.roles" ng-selected="true" flex>
+                {{role}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+        </div>
+        <div flex="40">
 
-        <md-input-container>
-          <label>Correo electrónico</label>
-          <input type="email" name="email" ng-model="vm.user.email" required mongoose-error/>
-          <div ng-messages="signUpForm.email.$error">
-            <div ng-message="required">
-              Escribe tu correo electrónico
+          <md-input-container>
+            <label>Correo electrónico</label>
+            <input type="email" name="email" ng-model="vm.user.email" required mongoose-error/>
+            <div ng-messages="signUpForm.email.$error">
+              <div ng-message="required">
+                Escribe tu correo electrónico
+              </div>
+              <div ng-message="mongooseError">
+                {{vm.errors.email}}
+              </div>
+              <!--<p ng-show="signUpForm.email.$error.mongoose">
+                  {{ vm.errors.email }}
+                </p>-->
             </div>
-            <div ng-message="mongooseError">
-              {{vm.errors.email}}
-            </div>
-            <!--<p ng-show="signUpForm.email.$error.mongoose">
-                {{ vm.errors.email }}
-              </p>-->
-          </div>
-        </md-input-container>
+          </md-input-container>
 
-        <md-input-container>
-          <label>Contraseña</label>
-          <input type="password" name="password" ng-model="vm.user.password" ng-minlength="3" required mongoose-error/>
-          <div ng-messages="signUpForm.password.$error">
-            <div ng-message="required">
-              Escribe tu contraseña
+          <md-input-container>
+            <label>Contraseña</label>
+            <input type="password" name="password" ng-model="vm.user.password" ng-minlength="3" required mongoose-error/>
+            <div ng-messages="signUpForm.password.$error">
+              <div ng-message="required">
+                Escribe tu contraseña
+              </div>
+              <div ng-message="mongoose-error">
+                {{vm.errors.password}}
+              </div>
+              <!--<p ng-show="signUpForm.email.$error.mongoose">
+                  {{ vm.errors.email }}
+                </p>-->
             </div>
-            <div ng-message="mongoose-error">
-              {{vm.errors.password}}
-            </div>
-            <!--<p ng-show="signUpForm.email.$error.mongoose">
-                {{ vm.errors.email }}
-              </p>-->
-          </div>
-        </md-input-container>
+          </md-input-container>
 
-        <md-input-container>
-          <label>Confirmar contraseña</label>
-          <input type="password" name="confirmPassword" ng-model="vm.user.confirmPassword" match="vm.user.password" ng-minlength="3"
-            required/>
-          <div ng-messages="signUpForm.password.$error">
-            <div ng-message="required">
-              Confirma tu contraseña
+          <md-input-container>
+            <label>Confirmar contraseña</label>
+            <input type="password" name="confirmPassword" ng-model="vm.user.confirmPassword" match="vm.user.password" ng-minlength="3"
+              required/>
+            <div ng-messages="signUpForm.password.$error">
+              <div ng-message="required">
+                Confirma tu contraseña
+              </div>
+              <div ng-message="match">
+                Las contraseñas deben coincidir
+              </div>
             </div>
-            <div ng-message="match">
-              Las contraseñas deben coincidir
-            </div>
-          </div>
-        </md-input-container>
+          </md-input-container>
+        </div>
+
         <md-dialog-actions>
           <div layout="row" layout-align="center center">
             <md-button class="md-raised md-primary" type="submit">

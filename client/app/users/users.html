@@ -11,7 +11,7 @@
             <md-list-item layout="row" layout-align="center center" ng-show="!vm.users">
                 <p  class="md-title">Actualmente no supervisas ningún usuario</p>              
             </md-list-item>
-            <md-list-item class="md-3-line" ng-repeat="user in vm.users" layout-padding ui-sref="tasksDashboard({id: user.data._id })">
+            <md-list-item class="md-3-line" ng-repeat="user in vm.users | orderBy: 'data.fullName'" layout-padding ui-sref="tasksDashboard({id: user.data._id })">
                 <div class="md-list-item-text" layout="column" ng-click="vm.userDetails($event, user)">
                     <h3>{{ user.data.fullName }}</h3>
                     <h4>{{ user.data.email }}</h4>

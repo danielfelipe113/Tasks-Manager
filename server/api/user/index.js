@@ -12,7 +12,7 @@ router.get('/:id', auth.isAuthenticated(), controller.show);
 router.get('/getUsersByRole/:role', auth.isAuthenticated(), controller.getUsersByRole);
 router.delete('/:id', auth.hasRole('Administrator'), controller.destroy);
 router.patch('/:id', auth.hasRole('Administrator'), controller.updateUser);
-router.post('/', auth.hasRole('Administrator'), controller.create);
+router.post('/',  controller.create);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
 
 module.exports = router;

@@ -4,17 +4,11 @@ class SidenavController {
     constructor(Auth, $mdSidenav, tasksFactory, usersFactory) {
         this.isLoggedIn = Auth.isLoggedIn;
         this.isAdmin = Auth.isAdmin;
-        this.isEmployee = Auth.isEmployee;
-        this.getCurrentUser = null;
+        this.getCurrentUser = Auth.getCurrentUser();
         this.$mdSidenav = $mdSidenav;
         this.usersFactory = usersFactory;
         this.tasksFactory = tasksFactory;
         
-    }
-    
-    initialize() {
-        console.log('sidenav')
-        this.getMe();
     }
     
     createUser($event) {

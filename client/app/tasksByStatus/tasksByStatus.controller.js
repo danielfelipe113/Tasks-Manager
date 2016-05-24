@@ -97,7 +97,7 @@
       let messages = this.values.values();
 
       let data = messages.CONFIRM.TYPE.TASK;
-
+      
       function callback() {
         that.tasksFactory.deleteTask(task._id)
           .then(res => {

@@ -20,8 +20,10 @@
             <span md-highlight-text="vm.searchText" >{{task.Title}}</span>
             </md-item-template>
             <md-not-found>
-                No se encontraron tareas
-            <md-button class="md-raised md-primary" ng-click="vm.createTasks($event)">¡Crea una nueva!</md-button>
+                <span>
+                    No se encontraron tareas
+                    <md-button class="md-raised md-primary" ng-click="vm.createTasks($event)">¡Crea una nueva!</md-button>
+                </span>
             </md-not-found>
         </md-autocomplete>
     </div>

@@ -10,10 +10,10 @@ class LoginController {
     this.$state = $state;
   }
 
-  login(form) {
+  login(isValid) {
     this.submitted = true;
 
-    if (form.$valid) {
+    if (isValid) {
       this.Auth.login({
         email: this.user.email,
         password: this.user.password

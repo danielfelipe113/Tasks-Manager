@@ -6,21 +6,13 @@ class NavbarController {
     'title': 'Home',
     'state': 'tasksDashboard'
   }];
-
-  isCollapsed = true;
   //end-non-standard
 
   constructor(Auth) {
     this.isLoggedIn = Auth.isLoggedIn;
     this.isAdmin = Auth.isAdmin;
-    this.currentUser = null;
-    }
+    this.currentUser = Auth.getCurrentUser();;
     
-    getMe() {
-        this.usersFactory.getMe()
-            .then((response) => {
-                this.currentUser = response;
-            });
     }
     
     openMenu($mdOpenMenu, ev) {

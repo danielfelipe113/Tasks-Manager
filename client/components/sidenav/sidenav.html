@@ -8,7 +8,7 @@
             <span flex>Dashboard</span>
             <md-icon class="tasksInProgress" flex="10">dashboard</md-icon>
         </md-button>
-        <md-button ui-sref="users" layout="row" layout-align="space-between center" ng-hide="vm.isEmployee()">
+        <md-button ui-sref="users" layout="row" layout-align="space-between center" ng-hide="vm.currentUser === 'Employee'">
             <span flex>Usuarios que superviso</span>
             <md-icon class="tasksInProgress" flex="10">person</md-icon>
         </md-button>

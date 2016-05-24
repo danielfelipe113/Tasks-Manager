@@ -49,7 +49,7 @@ class editUserController {
                 } else if (element.role === that.appConfig.userRolesJson.Employee) {
                     that.users.Employees.push(element);
                 }
-            }, this);
+            });
         }
     }
 
@@ -60,11 +60,11 @@ class editUserController {
 
         if (isValid) {
             this.usersFactory.updateUser(this.user._id, this.user)
-                .then((res) => {
+                .then(() => {
                     that.toastFactory.successToast(that.values.MESSAGES.USERS.SAVESUCCESS);
                     that.$mdDialog.hide();
                 })
-                .catch((err) => {
+                .catch(() => {
                     that.toastFactory.errorToast(that.values.MESSAGES.ERROR);
                     that.$mdDialog.cancel();
                 });

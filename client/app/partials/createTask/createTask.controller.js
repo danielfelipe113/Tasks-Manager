@@ -47,13 +47,13 @@ class createTaskController {
         this.usersFactory.getMe().then(
             function (res) {
                 let parentScope = that;
-                that.currentUser = res
+                that.currentUser = res;
                 that.populateTask();
                 that.getPriorities();
                 that.getStatus();
                 that.setUserRol()
                     .then(res => {
-                        if (res != 'Employee') {
+                        if (res !== 'Employee') {
                             parentScope.getUsers();
                         }
                     });
@@ -68,14 +68,14 @@ class createTaskController {
 
         if (this.currentUser.role === this.appConfig.userRolesJson.Employee) {
             this.isEmployee = true;
-            deferred.resolve('Employee')
+            deferred.resolve('Employee');
         } else if (this.currentUser.role === this.appConfig.userRolesJson.Administrator) {
             this.isAdministrator = true;
-            deferred.resolve('Administrator')
+            deferred.resolve('Administrator');
         } else {
-            deferred.resolve('Supervisor')
+            deferred.resolve('Supervisor');
         }
-        return deferred.promise
+        return deferred.promise;
     }
 
     populateTask() {
@@ -115,7 +115,7 @@ class createTaskController {
                 } else if (element.role === that.appConfig.userRolesJson.Employee) {
                     that.users.Employees.push(element);
                 }
-            }, this);
+            });
         }
     }
 
@@ -131,25 +131,25 @@ class createTaskController {
         if (isValid) { //create task
             if (this.isNewTask) {
                 this.tasksFactory.postTask(this.newTask)
-                    .then((res) => {
+                    .then(() => {
                         that.toastFactory.successToast(messages.MESSAGES.TASKS.CREATESUCCESS);
                         that.$mdDialog.hide(that.$state.current.name);
                     })
-                    .catch((err) => {
+                    .catch(() => {
                         that.toastFactory.errorToast(messages.MESSAGES.ERROR);
                         that.$mdDialog.cancel();
                     });
             } else { //save task
                 this.tasksFactory.putTask(this.newTask)
-                    .then(res => {
+                    .then(() => {
                         that.toastFactory.successToast(messages.MESSAGES.TASKS.CREATESUCCESS);
                         that.$mdDialog.hide(that.$state.current.name);
                     })
                     .catch(err => {
-                        console.log(err)
+                        console.log(err);
                         that.toastFactory.errorToast(messages.MESSAGES.ERROR);
                         that.$mdDialog.cancel();
-                    })
+                    });
             }
         }
         return false;

@@ -21,7 +21,7 @@
       if (this.userId) {
         this.getUserById();
       } else {
-        this.getMe()
+        this.getMe();
       }
     }
 
@@ -30,7 +30,7 @@
         .then(response => {
           this.currentUser = response.data;
           this.getTasks(this.currentUser._id);
-        })
+        });
     }
 
     getMe() {
@@ -47,7 +47,7 @@
           this.tasks = response.data;
         })
         .catch(err => {
-          console.log(err)
+          console.log(err);
         });
 
     }

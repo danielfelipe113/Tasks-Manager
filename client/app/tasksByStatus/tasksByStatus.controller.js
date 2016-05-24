@@ -3,7 +3,7 @@
 
   class tasksByStatusController {
     constructor($http, tasksFactory, $stateParams, appConfig, dialogService, values, $state, usersFactory) {
-      this.$state = $state
+      this.$state = $state;
       this.usersFactory = usersFactory;
       this.dialogService = dialogService;
       this.status = $stateParams.status;
@@ -27,9 +27,9 @@
     getTasks() {
       var tempId = null;
       if(this.otherUserIdid) {
-        tempId = this.otherUserId
+        tempId = this.otherUserId;
       } else {
-        tempId = this.currentUser._id
+        tempId = this.currentUser._id;
       }
       
       this.tasksFactory.getTasksByStatus(tempId, this.status)
@@ -62,12 +62,11 @@
         .then(() => {
         })
         .catch(() => {
-        })
+        });
       this.getTasks(this.id);
     }
 
     taskDetails($event, task) {
-      let that = this;
       let template = './app/partials/taskDetails/taskDetails.html';
       let controller = 'taskDetailsController';
 
@@ -84,7 +83,7 @@
         let goToState = state || 'tasksDashboard';
         that.$state.go(goToState, {}, {
           reload: true
-        })
+        });
       }
 
       this.dialogService.showDialog($event, template, controller, taskToEdit, callback);
@@ -100,12 +99,12 @@
       
       function callback() {
         that.tasksFactory.deleteTask(task._id)
-          .then(res => {
-            that.getTasks(that.id)
+          .then(() => {
+            that.getTasks(that.id);
           })
           .catch(err => {
-            console.log(err)
-          })
+            console.log(err);
+          });
       }
 
       this.dialogService.showDialog($event, template, controller, data, callback);

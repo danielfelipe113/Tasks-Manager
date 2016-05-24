@@ -26,7 +26,6 @@ class createUserController {
 
   CreateEmptyUser() {
     this.user = new this.models.CreateEmptyUser();
-    console.log(this.user)
   }
 
 
@@ -40,7 +39,7 @@ class createUserController {
 
     if (form.$valid) {
       this.Auth.createUser(this.user)
-        .then((res) => {
+        .then(() => {
           that.toastFactory.successToast(that.values.MESSAGES.USERS.SAVESUCCESS);
           that.$mdDialog.hide();
         })

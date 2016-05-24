@@ -8,6 +8,7 @@ angular.module('tasksAdminApp', [
   'tasksAdminApp.usersFactory',
   'tasksAdminApp.tasksFactory',
   'tasksAdminApp.toastFactory',
+  'tasksAdminApp.values',
   'ngCookies',
   'ngResource',
   'ngSanitize',

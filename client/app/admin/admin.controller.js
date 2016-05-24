@@ -34,7 +34,6 @@
     }
 
     userDetails($event, user) {
-      let that = this;
       let template = './app/partials/userDetails/userDetails.html';
       let controller = 'userDetailsController';
 
@@ -66,22 +65,21 @@
           this.usersByRole = response.data;
         })
         .catch((err) => {
-          console.log(err)
-        })
+          console.log(err);
+        });
     }
 
     removeUser($event, userId) {
       let that = this;
       let template = './app/partials/confirmPartials/confirm.html';
       let controller = 'confirmController';
-      let messages = this.values;
 
       let data = this.values.CONFIRM.TYPE.USER;
 
       function callback() {
         that.usersFactory.deleteUser(userId)
           .then(() => {
-          })
+          });
         that.getUsersByRole();
       }
       this.dialogService.showDialog($event, template, controller, data, callback);

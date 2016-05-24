@@ -11,7 +11,7 @@
     }
 
     initialize() {
-      this.getSupervisedTasks()
+      this.getSupervisedTasks();
     }
 
     getSupervisedTasks() {

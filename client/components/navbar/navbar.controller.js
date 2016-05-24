@@ -11,8 +11,7 @@ class NavbarController {
   constructor(Auth) {
     this.isLoggedIn = Auth.isLoggedIn;
     this.isAdmin = Auth.isAdmin;
-    this.currentUser = Auth.getCurrentUser();;
-    
+    this.currentUser = Auth.getCurrentUser();
     }
     
     openMenu($mdOpenMenu, ev) {

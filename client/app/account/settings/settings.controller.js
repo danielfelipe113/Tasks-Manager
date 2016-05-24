@@ -28,7 +28,7 @@ class SettingsController {
         that.usersFactory.getUserById(tempUser._id)
           .then(response => {
             that.user = response.data;
-          })
+          });
       });
   }
 
@@ -38,11 +38,11 @@ class SettingsController {
     let that = this;
     if (isValid) {
       this.usersFactory.updateUser(this.user._id, this.user)
-        .then((res) => {
+        .then(() => {
           that.getUser();
           that.toastFactory.successToast(that.values.MESSAGES.USERS.SAVESUCCESS);
         })
-        .catch((err) => {
+        .catch(() => {
           that.toastFactory.errorToast(that.values.MESSAGES.ERROR);
         });
     }

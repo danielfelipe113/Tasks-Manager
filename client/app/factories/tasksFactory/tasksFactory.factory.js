@@ -2,8 +2,11 @@
 'use strict';
 (function () {
     function tasksFactory($http, $q, appConfig, usersFactory, dialogService, $state, $interval, values) {
-
-        var tasksFactory = {
+        if (sessionStorage.getItem('reviewedForDelayed') !== 'true') {
+            reviewedForDelayed();
+        }
+                
+        var tasksFactoryMethods = {
             getTasks: getTasks,
             getTasksByStatus: getTasksByStatus,
             getTaskById: getTaskById,
@@ -12,13 +15,13 @@
             postTask: postTask,
             putTask: putTask,
             deleteTask: deleteTask
-        }
+        };
 
-        return tasksFactory
+        return tasksFactoryMethods;
 
 
         function getTasks(id, justLength) {
-            return $http.get('api/tasks/getTasks/' + id + '/' + justLength)
+            return $http.get('api/tasks/getTasks/' + id + '/' + justLength);
         }
 
         function getTaskById(id) {
@@ -47,7 +50,6 @@
         }
 
         function createTasks($event) {
-            var that = this;
             var template = './app/partials/createTask/createTask.html';
             var controller = 'createTaskController';
 
@@ -55,7 +57,7 @@
                 var goToState = state || 'tasksDashboard';
                 $state.go(goToState, {}, {
                     reload: true
-                })
+                });
             }
 
             dialogService.showDialog($event, template, controller, null, callback);
@@ -69,49 +71,50 @@
             usersFactory.getMe()
                 .then(function (res) {
                     me = res;
-                    for (var i = 0; i < me.supervisorOf.length; i++) {
-                        var userSupervisedId = me.supervisorOf[i]._id;
-                        $http.get('api/tasks/getTasks/' + userSupervisedId + '/' + true)
-                            .then(function (response) {
-                                users.push(response.data);
-                            });
-                    }
+                    getUsersTasks();
                     deferred.resolve(users);
-                })
+                });
+
+
+            function getUsersTasks() {
+                for (var i = 0; i < me.supervisorOf.length; i++) {
+                    var userSupervisedId = me.supervisorOf[i]._id;
+                    $http.get('api/tasks/getTasks/' + userSupervisedId + '/' + true)
+                        .then(function (response) {
+                            users.push(response.data);
+                        });
+                }
+            }
             return deferred.promise;
         }
-
-    };
-
-    //Revisar si hay tareas retrasadas
-
-    if (sessionStorage.getItem('reviewedForDelayed') !== 'true') {
-        reviewedForDelayed();
-    }
-
-    function reviewedForDelayed() {
-        var sessionStorage = window.sessionStorage;
-        sessionStorage.setItem('reviewedForDelayed', 'true')
-        var status = values.getStatus();
-
-        getTasks()
-            .then(function (response) {
-                var tasks = response.data;
-                var tempTasks = [];
-                var actualTime = new Date();
-                var taskTime = null;
-                for (var i = 0; i < tasks.length; i++) {
-                    taskTime = new Date(tasks[i].DoBeforeDate);
-                    if (tasks[i].Status.statusName === 'ToDo' || tasks[i].Status.statusName === 'ToDoToday') { //need to be fixed
-                        if (actualTime > taskTime) {
-                            tasks[i].Status = status[3]; // == delayed, need to be fixed - quitar numero
-                            tempTasks.push(tasks[i]);
+        //Revisar si hay tareas retrasadas
+        
+        function reviewedForDelayed() {
+            var sessionStorage = window.sessionStorage;
+            sessionStorage.setItem('reviewedForDelayed', 'true');
+            var status = values.getStatus();
+            getTasks()
+                .then(function (response) {
+                    var tasks = response.data;
+                    var tempTasks = [];
+                    var actualTime = new Date();
+                    var taskTime = null;
+                    for (var i = 0; i < tasks.length; i++) {
+                        taskTime = new Date(tasks[i].DoBeforeDate);
+                        if (tasks[i].Status.statusName === 'ToDo' || tasks[i].Status.statusName === 'ToDoToday') { //need to be fixed
+                            if (actualTime > taskTime) {
+                                tasks[i].Status = status[3]; // == delayed, need to be fixed - quitar numero
+                                tempTasks.push(tasks[i]);
+                            }
                         }
                     }
-                }
-                putTask(tempTasks);
-            });
+                    putTask(tempTasks);
+                });
+        }
+
+
     }
+
 
 
     angular

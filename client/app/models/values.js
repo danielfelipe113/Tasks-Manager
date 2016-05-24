@@ -2,15 +2,18 @@
     'use strict';
 
     angular
-        .module('tasksAdminApp')
+        .module('tasksAdminApp.values', [])
         .factory('values', values);
 
     function values() {
+        
         var service = {
             getPriorities: getPriorities,
             getStatus: getStatus,
             values: values
         };
+        
+        return service;
         
         function values() {
             var values = {
@@ -41,8 +44,6 @@
             return values;
         }
 
-        return service;
-
         function getPriorities() {
             var Priorities = [
                 {
@@ -71,7 +72,7 @@
                 }
             ];
             
-            return Priorities
+            return Priorities;
         }
 
         function getStatus() {
@@ -125,6 +126,5 @@
             
             return Status;
         }
-               
     }
 })();

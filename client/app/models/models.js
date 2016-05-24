@@ -2,12 +2,6 @@
     'use strict';
 
     function models() {
-        var service = {
-            createEmptyTask: createEmptyTask,
-            CreateEmptyUser: CreateEmptyUser
-        };
-
-        return service;
 
         function CreateEmptyUser() {
             this.firstName = null;
@@ -35,6 +29,13 @@
             this.EstimatedHours = 0;
             this.TimeSpent = 0;
         }
+        
+        var service = {
+            createEmptyTask: createEmptyTask,
+            CreateEmptyUser: CreateEmptyUser
+        };
+
+        return service;
     }
     angular
         .module('tasksAdminApp')

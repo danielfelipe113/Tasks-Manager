@@ -1,13 +1,7 @@
-<md-dialog class="createTaskFormContainer" flex="60">
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <h2 flex>Detalles del usuario</h2>
-            <md-button ng-click="vm.closeDialog()" class="md-icon-button">
-                <md-icon>close</md-icon>
-            </md-button>
-        </div>
-    </md-toolbar>
-    <md-dialog-content layout-padding>
+<navbar></navbar>
+<header></header>
+<div class="createTaskFormContainer">
+    <div layout-padding>
         <div layout-padding layout="row">
             <div flex="60" layout="column" layout-align="center start">
                 <div>
@@ -40,8 +34,8 @@
                 </md-content>
             </div>
         </div>
-        <md-dialog-actions>
+        <div>
             <md-button ng-click="vm.closeDialog()">Cerrar</md-button>
-        </md-dialog-actions>
-    </md-dialog-content>
-</md-dialog>
+        </div>
+    </div>
+</div>

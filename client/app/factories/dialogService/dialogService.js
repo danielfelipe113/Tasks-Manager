@@ -5,8 +5,6 @@
         .module('tasksAdminApp')
         .service('dialogService', dialogService);
 
-    dialogService.$inject = ['$mdDialog', '$state'];
-
     function dialogService($mdDialog, $state) {
         var dialogService = {
             showDialog: showDialog

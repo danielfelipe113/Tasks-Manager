@@ -19,6 +19,6 @@ module.exports = {
           process.env.MONGOHQ_URL ||
           process.env.OPENSHIFT_MONGODB_DB_URL +
           process.env.OPENSHIFT_APP_NAME ||
-          'mongodb://localhost/tasksadmin'
+          'mongodb://heroku_rp5hxggb:m9tqd97bki3at0921rccukfta3@ds015690.mlab.com:15690/heroku_rp5hxggb'
   }
 };

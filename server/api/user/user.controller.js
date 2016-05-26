@@ -119,11 +119,11 @@ export function changePassword(req, res, next) {
  */
 export function updateUser(req, res, next) {
   var userId = req.params.id;
-  
+  var body = req.body;
   return User.findById(userId).exec()
     .then(user => {
-        user = _.merge(user, req.body);
-        console.log(user)
+        user.supervisorOf = body.supervisorOf;
+        user = _.merge(body, user);
         return user.save()
           .then(() => {
             res.status(204).end();

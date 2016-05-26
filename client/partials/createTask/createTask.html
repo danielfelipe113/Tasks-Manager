@@ -1,13 +1,7 @@
-<md-dialog class="createTaskFormContainer" flex="60">
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <h2 flex>Crear nueva tarea</h2>
-            <md-button ng-click="vm.closeDialog()" class="md-icon-button">
-                <md-icon>close</md-icon>
-            </md-button>
-        </div>
-    </md-toolbar>
-    <md-dialog-content layout-padding>
+<navbar></navbar>
+<header></header>
+<div class="createTaskFormContainer">
+    <div layout-padding>
         <form class="createTaskForm" name="createTaskForm" novalidate layout="column" layout-align="center center" layout-align-gt-sm="start">
             <div layout="row" layout-align="center center">
                 <h2 class="color-indigo">Llene los siguientes campos:</h2>
@@ -121,9 +115,8 @@
                 </div>
             </div>
         </form>
-        <md-dialog-actions>
-            <md-button type="submit" class="md-raised md-primary" ng-click="vm.saveTask(createTaskForm.$valid)">Guardar tarea</md-button>
-            <md-button ng-click="vm.closeDialog()">Cerrar</md-button>
-        </md-dialog-actions>
-    </md-dialog-content>
-</md-dialog>
+        <div layout="row" layout-align="center center">
+            <md-button type="submit" class="md-raised md-primary" ng-click="vm.saveTask(createTaskForm.$valid)">Guardar tarea</md-button>            
+        </div>
+    </div>
+</div>

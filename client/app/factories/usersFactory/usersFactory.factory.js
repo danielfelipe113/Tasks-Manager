@@ -27,13 +27,13 @@
         }
         function updateUser(id, user) {
             var tempUser = angular.toJson(user);
-            return $http.patch('api/users/' + id, tempUser);
+            return $http.put('api/users/' + id, tempUser);
         }
         function deleteUser(id) {
             return $http.delete('api/users/' + id);
         }
         function createUsers($event) {
-            var template = './app/partials/createUser/createUser.html';
+            var template = './partials/createUser/createUser.html';
             var controller = 'createUserController';
             dialogService.showDialog($event, template, controller);
         }

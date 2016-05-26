@@ -1,13 +1,7 @@
-<md-dialog class="signUpContainer">
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h2 flex>Crear usuario</h2>
-      <md-button ng-click="vm.closeDialog()" class="md-icon-button">
-        <md-icon>close</md-icon>
-      </md-button>
-    </div>
-  </md-toolbar>
-  <md-dialog-content class="signUpContent">
+<navbar></navbar>
+<header></header>
+<div class="signUpContainer">
+  <div class="signUpContent">
     <div class="formContainer" layout="column" layout-align="center center">
       <form class="signUpForm" name="signUpForm" ng-submit="vm.register(signUpForm)" novalidate layout="column" layout-align="center center"
         layout-align-gt-sm="start">
@@ -91,14 +85,14 @@
           </md-input-container>
         </div>
 
-        <md-dialog-actions>
+        <div>
           <div layout="row" layout-align="center center">
             <md-button class="md-raised md-primary" type="submit">
-              Registrarse
+              Registrar
             </md-button>
           </div>
-        </md-dialog-actions>
+        </div>
       </form>
     </div>
-  </md-dialog-content>
-</md-dialog>
+  </div>
+</div>

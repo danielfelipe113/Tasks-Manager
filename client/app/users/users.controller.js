@@ -2,9 +2,11 @@
 (function () {
 
   class UsersComponent {
-    constructor(Auth, tasksFactory, usersFactory) {
+    constructor(Auth, tasksFactory, usersFactory, values, dialogService) {
       this.tasksFactory = tasksFactory;
+      this.dialogService = dialogService;
       this.usersFactory = usersFactory;
+      this.values = values.values();
       this.users = null;
 
       this.initialize();
@@ -22,9 +24,6 @@
         });
         
     }
-
-
-
   }
 
   angular.module('tasksAdminApp')

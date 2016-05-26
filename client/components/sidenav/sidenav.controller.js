@@ -8,15 +8,6 @@ class SidenavController {
         this.$mdSidenav = $mdSidenav;
         this.usersFactory = usersFactory;
         this.tasksFactory = tasksFactory;
-        
-    }
-    
-    createUser($event) {
-        this.usersFactory.createUsers($event);            
-    }
-    
-    createTask($event) {
-        this.tasksFactory.createTasks($event);
     }
     
     isSidenavLeftOpen() {

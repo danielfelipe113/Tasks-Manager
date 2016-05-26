@@ -1,7 +1,5 @@
 'use strict';
-/**
- * Pasar las funciones a la factory
- */
+
 (function () {
 
   class tasksDashboardController {

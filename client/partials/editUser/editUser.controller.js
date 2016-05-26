@@ -1,14 +1,14 @@
 'use strict';
 
+(function () {
 class editUserController {
-    constructor(dataModel, $mdDialog, appConfig, usersFactory, toastFactory, values) {
+    constructor($state, appConfig, usersFactory, toastFactory, values) {
         //dependencies
         this.toastFactory = toastFactory;
         this.values = values.values();
         this.usersFactory = usersFactory;
-        this.$mdDialog = $mdDialog;
         this.appConfig = appConfig;
-
+        this.$state = $state;
         //vars
         this.users = {
             Supervisors: [],
@@ -16,15 +16,24 @@ class editUserController {
             Employees: []
         };
         this.roles = appConfig.userRolesJson;
-        this.user = dataModel;
+        this.user = null; //hacer get al usuario con el id que le paso
         //init
         this.initialize();
     }
 
     initialize() {
         //methods
+        this.getUser();
         this.getUsers();
 
+    }
+    
+    getUser() {
+        let that = this;
+        this.usersFactory.getUserById(this.$state.params.id)
+            .then((res) => {
+                that.user = res.data;
+            })
     }
 
     getUsers() {
@@ -59,24 +68,26 @@ class editUserController {
         let that = this;
 
         if (isValid) {
+            console.log(this.user)
             this.usersFactory.updateUser(this.user._id, this.user)
                 .then(() => {
                     that.toastFactory.successToast(that.values.MESSAGES.USERS.SAVESUCCESS);
-                    that.$mdDialog.hide();
+                    that.$state.go('tasksDashboard')
                 })
                 .catch(() => {
                     that.toastFactory.errorToast(that.values.MESSAGES.ERROR);
-                    that.$mdDialog.cancel();
                 });
         }
         return false;
     }
-
-    closeDialog() {
-        this.$mdDialog.cancel();
-    }
 }
 
-angular.module('tasksAdminApp')
-    .controller('editUserController', editUserController);
 
+  angular.module('tasksAdminApp')
+    .component('editUser', {
+      templateUrl: 'partials/editUser/editUser.html',
+      controller: editUserController,
+      controllerAs: 'vm'
+    });
+
+})();

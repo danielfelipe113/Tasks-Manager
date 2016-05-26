@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="content" layout="row" layout-align="end center" flex="20">
-                    <md-button ng-click="vm.taskDetails($event, task)" class="md-raised md-accent">Ver más</md-button>
+                    <md-button ui-sref="taskDetails({id: task._id})" class="md-raised md-accent">Ver más</md-button>
                     <div class="actions" ng-hide="task.Status.statusName === 'Done'">
                         <md-fab-speed-dial md-direction="down" class="md-scale">
                             <md-fab-trigger>
@@ -67,7 +67,7 @@
                                     </md-tooltip>
                                     <md-icon>assignment_turned_in</md-icon>
                                 </md-button>
-                                <md-button class="edit md-icon-button" ng-click="vm.editTask($event, task)">
+                                <md-button class="edit md-icon-button" ui-sref="createTasks({ id: task._id })" ng-hide="vm.currentUser.role === 'Employee'">
                                     <md-tooltip md-direction="left">
                                         Editar
                                     </md-tooltip>

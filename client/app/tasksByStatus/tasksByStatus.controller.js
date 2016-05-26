@@ -50,7 +50,7 @@
       this.tasksFactory.createTasks($event);
     }
 
-    toTarget(target, task) { // need to be fixed
+    toTarget(target, task) { // need to be fixed remove magic string
       let tempTask = task;
       if (target === 'InProgress') {
         tempTask.Status = this.Status[2];
@@ -66,17 +66,10 @@
       this.getTasks(this.id);
     }
 
-    taskDetails($event, task) {
-      let template = './app/partials/taskDetails/taskDetails.html';
-      let controller = 'taskDetailsController';
-
-      this.dialogService.showDialog($event, template, controller, task);
-    }
-
     editTask($event, task) {
       let that = this;
       let taskToEdit = task;
-      let template = './app/partials/createTask/createTask.html';
+      let template = './partials/createTask/createTask.html';
       let controller = 'createTaskController';
 
       function callback(state) {
@@ -91,7 +84,7 @@
 
     removeTasks($event, task) {
       let that = this;
-      let template = './app/partials/confirmPartials/confirm.html';
+      let template = './partials/confirmPartials/confirm.html';
       let controller = 'confirmController';
       let messages = this.values.values();
 

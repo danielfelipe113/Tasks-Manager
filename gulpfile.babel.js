@@ -32,7 +32,7 @@ const paths = {
         ],
         styles: [`${clientPath}/{app,components}/**/*.styl`],
         mainStyle: `${clientPath}/app/app.styl`,
-        views: `${clientPath}/{app,components}/**/*.html`,
+        views: `${clientPath}/{app,components,partials}/**/*.html`,
         mainView: `${clientPath}/index.html`,
         test: [`${clientPath}/{app,components}/**/*.{spec,mock}.js`],
         e2e: ['e2e/**/*.spec.js'],
@@ -499,7 +499,7 @@ gulp.task('build:client', ['transpile:client', 'styles', 'html', 'constant'], ()
 });
 
 gulp.task('html', function() {
-    return gulp.src(`${clientPath}/{app,components}/**/*.html`)
+    return gulp.src(`${clientPath}/{app,components,partials}/**/*.html`)
         .pipe(plugins.angularTemplatecache({
             module: 'tasksAdminApp'
         }))

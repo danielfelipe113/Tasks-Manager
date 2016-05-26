@@ -1,13 +1,8 @@
-<md-dialog class="createTaskdivContainer" flex="60">
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <h2 flex>Detalles de la tarea</h2>
-            <md-button ng-click="vm.closeDialog()" class="md-icon-button">
-                <md-icon>close</md-icon>
-            </md-button>
-        </div>
-    </md-toolbar>
-    <md-dialog-content layout-padding>
+<navbar></navbar>
+<header></header>
+
+<div class="createTaskdivContainer">
+    <div layout-padding>
         <div layout="column" layout-align="center center" layout-align-gt-sm="start">
             <div layout="row" layout-align="center center">
                 <h2 class="color-indigo">Detalles de la tarea</h2>
@@ -72,8 +67,5 @@
                 </div>
             </div>
         </div>
-        <md-dialog-actions>
-            <md-button ng-click="vm.closeDialog()">Cerrar</md-button>
-        </md-dialog-actions>
-    </md-dialog-content>
-</md-dialog>
+    </div>
+</div>

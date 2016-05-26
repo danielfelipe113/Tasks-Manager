@@ -1,13 +1,8 @@
-<md-dialog class="createTaskFormContainer" flex="60">
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <h2 flex>Editar usuario</h2>
-            <md-button ng-click="vm.closeDialog()" class="md-icon-button">
-                <md-icon>close</md-icon>
-            </md-button>
-        </div>
-    </md-toolbar>
-    <md-dialog-content layout-padding>
+<navbar></navbar>
+<header></header>
+
+<div class="createTaskFormContainer">
+    <div layout-padding>
         <form class="saveForm" name="saveForm" novalidate layout="column" layout-align="center center" layout-align-gt-sm="start">
             <div layout="row" layout-align="center center">
                 <h2 class="color-indigo">Llene los siguientes campos:</h2>
@@ -36,7 +31,7 @@
 
                     <md-input-container class="md-accent" ng-hide="vm.user.role === vm.roles.Employee">
                         <label>Supervisar a:</label>
-                        <md-select name="taskAssignTo" ng-model="vm.user.supervisorOf" required ng-disabled="vm.isEmployee" multiple ng-model-options="{trackBy: '$value._id'}">
+                        <md-select name="taskAssignTo" ng-model="vm.user.supervisorOf" ng-disabled="vm.isEmployee" multiple ng-model-options="{trackBy: '$value._id'}">
                             <md-option ng-value="vm.currentUser" ng-selected="true" ng-show="vm.isEmployee"> {{ vm.newTask.AssignTo.fullName }}</md-option>
                             <md-optgroup label="Administradores" ng-if="vm.isAdministrator">
                                 <md-option ng-value="administrator" ng-repeat="administrator in vm.users.Administrators">{{administrator.fullName}}</md-option>
@@ -81,9 +76,9 @@
             </div>
         </form>
        
-        <md-dialog-actions>
-            <md-button type="submit" class="md-raised md-primary" ng-click="vm.saveForm(saveForm.$valid)">Guardar cambios</md-button>
-            <md-button ng-click="vm.closeDialog()">Cerrar</md-button>
-        </md-dialog-actions>
-    </md-dialog-content>
-</md-dialog>
+        <div layout="row" layout-align="center center">
+            <md-button type="submit" class="md-raised md-primary" ng-click="vm.saveForm(saveForm.$valid)">Guardar cambios</md-button>            
+        </div>
+    </div>
+    <code>{{ vm.user.supervisorOf | json }}</code>
+</div>

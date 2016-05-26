@@ -5,7 +5,7 @@
         if (sessionStorage.getItem('reviewedForDelayed') !== 'true') {
             reviewedForDelayed();
         }
-                
+
         var tasksFactoryMethods = {
             getTasks: getTasks,
             getTasksByStatus: getTasksByStatus,
@@ -50,7 +50,7 @@
         }
 
         function createTasks($event) {
-            var template = './app/partials/createTask/createTask.html';
+            var template = './partials/createTask/createTask.html';
             var controller = 'createTaskController';
 
             function callback(state) {
@@ -71,8 +71,7 @@
             usersFactory.getMe()
                 .then(function (res) {
                     me = res;
-                    getUsersTasks();
-                    deferred.resolve(users);
+                    getUsersTasks(me);
                 });
 
 
@@ -82,13 +81,14 @@
                     $http.get('api/tasks/getTasks/' + userSupervisedId + '/' + true)
                         .then(function (response) {
                             users.push(response.data);
+                            deferred.resolve(users);
                         });
                 }
             }
             return deferred.promise;
         }
         //Revisar si hay tareas retrasadas
-        
+
         function reviewedForDelayed() {
             var sessionStorage = window.sessionStorage;
             sessionStorage.setItem('reviewedForDelayed', 'true');

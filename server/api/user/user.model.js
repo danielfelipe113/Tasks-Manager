@@ -27,9 +27,7 @@ var UserSchema = new Schema({
     enum: roleTypes,
     default: 'Employee'
   },
-  supervisorOf: {
-    type: []
-  },
+  supervisorOf:[],
   email: {
     type: String,
     required: true,

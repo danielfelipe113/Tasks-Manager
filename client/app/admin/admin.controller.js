@@ -34,7 +34,7 @@
     }
 
     userDetails($event, user) {
-      let template = './app/partials/userDetails/userDetails.html';
+      let template = './partials/userDetails/userDetails.html';
       let controller = 'userDetailsController';
 
       this.dialogService.showDialog($event, template, controller, user);
@@ -42,7 +42,7 @@
 
     editUser($event, user) {
       let that = this;
-      let template = './app/partials/editUser/editUser.html';
+      let template = './partials/editUser/editUser.html';
       let controller = 'editUserController';
 
       function callback() {
@@ -71,7 +71,7 @@
 
     removeUser($event, userId) {
       let that = this;
-      let template = './app/partials/confirmPartials/confirm.html';
+      let template = './partials/confirmPartials/confirm.html';
       let controller = 'confirmController';
 
       let data = this.values.CONFIRM.TYPE.USER;

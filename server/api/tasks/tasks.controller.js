@@ -97,11 +97,8 @@ export function create(req, res) {
 
 // Updates an existing Tasks in the DB
 export function update(req, res) {
-
-
   if (!req.body.length) {
     var idSingle = req.body._id;
-
 
     return Tasks.findById(idSingle).exec()
       .then(handleEntityNotFound(res))
